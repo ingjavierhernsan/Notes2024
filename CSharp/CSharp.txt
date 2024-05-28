@@ -37,6 +37,17 @@
 62.- PARAMETROS POR REFERENCIA (REF)
 63.- PARAMETROS POR REFERENCIA (OUT)
 64.- NUMERO VARIABLE DE PARAMETROS
+65.- PARAMETROS OPCIONALES
+66.- LLAMADAS CON NOMBRES DE PARAMETROS
+67.-SOBRECARGA DE METODOS
+68.- SOBRECARGA DEL CONSTRUCTOR
+69.- METODOS ESTATICOS
+70.- ATRIBUTOS Y PROPIEDADES ESTATICAS
+71.- CLASES ESTATICAS
+72.- ENUMERACIONES
+73.- SOBRECARGA DE OPERADORES
+74.- INDIZADORES
+85.- DEFINICION DE PROPIEDADES AUTOMATICAS
 
 89.- COLECCIONES: QUEUE<T> Y STACK<T>
 90.- COLECCION: LIST<T>
@@ -1877,14 +1888,642 @@ static void Main(string[] args){
 
 64.- NUMERO VARIABLE DE PARAMETROS
 
+Hasta ahora hemos planteado metodos que reciben una cantidad fija de parametros, pero C# permite implementar metodos con una cantidad variable de parametros (es decir que llamemos al metodo pasando en algunas circunstancias pasandole dos prametros y en otras pasandole 5).
+
+Para resolver esto C# incorpora la palabra clave params y seguidamente un vector.
+
+class Program{
+	public int Sumar(params int[] p){
+		int su = 0;
+		
+		for(var f=0; f<p.Length; f++){
+			su = su + p[f];
+		}
+		
+		return su;
+	}
+	
+	static void Main(string[] args){
+		Program p = new Program();
+		
+		Console.Write("La suma de 3, 4, 5 es: ");
+		Console.WriteLine(p.Sumar(3, 4, 5));
+		Console.ReadKey();
+	}
+}
+
+65.- PARAMETROS OPCIONALES
+Para definir un parametro opcional debemos asignarle un dato en la declaracion del metodo:
+
+public void Imprimir(string mensaje, int col = 2, int fil = 1)
+
+Como vemos debemos asignarle un valor en la declaracion del metodo, luego cuando llamamos a este metodo podemos hacerlos pasando 1, 2 o 3 parametros:
+
+ob1.Imprimir("Hola");
+
+ob1.Imprimir("Hola", 40);
+
+ob1.Imprimir("Hola", 40, 12);
+
+Los parametros opcionales deben ser siempre los ultimos que indiquemos. El parametro mensaje no es opcional por lo que si o si debe especificarse.
+
+66.- LLAMADAS CON NOMBRES DE PARAMETROS
+Cuando se llama un metodo es importante el orden de envio de los parametros.
+
+C# presenta la posibilidad de llamr a un metodo pasando los parametros en cualquier orden, siempre que cuando los llamemos indiquemos previo al valor del parametro el nombre del parametro.
+
+class Program{
+	public void Imprimir(string mensaje, int columna, int fila){
+		Console.SetCursorPosition(Columna, fila);
+		Console.WriteLine(mensaje);
+	}
+	
+	static void Main(string[] args){
+		Program ob1 = new Program();
+		
+		ob1.Imprimir(fila: 12, columna: 40, mensaje: "Hola mundo);
+		ob1.Imprimir(mensaje: "Fin", fila: 23, columna: 5);
+		
+		Console.ReadKey();
+	}
+}
+
+67.-SOBRECARGA DE METODOS
+La sobrecarga de metodos permite definir dos o mas metodos con el mismo nombre, pero que difieren en cantidad o tipo de parametros.
+
+Esta carecteristica del lenguaje nos facilita la implementacioln de algoritmos que cumplen la misma funcion pero que diferen en los parametros.
+
+public int Sumar(int x1, int x2){
+	int s = x1 + x2;
+	return s;
+}
+
+public string Sumar(string s1, string s2){
+	string s = s1 + s2;
+	return s;
+}
 
 
+============================================================
 
+public void Mostrar(string mensaje, int column, int fila){
+	Console.SetCursorPosition(columna, fila);
+	Console.Write(mensaje);
+}
 
+public void Mostrar(string mensaje, int columna, int fila, ConsoleColor colorletra){
+	Console.ForegroundColor = colorletra;
+	Mostar(mensaje, columna, fila);
+}
 
+68.- SOBRECARGA DEL CONSTRUCTOR
+Como hemos visto el constructor es un metodo y como tal podemos sobrecargarlo, es decir definir varios constructores con distintas cantidades o tipos de parametros.
 
+class Titulo{
+	private string tit;
+	private int columna;
+	private int fila;
 
+	public Titulo(string t){
+		tit = t;
+		columna = 1;
+		fila = 1;
+	}
+	
+	public Titulo(string t, int col, int fil){
+		tit = t;
+		columna = col;
+		fila = fil;
+	}
+}
 
+69.- METODOS ESTATICOS
+En C# podemos definir metodos que se crean independientemente a la definicion de objetos. Un metodo estatico puede llamarse sin tener que crear un objeto de dicha clase. Un metodo estatico tiene ciertas restricciones:
+
+- No puede acceder a los atributos de la clase (salvo que sean estaticos).
+- No puede utilizar el operador this, ya que este metodo se puede llamar sin tener que crear un objeto de la clase.
+- Puede llamr a otro metodo siempre y cuando sea estatico.
+- Un metodo estatico es lo mas parecido a lo que son las fucniones en los lenguajes estructurados (con la diferiencias que se encuentra encapsulado en una clase).
+
+si recordamos cada vez que creamos un programa en C# debemos especificar el metodo Main:
+
+static void Main(string[] args)
+
+El metodo Main es estatico para que el sistema operativo pueda llamarlo directamente sin tener que crear un objeto de la clase que lo contiene.
+
+namespace metodosEstaticos{
+	class Operacion{
+		public static int Sumar(int x1, int x2){
+			int s = x1 + x2;
+			return s;
+		}
+		
+		public static int Restar(int x1, int x2){
+			int r = x1 - x2;
+			return r;
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Console.Write("La suma de 2 + 4 es: ");
+			Console.WriteLine(Operacion.Sumar(2, 4));
+			
+			Console.Write("La resta de 6 - 2 es: ");
+			Console.WriteLine(Operacion.Restar(6, 2));
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+70.- ATRIBUTOS Y PROPIEDADES ESTATICAS
+Los atributos estaticos tienen un comportamiento muy distinto a los atributos vistos hasta el momento. Un atributo estatico se reserva espacio para el mismo indistintamente que definamos un objeto de dicha clase. En caso de crar varios objetos de dicha clase todosa las instancias acceden al mismo atributo estatico. Recordemos que los atributos que habiamos visto son independientes en cada objeto de la clase.
+
+namespace AtributosStaticos1{
+	class Persona{
+		private string nombre;
+		private int edad;
+		public static int cantidad;
+		
+		public Persona(string nom, int ed){
+			cantidad++;
+			nombre = nom;
+			edad = ed;
+		}
+		
+		public void Imprimir(){
+			Console.WriteLine(nombre + "-" + edad);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.cantidad);
+			Persona per1 = new Persona("juan", 30);
+			per1.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.cantidad);
+			Persona per2 = new Persona("ana", 20);
+			per2.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.cantidad);
+			Persona per3 = new Persona("luis", 10);
+			per3.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.cantidad);
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+====================================================================================================================
+
+namespace AtributosStaticos1{
+	class Persona{
+		private string nombre;
+		private int edad;
+		private static int cantidad;
+		
+		public static int Cantidad{
+			set{
+				cantidad = value;
+			}
+			
+			get{
+				return cantidad;
+			}
+		}
+		
+		public Persona(string nom, int ed){
+			cantidad++;
+			nombre = nom;
+			edad = ed;
+		}
+		
+		public void Imprimir(){
+			Console.WriteLine(nombre + "-" + edad);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.Cantidad);
+			Persona per1 = new Persona("juan", 30);
+			per1.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.Cantidad);
+			Persona per2 = new Persona("ana", 20);
+			per2.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.Cantidad);
+			Persona per3 = new Persona("luis", 10);
+			per3.Imprimir();
+			
+			Console.WriteLine("Valor del atriburo estatico cantidad: " + Persona.Cantidad);
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+71.- CLASES ESTATICAS
+Una clase se la puede hace estatica siempre y cuando todos sus atributos sean estaticos, lo mismo que sus metodos.
+
+No se pueden crear objetos de una clase estatica.
+
+namespace ClaseEstatica1{
+	static class Operaciones{
+		public static int Sumar(int valor1, int valor2){
+			return valor1 + valor2;
+		}
+		
+		public static int Restar(int valor1, int valor2){
+			return valor1 - valor2;
+		}
+		
+		public static int Multiplicar(int valor1, int valor2){
+			return valor1 * valor2;
+		}
+		
+		public static int Dividir(int valor1, int valor2){
+			return valor1 / valor2;
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Console.WriteLine("10 + 5 es: " + Operaciones.Sumar(10, 5));
+			Console.WriteLine("10 - 5 es: " + Operaciones.Restar(10, 5));
+			Console.WriteLine("10 * 5 es: " + Operaciones.Multiplicar(10, 5));
+			Console.WriteLine("10 / 5 es: " + Operaciones.Dividir(10, 5));
+			Console.ReadKey();
+		}
+	}
+}
+
+72.- ENUMERACIONES
+Una enumeracion es un conjunto de constantes enteras que tienen asociado un nombre para cada valor.
+
+El objetivo fundamental de implementar una enomeracion es facilitar la legibilidad de un programa.
+
+Supongamos que necesitamos almacenar en un juego de cartas el tipo de xarta actual (oro, basto, copa o espada), podemos definir una variable entera y almacenar en 1 si es oro, un 2 si es basto y asi sucesivamente.
+
+Luego mediante if podemos analizar el valor de esa variable y proceder de acuerdo al valor existente.
+
+class JuegoDeCartas{
+	public enum TipoCarta { oro, basto, copa, espada };
+	private TipoCarta cartaActual;
+	
+	public void Imprimir(){
+		cartaActual = TipoCarta.oro;
+		
+		Console.WriteLine("El valor actual es: " + cartaActual);
+		
+		cartaActual = TipoCarta.espada;
+		
+		Console.WriteLine("El valor actial es: " + cartaActual);
+		
+		Console.ReadKey();
+	}
+	
+	static void Main(string[] args){
+		JuegoDecartas jc = new JuegoDeCartas();
+		jc.Imprimir();
+	}
+}
+
+Asignacion de valores a las constantes de una enumeracion
+
+Podemos especificar los valores para cada constante de la enumeracion:
+
+public enum TipoProcesador { bits16 = 16, bits32 = 32, bits64 = 64 };
+
+Tengamos en cuenta que si no le asignamos un valor a la constante comienzan a asignarse un valor a partir de cero en forma correlativa:
+
+public enum TipoProcesador { bits16, bits32, bits64 };
+
+Con esto bits16 tiene asociado el entero 0, bits32 tiene asociado el valor 1 y bits64 tiene asociado el valor 2.
+
+Podemos asignarle valores a algunas constantes y otras no:
+
+public enum TipoProcesador { bits16 = 16, bits32, bits64 };
+
+Con esto bits16 tiene asociado el entero 16, bits32 tiene asociado el valor 17 y bits64 tiene asociado el valor 18.
+
+Si necesitamos el valor entero de una variable de tipo enumeracion debemos utilizar el operador cast (es decir anteceder entre parentesis el tipo de dato que ceseitamos que la convierta):
+
+Console.Write((int)cartaAvtual);
+
+Especificacion del tipo de dato en la enumeracion
+
+Por defecto cuando definimos una enumeracion se trabaja con tipod int, pero podemos especificar otro tipo de enteros con otros tamanos:
+
+public enum TipoCarta: byte { oro = 1, basto, copa, espada };
+
+73.- SOBRECARGA DE OPERADORES
+La sobrecarga de operadores en C# permite redefinir la accion de un operador en relacion a una clase.
+
+Por ejemplo podemos plantear una clase Vector y luego redefinir el operador + para dicha clase. Luego cuando sumamos dos objetos de esa clase vector podemos generar otro objeto de dicha clase que resulte de la suma de sus componentes.
+
+El empleo de la sobrecarga de operadores debe hacerse con mucho cuidado de no desvirtuar el concepto que representa dicho operador (por ejemplo sobrecargar el operador "-" para la clase Vector y que genere la suma de sus componentes).
+
+namespace SobrecargaOperadores{
+	class VectorEnteros{
+		private int[] vec;
+		
+		public VectorEnteros(){
+			vec = new int[5];
+		}
+		
+		public void Cargar(){
+			for(int f=0; f<vec.Length; f++){
+				Console.Write("Ingrese componente: ");
+				vec[f] = int.Parse(Console.ReadLine());
+			}
+		}
+		
+		public void Imprimir(){
+			for(int f=0; f<vec.Length; f++){
+				Console.Write(vec[f] + " ");
+			}
+			
+			Console.WriteLine();
+		}
+		
+		public static VectorEnteros operator +(VectorEnteros v1, VectorEnteros v2){
+			VectorEnteros su = new VectorEnteros();
+			
+			for(int f=0; f<su.vec.Length; f++){
+				su.vec[f] = v1.vec[f] + v2.vec[f];
+			}
+			
+			return su;
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			VectorEnteros v1 = new VectorEnteros();
+			
+			Console.WriteLine("CArga del primer vector");
+			
+			v1.Cargar();
+			
+			VectorEnteros v2 = new VectorEnteros();
+			
+			Console.WriteLine("Carga del segundo vector");
+			
+			v2.Cargar();
+			
+			Console.WriteLine("Primer Vector");
+			v1.Imprimir();
+			
+			Console.WriteLine("Segundo Vector");
+			v2.Imprimir();
+			
+			VectorEnteros vt;
+			vt = v1 + v2;
+			
+			Console.WriteLine("Vector Resultante");
+			vt.Imprimir();
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+La sintaxis para sobrecargar un operador binario es:
+
+public static { valor que retorna} operator { operador }(tipo-parametro nombre, tipo-parametro nombre)
+
+public static VectorEnteros operator +(VectorEnteros v1, VectorEnteros v2)
+
+Operacion unaria
+Los ejemplos anteriores mostraban la sobrecarga de operadores binarios (un operador y dos operadores), un operador unario afecta solo un operado.
+
+Operador ++
+public static VectorEnteros operator ++(VectorEnteros v){
+	VectorEnteros resu = new VectorEnteros());
+	
+	for(int f=0; f<v.vec.Length; f++){
+		resu.vec[f]=v.vec[f]+1;
+	}
+	
+	return resu;
+}
+
+Sobrecarga de operadores relacionales
+Los operadores relacionales devuelven un valor de tipo bool.
+
+Cuando se sobrecargan los operadores realcionales estamos obligados a implementar en pares, es decir si implementamos el == debemos implementar el != en forma obligatoria (sino se genera un error sintactivo).
+
+Los pares son:
+
+==
+!=
+
+<
+>
+
+<=
+>=
+
+public static bool operator == (VectorEnteros v1, VectorEnteros v2){
+	for(int f=0; f<v1.vec.Length; f++){
+		if(v1.vec[f] != v2.vec[f])
+			return false;
+	}
+	
+	return true;
+}
+
+public static bool operator != (VectorEnteros v1, VectorEnteros v2){
+	for(int f=0; f<v1.vec.Length; f++){
+		if(v1.vec[f] == v2.vec[f])
+			return false;
+	}
+	
+	return true;
+}
+
+if(v1 == v2)
+	Console.Write("Todos los elementos son iguales.");
+else
+	Console.Write("No todos los elementos son iguales.");
+
+74.- INDIZADORES
+Los indizadores permiten acceder mediante subindices a un objeto de una clase que lo implementa. El objetivo es facilitar la implementacion de una algoritmo.
+
+El indizador evita que implementemos una serie de metodos para administar el objeto.
+
+La sintaxis de un indizador es:
+
+tipo this[tipo indice]{
+	get{
+		valor que retorna segun indice
+	}
+	set {
+		fijar el valor segun indice
+	}
+}
+
+namespace Indizador{
+	class Cliente{
+		private string nombre;
+		
+		public string Nombre{
+			set{
+				nombre = value;
+			}
+			get {
+				return nombre;
+			}
+		}
+		
+		private dinero;
+		
+		public int Dinero{
+			set{
+				dinero = value;
+			}
+			get{
+				return dinero;
+			}
+		}
+		
+		public Cliente(string nom, int din){
+			Nombre = nom;
+			Dinero = din;
+		}
+	}
+	
+	class Banco{
+		private Cliente[] clientes;
+		
+		public Banco(){
+			clientes = new Cliente[3];
+		}
+		
+		public Cliente this[int indice]{
+			set{
+				clientes[indice] = value;
+			}
+			get {
+				return clientes[indice];
+			}
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Banco banco1 = new Banco();
+			
+			Cliente cli1 = new Cliente("juan", 1000);
+			Cliente cli2 = new Cliente("ana", 2000);
+			Cliente cli3 = new Cliente("luis", 1500);
+			
+			banco1[0] = clie1;
+			banco1[1] = clie2;
+			banco1[2] = clie3;
+			
+			Console.WriteLine("Datos de los clientes.");
+			
+			Console.WriteLine(banco1[0].Nombre);
+			Console.WriteLine(banco1[0].Dinero);
+			Console.WriteLine();
+			
+			Console.WriteLine(banco1[1].Nombre);
+			Console.WriteLine(banco1[1].Dinero);
+			Console.WriteLine();
+			
+			Console.WriteLine(banco1[2].Nombre);
+			Console.WriteLine(banco1[2].Dinero);
+			Console.WriteLine();
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+Un indizador puede tener mas de un subindice, la estructura luego debe ser:
+
+tipo this[tipo indice1, tipo indice2]{
+	get{
+		valor que retorna segun indicdes
+	}
+	set{
+		fijar el valor segun indices
+	}
+}
+
+namespace indezador{
+	public enum DatoCasilla { agua, barco };
+	
+	class Tablero {
+		private DatoCasilla[,] mat;
+		
+		public Tablero(){
+			mat = new DatoCasilla[10, 10];
+		}
+		
+		public void Graficar(){
+			for(int f=0; f<mat.GetLength(0); f++){
+				for(int c=0; c<mat.GetLength(1); f++){
+					if(mat[f, c] == DatoCasilla.agua){
+						Console.Write("0");
+					}
+					
+					if(mat[f, c] == DatoCasilla.barco){
+						Console.Write("-");
+					}
+				}
+				
+				Console.WriteLine();
+			}
+		}
+		
+		public DatoCasilla this[int fila, int columna]{
+			set{
+				mat[fila, columna] = value;
+			}
+		
+			get{
+				return mat[fila, columna];
+			}
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Tablero tablero1 = new Tablero();
+		
+			tablero1[0, 0] = DatoCasilla.barco;
+			tablero1[0, 1] = DatoCasilla.barco;
+			tablero1[0, 2] = DatoCasilla.barco;
+			tablero1[0, 9] = DatoCasilla.barco;
+			tablero1[1, 9] = DatoCasilla.barco;
+			tablero1[2, 9] = DatoCasilla.barco;
+		
+			tablero1.Graficar();
+		
+			Console.WriteLine();
+		
+			if(tablero1[0, 0] == DatoCasilla.barco){
+				Console.WriteLine("Hay un barco en esta casilla.");
+			} else {
+					if(tablero1[0, 0] == DatoCasilla.agua){
+						Console.WriteLine("Agua");
+					}
+			}
+		
+			Console.ReadKey();
+		}
+	}
+}
+
+85.- DEFINICION DE PROPIEDADES AUTOMATICAS
 
 
 

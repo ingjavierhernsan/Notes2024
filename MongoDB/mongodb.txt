@@ -1,0 +1,894 @@
+MongoDB
+
+1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
+2.- MOSTRAR LAS BASE DE DATOS
+3.- LIMPIAR PANTALLA
+4.- INSERTAR DOCUMENTOS MEDIANTE LOS METODOS INSERTONE E INSERTMANY DE UNA COLECCION
+5.- CAMPO OBLIGATORIO _ID
+6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
+7.- BORRAR BASES DE DATOS, COLECCIONES O TODOS LOS DOCUMENTOS DE UNA COLECCION
+8.- RECUPERAR ALGUNOS DOCUMENTOS DE UNA COLECCION CON EL METODO FIND
+9.- OPERADORES RELACIONALES $EQ, $GT, $GTE, $LT, $LTE, $IN, $NIN Y $NE
+10.- BORRAR DOCUMENTOS DE UNA COLECCION CON LOS METODOS DELETEONE Y DELETEMANY
+11.- MODIFICAR UN DOCUMENTO MEDIANTE EL METODO UPDATEONE
+12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
+13.- OPERADORES LOGICOS $AND, $OR Y $NOT
+14.- CURSORES Y SUS METODOS EN MONGODB
+15.- RECUPERAR ALGUNOS CAMPOS DE UNA COLECCION CON EL METODO FIND
+16.- DOCUMENTOS EMBEBIDOS: DEFINICION DE CAMPOS DE TIPO DOCUMENTO
+17.- DOCUMETNOS EMBEBIDOS: DEFINICION DE CAMPOS DE ARREGLO CON ELEMENTOS DE TIPO DOCUMENTO
+18.- CAMPO _ID GENERADO POR MONGODB
+19.- TIPO DE DATO DATE EN MONGODB
+20.- TIPO DE DATO BINARY DATA
+21.- INDICES
+22.- INDICES - SIMPLES Y COMPUESTOS
+23.- INDICES - CON CAMPOS DE TIPO DOCUMENTO Y ARRAY
+24.- INDICES - ELIMINACION
+25.- MONGODB SHELL - CARACTERISTICAS
+26.- MONGODB SHELL - CARGAR Y EJECUTAR UN ARCHIVO *.JS
+27.- MONGODB SHELL - CONECTARNOS A UN SERVIDOR REMOTO
+
+
+1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
+MongoDB es una base de datos documental, el elemento esencial es el documento que normalmente se los agrupa en colecciones de documentos similares. Una base de datos en MongoDB es un conjunto de colecciones:
+
+Base de datos 1:
+    Coleccion 1:
+        - Documento1
+        - Documento2
+        - Documento3
+    
+    Coleccion 2:
+        - Documento1
+        - Documento2
+        - Documento3
+
+MongoDB utiliza el formato JSON para representar los datos en un "documento"
+
+{
+    codigo: 1,
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: ['Planeta', 'Siglo XXI']
+}
+
+Crear base de datos:
+use base1
+
+Mediante el comando 'use' activamos una base de datos existente o creamos una nueva, queda luego acitva la base de datos 'base1'.
+
+Insertar datos:
+
+insertOne()
+db.NombreColeccion.insertOne()
+
+db.libros.insertOne(
+    {
+        codigo: 1,
+        nombre: 'El aleph',
+        autor: 'Borges',
+        editoriales: ['Planeta', 'Siglo XXI']
+    }
+)
+
+Mostrar los datos almacenados en la coleccion 'libros' podemos llamar al metodo 'find':
+
+find()
+
+db.NombreColeccion.find()
+
+db.libros.find()
+
+{
+    _id: ObjectId("652a4232b3948c7b311df3af"),
+    codigo: 1,
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: ['Planeta', 'Siglo XXI']
+}
+
+Todos los documentos requiere una clave principal almacenada en el campo _id. Podemos indicar nosotros el valor a almacenar en el campo _id, pero si no lo hacemos se crea en forma automatica.
+
+Mostrar la base de datos donde estamos:
+
+db
+
+Cada vez que iniciamos MongoDB shell se activa por defecto la base de datos 'test' mediante el comando 'use' debemos activar la base de datos que necesitamos trabajar.
+
+2.- MOSTRAR LAS BASE DE DATOS
+
+show dbs
+
+3.- LIMPIAR PANTALLA
+
+cls
+
+ctrl + l
+
+
+4.- INSERTAR DOCUMENTOS MEDIANTE LOS METODOS INSERTONE E INSERTMANY DE UNA COLECCION
+
+InsertOne: Inserta un documento en una coleccion.
+InsertMany: Inserta multiples documentos en una coleccion.
+
+db.libros.insertMany(
+    [
+        {
+            codigo: 3,
+            nombre: 'Aprenda PHP',
+            autor: 'Mario Molina',
+            editoriales: ['Planeta']
+        },
+        {
+            codigo: 4,
+            nombre: 'Java en 10 minutos',
+            autor: 'Barros Sergio',
+            editoriales: ['Planeta', 'Siglo XXI']
+        }
+    ]
+)
+
+5.- CAMPO OBLIGATORIO _ID
+En MongoDB todo documento requiere un campo clave que se debe llamar _id. Si nosotros como desarrolladores no definimos dicho campo el mismo se crea en forma automatica y se carga un calor unico.
+
+Podemos definir y cargar un valor en el campo _id cuando inicializamo un documento:
+
+db.clientes.insertOne(
+    {
+        _id: 1,
+        nombre: 'Lopez Marcos',
+        domicilio: 'Colon 111',
+        provincia: 'Cordoba'
+    }
+)
+
+Cuando se ejecuta el metodo insertOne nos retorna un objeto JSON informando del resultado de la insercion medinate un objeto con dos campos, el primero 'acknowledged' que indica si el documento fue admitido en la coleccion y el _id que en este caso lo define el usuario de la base de datos.
+
+Se se produce un error nos genera un objeto JSON con otra estructura, probemos de intentar de ingresar un segundo docuemnto con el mismo _id.
+
+Nos retorna un objeto JSON que entre otros campos define uno llamado 'errmsg' con el mensaje de error.
+
+Si nuestra aplicacion administra el campo '_id' hay que tener en cuenta que nunca puede repetirse y en el caso que intentemos ingresar un documento con clave repetida luego dicho documento no se inserta en la coleccion.
+
+6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
+
+show dbs
+Muestra las bases de datos.
+
+use base1
+Selecciona la base de datos que deseamos utilizar.
+
+show collections
+Muestra las colecciones que tiene la base de datos.
+
+help
+Si queremos consultar los comandos esenciales del shell de MongoDB debemos emplear el comando 'help'.
+
+7.- BORRAR BASES DE DATOS, COLECCIONES O TODOS LOS DOCUMENTOS DE UNA COLECCION
+Si queremos eliminar todos los documentos se una coleccion debemos utilizar el metodo 'deleteMany' aplicado a una coleccion existente:
+
+db.NombreColeccion.deleteMany({})
+
+use base1
+deb.libros.deleteMany({})
+show collections
+
+Es importante notar que luego de llamar al metodo deleteMany la coleccion 'libros' sigue existiendo.
+
+Para eliminar los documentos de una coleccion y la coleccion propiamente dicha debemos emplear el metod 'drop':
+
+db.NombreColeccion.drop()
+
+use base1
+db.libros.drop()
+show collections
+
+Para eleminar una base de datos en forma completa, es decir todas sus colecciones y documentos debemos emplear el metodo 'dropDatabase' del objeto 'db':
+
+use nombreBaseDeDatos
+db.dropDatabase()
+
+show dbs
+use base1
+db.dropDatabase()
+
+8.- RECUPERAR ALGUNOS DOCUMENTOS DE UNA COLECCION CON EL METODO FIND
+El metodo find nos permite seleccionar solo algunos documentos que cumplen una condicion:
+
+db.libros.find({_id:1})
+
+Podemos disponer mas de un campo:
+
+db.libros.find({precio:50, cantidad:20})
+
+9.- OPERADORES RELACIONALES $EQ, $GT, $GTE, $LT, $LTE, $IN, $NIN Y $NE
+Listado de operadores relacionales
+$eq - equal - igual
+$lt - low than - menor que
+$lte - low thna equal - menor o igual que
+$gt - greater than - mayor que
+$gte - greater than equal - mayor o igual que
+$ne - not equal - distinto
+$in - in - dentro de
+$nin - not in - no dentro de
+
+Otra froma de expresar  la busqueda de todos los libros con un precio igual a 50 es:
+
+db.libros.find({precio:{$eq:50}})
+
+Para mostrar todos los libros con un precio inferior a 30 tenemos que utilizar el operador $lt:
+
+db.libros.find({precio:{$lt:30}})
+
+Recuperar todos los libros que tienen un precio mayor a 40:
+
+db.libros.find({precio: {$gt:40}})
+
+Rcuperar todos los libros que en el campo cantidad tiene 50 o mas:
+
+db.libros.find({cantidad:{$gte:50}})
+
+Recuperar todos los libros que en le campo cantidad hay un valot distinto a 50:
+
+db.libros.find({cantidad:{$ne:50}})
+
+Recuperar todos los libros cuyo precio esten comprendidos entre 20 y 45:
+
+db.libros.find({precio:{$gte:20, $lte:45}})
+
+Recuperar todos los libros del editorial 'Planeta':
+
+db.libros.find({editorial: {$in:['Planeta']}})
+
+Recuperar todos lso libros que no pretenezcan a la editorial 'Planeta':
+
+db.libros.find({editorial:{$nin: ['Planeta']}})
+
+10.- BORRAR DOCUMENTOS DE UNA COLECCION CON LOS METODOS DELETEONE Y DELETEMANY
+Hemos vidto en conceptod anteriores que podemos eliminar todos los documentos de unacoleecion mediante el metodod deleteMany y psando un objeto literal vacio:
+
+db.libros.deleteMany({})
+
+deleteMany: Borra todos los documentos que cumplen la condicion que le enviamos.
+deleteOne: Borra el primer documento que cumple la condicion que le pasamos.
+
+Si queremos eliminar el documento que almacena en el campo el _id con valor 1 luego podemos utilizar la sintaxis:
+
+db.libros.deleteOne({_id:1})
+
+Tambien:
+
+db.libros.deleteOne({_id:1 {$eq:1}})
+
+Lo mas conveniente es utilizar el metodo 'deleteOne' ya que solo uno puede cumplir esa condicion al ser la clave primaria del documento.
+
+La sintaxis anterior es bueno recordarv ya que los otros operadores relacionales hay que utilizarlos en forma obligatoria y no tienen una sintaxis alternativa como el $eq.
+
+Para borrar todos los libros que tienen un precio mayor o igual a 50 tenemos:
+
+db.libros.deleteMany({precio: {$gte:50}})
+
+11.- MODIFICAR UN DOCUMENTO MEDIANTE EL METODO UPDATEONE
+Para modificar un documento en particular disponemos de un metodo llamado updateOne.
+
+db.libros.updateOne({_id:{$eq:1}, {$set:{precioL15, cantidad:1}}})
+
+Hemos llamado al metodo updateOne con dos prametros, el primero indica el documento a modificar y el segundo parametro utilizamos el operador $set que es un operador de actualizacion seguidamente con lso campos y valores a modificar.
+
+Con las vase de datos documentales tengamos en cuenta que los documentos pueden tener distintas cnatidades de campos. Por ejemplo si queremos agrefar el comapo descripcion al libro con '_id:4' debemos utilizar la sintaxis:
+
+db.libros.updateOne({_id:{$eq:t}}, {$set: {descripcion: 'Cada unidad trata un tema fundamental de Java desde 0.'}})
+
+El campo 'descripcion' solo se aplicara al documento con '_id:4', los demas no los tendran.
+
+Si queremos eliminar un campo de un documento debemos emplear el operador de actualizacion $unset.
+
+db.libros.updateOne({_id:{$eq:4}}, {$unset:{descripcion:''}})
+
+Luego de ejecutar el updateOne tenemos que para el documento que tiene el _id 4 se ha eliminado el campo 'descripcion'.
+
+Es importante entender que mediante el operador $unset eliminamos el cmapo, en camvio si utilizamos el operador $set modificamos el contenido del campo.
+
+Discponemos tambien de operadores de modificacion para arreglos, veamos como podemos agregar y eliminar elementos en el arreglo 'editorial'.
+
+db.libros.updateOne({_id:{$eq:1}}, {$push:{editorial:'Atlantida'}})
+
+Podemos ver que luego de ejecutarse el metodo updateOne el arreglo 'editorial' tiene una nueva componente para el documento con '_id:1'.
+
+De forma similar para eliminar un elmento del arreglo debemos emplear el operador $pull:
+
+db.libros.updateOne({_id:{$eq:1}}, {$pull:{editorial:'Atlantida'}})
+
+12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
+El sigundo metodo que nos permite actualizar documentos pero en forma masiva es el metodo updateMany.
+
+db.libros.updateMany({_id:{$gt:2}}, {$set:{canitdad:0}})
+
+db.libros.updateMany({cantidad: {$eq:0}}, {$set:{faltantes:true}})
+
+db.libros.updateMany({cantidad:{$eq:0}}, {$unset:{faltantes:true}, $set:{cantidad: 100}})
+
+La primera modificacion masiva la hacemos con todos los libros cuyo _id sean mayores a 2, fijando el campo cantidad con 0.
+
+La segunda modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, agregando el campo 'faltantes' con el valor true.
+
+La tercer y ultima modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, elimnamos el campo faltantes y fijamos el campo cantidad con el valor 100.
+
+13.- OPERADORES LOGICOS $AND, $OR Y $NOT
+Cuando necesitamos construir consultas que deban cumplir varias condiciones utilizaremos los operadores logicos.
+
+El operador $and lo hemos utilizado en forma implicita, por ejemplo si tenemos:
+
+db.libros.find({precio:50, cantidad:20})
+
+La sintaxis alternativa para el find es:
+
+db.librod.find({$and:[{precio:50}, {cantidad:20}]})
+
+El valor para el operador $and es un arreglo con cada una de las condiciones que debe cumplir.
+
+Para los operadores $or y $not no hay una forma de disponer una sintaxis implicita.
+
+db.libros.find({$or: [{precio:{$gte:50}}, {cantidad:1}]})
+
+Si queremos recuperar todos los documentos de la coleccion libros que no tienen un precio mayor o igual a 50 la sintaxis debe ser:
+
+db.libros.find({precio:{$not:{$gte:50}}})
+
+Los operadores logicos podemos utilizarlos no solo para recuperar datos, sino tambien cuando borramos o actualizamos documentos.
+
+db.libros.deleteMany({precio:{$not:{$eq:50}}})
+
+14.- CURSORES Y SUS METODOS EN MONGODB
+Cada vez que llamamos al metodo find de una coleccion el mismo no retorna un objeto de la clase Cursor.
+
+Si no asignamos el valor a una variable en el shell de MongoDB luego se muestran los documentos recuperados y se nos pide que confirmemos cada vez que se muestran 20.
+
+Podemos encadenar la llamada al metodo find con los metodos de la clase Cursor, por ejemplo si queremos que se muestren todos los libros ordenados por el nombre tenemos que implementar la siguiente logica:
+
+db.libros.find().sort({titulo:1})
+
+Apartir del cuarsor que retorna el metodo 'find' llamamos al metodo 'sort' de la clase Cursor y como condicion indicamos por el campo que queremos ordenar (si pasamos un 1 se ordena en forma ascendente y si pasamos un -1 se ordena en forma decendente).
+
+Otro metodo de la clase Cursor que nos puede qyudar cuando ejecutamos comandos desde el shell de MongoDB es 'pretty', el mismo tiene por objetivo mostrarnos los datos del cursor en forma mas legible:
+
+db.libros.find().pretty()
+
+{
+    "id":1,
+    "titulo": "El aleph",
+    "autor": "Borges",
+    "editorial":[
+        "Siglo XXI",
+        "Planeta"
+    ],
+    "precio":20
+}
+{
+    "id":2,
+    "titulo": "Martin Fierro",
+    "autor": "Jose Hernandez",
+    "editorial":[
+        "Siglo XXI"
+    ],
+    "precio":50
+}
+
+El metodo sort tambien retorna un Cursor con los datos ordenados, luego podemos llamar al metodo pretty a partir del Cursor devuelto por sort:
+
+db.libros.find().sort({titulo:1}).pretty()
+
+Otro metodo util es el 'limit' que tiene por objetivo limitar a un determinado numero de documentos a recuperar del Cursor.
+
+db.libros.find().limit(2)
+
+db.libros.find().sort({titulo:1}).limit(2)
+
+Otro metodo llamado 'skip' nos permite saltear una determinada cantidad de documentos desde el principio del cursor.
+
+db.libros.find().skip(1)
+
+Podemos combinar las llamadas al metodo skip y limit:
+
+db.libros.find().skip(2).limit(2).pretty()
+
+15.- RECUPERAR ALGUNOS CAMPOS DE UNA COLECCION CON EL METODO FIND
+Hay un segundo parametro opcional en el cual debemos indicar que campos del documento queremos recuperar:
+
+db.libros.find({precio:50}, {titulo:1, cantidad:1})
+
+En el segundo parametro del metodo 'find' debemos especificar cada campo y un valor 1 indicando que se lo quiere recuperar. El campo _id se recupera por defecto, salvo que indiquemos con un valor 0 para que no se recupere.
+
+16.- DOCUMENTOS EMBEBIDOS: DEFINICION DE CAMPOS DE TIPO DOCUMENTO
+Hasta ahora hemos trabajado definiendo documentos con una serie de campos que almacenan tipo de datos simples como enteros, reales, cadena de caracteres y datos compuestos de tipo arreglo.
+
+Segun el tipo de consultas que haremos a nuestros documentos debemos definir el esquema de campos de los mismos. Supongamos que tenemos que alamacenar el dato de clientes y luego hacer consultas de donde viven y discriminar por calle y numero, luego puede tener sentido tener un campo direccion que sea un documento donde se almacenen por separado la calle, el numero y el codigo postal.
+
+db.clientes.insertOne(
+    {
+        _id:1,
+        nombre:'Martinez Victor',
+        mail:'mvictor@gmail.com',
+        direccion:{
+            calle:'Colon',
+            numero: 620,
+            codigopostal: 5000
+        }
+    }
+)
+
+Para recuperar todos los clientes que viven en la calle 'Colon' tenemos que plantear la siguiente consulta:
+
+db.clientes.find({'direccion.calle':'Colon'}).pretty()
+
+Es obligatorio disponer las comillas cuando hacemos referencia a un subcampo de un documento: 'direccion.calle'.
+
+Para recuperar todos los clientes que viven en la calle 'Colon' y su numero esta comprendido entre 1 y 1000 tenemos que plantear la siguiente consulta:
+
+db.clientes.find({'direccion.calle':'Colon', 'direccion.numero':{$gte:0}, 'direccion.numero':{$lte:1000}}).pretty()
+
+17.- DOCUMETNOS EMBEBIDOS: DEFINICION DE CAMPOS DE ARREGLO CON ELEMENTOS DE TIPO DOCUMENTO
+Podemos definir campos de tipo arreblo y almacenar en los mismos documentos embebidos, por ejemplo:
+
+db.posts.insertOne(
+    {
+        _id:1,
+        titulo:'Lenguaje Java',
+        contenido: 'Uno de los lenguajes mas utilizados es ...',
+        comentarios: [{
+            autor:'Marcos Paz',
+            mail:'pazm@gmail.com',
+            contenido:'Me parece un buen...'
+        },
+        {
+            autor:'Ana Martinez',
+            mail:'marineza@gmail.com',
+            contenido:'Todo ha cambiado en...'
+        },
+        {
+            autor:'Luiz Blanco',
+            mail:'blancol@outlook.com',
+            contenido:'Afirmo que es...'
+        }]
+    }
+)
+
+La idea fundalmental en MongoDB es disponer de todos los datos agrupados dependiendo de los accesos futuros a la informacion, es evidente que cuando quremos acceder a una entrada de un bloq tambien necesitemos acceder a los comentarios de dicha entrada.
+
+Podemos generar documentos embebidos con mas niveles, por ejemplo definir un campo en el arreglo que sea de tipo documento.
+
+Si queremo recuperar los titulos de todos los posts y los nombres de los usuarios que hicieron comentarios en cada post, debemos implementar la siguiente consulta:
+
+db.posts.find({}, {_id:0, titulo:1, 'cometarios.autor':1}).pretty()
+
+Para recuperar todos los posts donde ha comentado el usuario 'Pablo Rodriguez':
+
+db.posts.find({'comentarios.autor':'Pablo Rodriguez'}).pretty()
+
+Podemos utilizar el subindice del arreglo para analizar un documento en particular, por ejemplo si queremos recuperar todos los posts que comento primero 'Rodriguez Pablo':
+
+db.posts.find({'comentarios.0.autor':'Pablo Rodriguez'}).pretty()
+
+Acotaciones
+Cuanod definimos documentos embebidos debemos tener en cuenta que un documento en MongoDB no puede tener un tamano mayor a 16 MB.
+
+No podemos crear una coleccion 'ciudades' y alamcenar documetnos con el nombre de la ciudad y embeber documentos con los nombres de todas sus ciudades (podria haber millones por cada ciudad).
+
+18.- CAMPO _ID GENERADO POR MONGODB
+Cuando creamos un documento podemos o no iniciar el campo _id, en la mayoria de los ejemplos hemos definido nosotros el campo _id y su valor, recordemos que no pueden repetirse.
+
+Si no definimos nosotros el campo _id se genera en forma automatica.
+
+El calor que se genera es de la clase ObjectId y tiene la caracteristica de poder generarse con un valor unico aunque se este generando en servidores distintos.
+
+Uno de los objetivos fundamentales de emplear MongoBD es poder tener servidores distribuidos, la posibilidad de definir una clave primaria unica y no tener que comunicarse entre los servidores se resuelve utilizando la clase ObjectId.
+
+No se puede generar un campo numerico autoincremental como en los gestores de base de datos relacionales, esto obligaria a sincronizar dicho campo con otros servidores y generaria cuellos de botella y excesivo trafico.
+
+MongoDB fue disenado para ser una base de datos distribuida, es fundamental poder generar identificadores unicos en un entorno fragmentado con multiples servidores.
+
+Un objeto de la clase ObjectId requiere 12 bytes y representan:
+
+- Los primeros 4 bytes indican la cantidad de segundos desde el 1 de enero de 1970 (epoca unix). Cuando de ordena por el _id luego los documentos se encontraran organizados segun el tiemo que se lo inserto.
+
+- Los 3 bytes siguientes del ObjectId son un identificador unico de la maquina en la que se genero, esto nos garantiza que los diferentes servidores no generaran ObjectId iguales.
+
+- Los 2 bytes siguientes evitan que haya colisiones de ObjectId en el mismo servidor, el mosmo se genera con el Id del numero de proceso que lo genero.
+
+- Los primero 9 bytes de un objectId garantizan su unicidad en todas las maquinas y procesos durante un segundo. Los ultimos 3 bytes son simplemente un contador incremental que es responsable de la unicidad dentro de un segundo en un solo proceso. Esto premite generar hasta 16, 777, 216 ObjectIds unicos por proceso en un solo segundo.
+
+19.- TIPO DE DATO DATE EN MONGODB
+Hemos utilizado hasta ahora varios tipos de datos cuando inicializamos campos de un documento:
+
+String: Permite almacenar cadenas de caracteres en foramto UTF-8.
+Integer32: Valores entero numerico.
+Integer64: Valores entero numerico.
+Double: Almacena valores de puneto flotante.
+Object: Almacena un documento embebido.
+Array: Permite almacenar un arreglo con elementos de distinto tipo.
+Boolean: Permitealmacenar un valor true o false.
+
+Veremos ahora como almacenar datos de tipo Date.
+
+La fecha es un entero de 64 bits que representa el numero de milisegundos desde la epoca de Unix (1 de enero de 1970). Esto da como resultado un intervalo de fechas representables de aproximadamente 290 millones de anos en el pasado y el futuro. El tipo Date alamcena el signo, un valor negativo representa una fecha anterior a 1970.
+
+db.autos.insertOne({patente : 'aaa111', fechahora : new Date()})
+
+La representacion de los datos de tipo Date cuando llamamos al metodo find es:
+
+{
+    _id : ObjectId("5c3a60d52c419f7680420488").
+    patente: "aaa111",
+    fechahora : ISODate("2019-01-12T21:49.852Z")
+}
+
+Para almacenar la fecha se utiliza el estandar ISO 8601 que tiene un formato:
+
+YYYY-MM-DDTHH:MM:SS
+
+Podemos almacenar una fecha particular cuando creamos el objeto de la case Date:
+
+db.empleados.insertOne({_id:20456234, nombre:'Rodriguez Pablo', fehcaingreso:new Date(2010, 0, 31)})
+
+db.empleados.insertOne({_id:17488834, nombre:'Gomez Ana', fechaingreso: new Date(2001, 11, 1)})
+
+Como el shell de MongoDB esta implementado en JavaScript debemos indicar al crear un objeto de la clase Date para el mes un valor comprendido entre 0 y 11.
+
+Podemos ver las fechas almacenadas en el cmapo 'fechaingreso', y que la parte de la hora esta en cero por no pasarlas cuando creamos el objeto de la clase Date:
+
+{
+    _id: 20456234,
+    nombre: 'Rogriguez Pablo',
+    fechaingreso: ISODate("2010-01-31T3:00:00Z")
+}
+
+Si necesitamos que los datos de empleados se recuperen en forma ordenada por el cmapo 'fechaingreso" debemos codificar la siguiente consulta:
+
+db.empleados.find().pretty().sort({fechaingreso:1})
+
+Imprimir solo el aprllido y la fecha de nacimiento.
+
+db.alumnos.find({}, {apellido:1, fehcanacimento:1, _id:0}).pretty()
+
+Imprimir todos los datos ordenados por la fecha de nacimiento de mayor a menor.
+
+db.alumnos.find().prettey().sort({fechanamiciento:-1})
+
+Imprimir todos los alumnos que nacieron a partir de 1970.
+
+db.alumnos.find({fechanacimiento:{$gte: new Date(1970, 0, 1)}}).pretty()
+
+20.- TIPO DE DATO BINARY DATA
+MongoDB permite definir la carga de datos binarios (por ejemplo archivos jpg, png, pdf, etc.) en un campo de un documento, siempre y cuanod no supere el limite de 16MB definido por el gestor de base de datos por motivos de eficiencia. Si tenemos que almacenar archivos muy grandes como podrian ser un archivo mp4 con una pelicula debemos utilizar otra tecnica, como por ejemplo que un el campo del documento se almacene la URL donde se encuentra la pelicula.
+
+Hay otra tecnica de trocear el archivo y almacenarlo en una sucesion de documentos, puede consultar en la pagina oficial de MongoDB.
+
+Desde el shell de mongoDB estamos bastante limitados para la carga de un campo de tipo binario pero podemos hacerlo creando una variable y almacenando el valor retornado por BinData:
+
+var datobinario=BinData(0, 'e8MEnzZoFyMmD7WSHdNrFJyEk8M=')
+
+db.usuarios.insertOne({nombre: 'Marcos', clave: 'abc123', fotoperfil: datobinario})
+
+{
+    _id: ObjectId("6530be92086d075ffc9c7063"),
+    nombre: 'Marcos',
+    clave: 'abc123',
+    fotoperfil: Binary.createFromBase64("e8MEnzZoFyMmD7WSHdNrFJyEk8M=", 0)
+}
+
+Recordemos que en el mundo real cuanod almacenemos campos de tipo Binary Data lo haremos desde una aplicacion creada con algun de los tantos lenguajes que soporta MongoDB como pueden ser: C, C++, C#, Go, Java, Node.js, Perl, PHP Phyton, Ruby o Scala.
+
+Las ventajas de tener los datos binarios dentro de los documentos son:
+- Proporciona el motor de base de datos alta disponibilidad y replicacion de datos.
+- Una arquitectura de aplicacion mas simple al tener centralizado todos los datos.
+- Cuando se usan conjuntos de replicas destribuidas geograficamente, MongoDB distribuira automaticamente los datos a centros de datos geograficamente distintos.
+- El almacenamiento de datos en la base de datos aprovecha los mecanismos de autenticacion y seguridad de MongoDB.
+- Mejor rendimeinto en los accesos a datos. Accediendo al docuamto contamos con todos los datos y no tenemos que hacer referencias a otras locaciones con datos.
+
+21.- INDICES
+Otro elemento esencial de MongoDB son los indices.
+
+Los indices sirven para acceder a los documentos de una coleccion rapidamente, acelerando la localizacion de la informacion.
+
+Los indices se emplean para facilicitar la obtancion de informacion de una coleccion. El indice de una coleccion desempena la misma funcion que el indice de una libro: permite encontrar datos rapidamente; en el caso de las cleccione, localiza documentos.
+
+MongoDB accede a los documentos de dos maneras:
+
+1) Recorriendo las colecciones; comenzando desde el principio y extrayendo los documentos que cumplen las condiciones de la consulta; lo cual implca posicionar las cabezas lectoras, leer el dato, controlar si coincide con lo que se busca (como si pasaramos una a una las paginas de un libro buscando un tema especifico).
+
+2) Empleando indices; recorriendo la estructura de arbol del indice para localizar los documentos y extrayendo los que complen las condiciones de la condulta (comparando con un libro, diremos que es como leer el indice y luego de encontrar el tema buscado, ir directamente a la pagina indicada).
+
+Un indice posibilita el acceso directo y rapido haciendo mas eficiente las busquedas. Sin indice, MongoDB debe recorrer secuencialmente todos los documentos de una coleccion para encontrar un documento en particular.
+
+Los indices son estruturas asosciadas a las colecciones, una coleccion alamacena los campos indexados y se crean para acelerar las consultas.
+
+Entonces, el objetivo de un indice es acelerar la recuperacion de informacion. La indexacion es una recnica que optimiza el acceso a los datos, mejora el rendimento acelerando las consultas y otras operaciones como pueden ser las modificaciones y borrados. Es util cunado las colecciones contienen cientod de miles o millones de documentos.
+
+La desventaja es que consume espacio en el disco y genera costo de mantenimineto (tiempo y recursos) cuando se efectuan inserciones y modificaciones.
+
+Es importante identificar el o los campos poor los que seria util crear un indice.
+
+No se recomienda crear indices sobre campoos que no se usan con frecuencia en consultas o en colecciones muy pequenas.
+
+Los cambios sobre las colecciones, como insercion, actualizacion o eliminacion de documentos, son incorporados automaticamente en los archivos indices.
+
+En MondoDB el primer indice que se crea en forma automatica corresponde al campo _id, recordemos que dicho campo podemos asignarle un valor nosotros o hacer que se cree automaticamente.
+
+Los otros campos a los cuales se le crearan indices deberan ser seleccionados por nosostros dependiento de las consultas de nuestra aplicacion a la base de datos.
+
+Los indices que se crean en MongoDB funcionan de manera similar a como funcionan en gestores de bases de datos realcionales (MySQL, SQLServer, PostgreSQL, etc).
+
+22.- INDICES - SIMPLES Y COMPUESTOS
+Indices simples
+Un indice es simple cuando se hace por un unico campo del documento, debemos utilizar el metodo 'createIndex' e indicar el campo por el cual queremos generar el archivo indice.
+
+db.libros.insertOne(
+	{
+		_id: 1,
+		titulo: 'El aleph',
+		autor: 'Borges',
+		editorial: ['siglo XXI', 'Planeta'].
+		precio: 20,
+		cantidad: 50
+	}
+)
+
+db.libros.createIndex({titulo:1})
+
+db.libros.find({}, {titulo:1}).sort({titulo:1}).pretty()
+
+Cuando ejecutamos el bloque anterior al crearse el indice nos informa de los indices anteriores que tenia la coleccion y la nueva cantidad de indices.
+
+Para indexar in orden inverso cuando se crea el indice debemos especificar un -1:
+
+db.libros.createIndex({titulo:-1})
+
+Los datos quedan ordenados de la 'z' a la 'a'.
+
+Indices compuestos
+Un indice es compuesto cuando se hace por dos o mas campos del documento, debemos utilizar tambien el metodo 'createIndex' e indicar los campos por los cuales generar el archivo indice:
+
+db.libros.createIndex({titulo:1, autor:1})
+
+db.libros.find({titulo:'Aprenda PHP', autor:'Mario Molina'}).pretty()
+
+Acceso solo a los datos de los indices
+Para maximizar la eficiencia de una consulta podemos filtrar por campos que se encuentran indexados y recuperar datos directamente del indice. En estos casos MongoDB no debe acceder a los documentos de la coleccion, solo debe acceder a los datos que se encuentran en el archivo indice:
+
+db.articulos.insertOne(
+	{
+		_id: 1,
+		nombre: 'MULTIFUNCION HP DESKJET 2675',
+		rubro: 'impresora',
+		precio: 3000,
+		stock: 20
+	}
+)
+
+db.articulos.createIndex({rubro: 1, _id: 1})
+
+db.articulos.find({rubro: 'monitor'}, {rubro: 1, _id: 1})
+
+Conocer estadisticas de la consulta
+Si queremos conocer informacion sobre los requerimientos reales de una consulta podemos utilizar el metodo explain:
+
+db.articulos.find({rubro: 'monitor'}, {rubro: 1, _id: 1}).explain('executionStats')
+
+Nos retorna muchos datos que pueden ser utilies para planificar que estructuras de indices definir.
+
+Podemos ver que en el campo 'totalDocsExamined' almacena un cero, esto quiere decir que no se consultaron documentos, sino directamente los datos almacenados en los indices (esto aumenta mucho la eficiencia de la consulta caundo tenemos millones de documentos).
+
+Si cambiamos la consulta y recuperamos tambien el precio:
+
+db.articulos.find({rubro: 'monitor'}, {rubro: 1, _id: 1, precio: 1}).explain('executionStats')
+
+Luego podemos comprobar que si se accedieron a los documentos a parte del archivo indice.
+
+Indices unicos
+Podemos asegurarnos que un documento tiene valores distintos para uno o varios campos definiendo un indice unico. La sintaxis para la definicion de un indice unico:
+
+db.clientes.insertOne(
+	{
+		_id: 1,
+		nombre: 'Perez ana',
+		dni: '20439455',
+		domicilio: 'San Martin 222',
+		provincia: 'Santa Fe'
+	}
+)
+
+db.clientes.createIndex({dni: 1}, {unique: true})
+
+Luego si intentamos ingresar un documento en la coleccion 'clientes' con un 'dni' repetido, MongoDB no lo permite.
+
+23.- INDICES - CON CAMPOS DE TIPO DOCUMENTO Y ARRAY
+MongoDB permite acceder a sus documentos y crear indices en campos de tipo documento. Los campos de tipo documento se pueden combinar con campos de nivel superior en indices compuestos y, aunque tienen algunas particularidades en algunos aspectos, se comportan principalmente como se comportan los campos de indice "normales".
+
+Podemos crear un indice simple de un subcampo, como por ejemplo la 'calle' del campo 'direccion':
+
+db.clientes.insertOne(
+    {
+        _id: 1,
+        nombre: 'Martinez Victor',
+        mail: 'mvictor@gmail.com',
+        direccion: {
+            calle: 'Colon',
+            numero: 620,
+            codigopostal: 5000
+        }
+    }
+)
+
+db.clientes.createIndex({'direccion.calle': 1})
+
+db.clientes.find({'direccion.calle': 'Dean Funes'})
+
+Podemos tambien crear un indice que incluya todos los subcampos:
+
+db.libros.insertOne(
+    {
+        _id: 1,
+        titulo: 'El aleph',
+        autor: {
+            nombre: 'Borge',
+            nacionalidad: 'Argentina'
+        },
+        editorial: ['Siglo XXI', 'Planeta'],
+        precio: 20,
+        cantidad: 50
+    }
+)
+
+db.libros.createIndex({autor: 1})
+
+db.libros.find({'autor.nombre':'Java en 10 minutos', 'autor.nacionalidad':'Espanola})
+
+El indice se utiliza solo en los casos que en la consulta indiquemos ambos subcampos: 'nombre' y 'nacionalidad'.
+
+Podemos tambien incluir un campo de tipo arreglo cuando se define un indice.
+
+24.- INDICES - ELIMINACION
+Para conocer los indices que tiene una coleccion hacemos uso del metodo 'getIndexes', nos devuelve informacion de cada uno de los indices:
+
+db.libros.getIndexes()
+
+Para eliminar un indice contamos con el metodo 'dropIndex' al cual le debemos pasar el nombre del indice a eliminar:
+
+db.libros.dropIndex('autor_1')
+
+Tengamos en cuenta que no podemos eliminar el indice que crea MongoDB sobre el campo _id.
+
+Para eliminar un indice si no queremos llamar a getIndexes podemos indicar los campos por los que se creo el indice.
+
+db.libros.dropIndex({titulo:1})
+
+25.- MONGODB SHELL - CARACTERISTICAS
+En MongoDB shell podemos ejecutar todas las funciones del lenguaje JavaScript, para comprobar esto ejecutemos:
+
+x=1;
+x++;
+x;
+cubo=Math.pow(x, 3)
+cubo;
+
+Podemos incluso codificar una funcion y luego llamarla:
+
+functon mayor(x1, x2){
+    if(x2 > x2)
+        return x1;
+    else
+        return x2;
+};
+
+mayor(10, 3);
+mayor(6, 34);
+
+Personalizacion del prompt de MongoDB shell
+
+Ahora que savemos que tenemos un entorno en JavaScript en MongoDB shell podemos personalizar por ejemplo el shell modificando la variable 'prompt' asignando una funcion:
+
+prompt = function(){
+    return (new Date())+"> ";
+};
+
+El prompt de MongoDB shell nos muestra la fecha y hora actual.
+
+Algo mas util es que el prompt muestre el nombre de la base de datos activa, esto logramos asignando la siguiente funcion:
+
+prompt = function(){
+    return db+"> ";
+};
+
+Crear una gran coleccion de datos mediante codigo JavaScript
+Podemos utilizar la funcionalidad de JavaScript en el shell de MongoDB para poblar una coleccion con datos de prueba por ejemplo:
+
+for(i=1; i<=1-; i++){
+    db.articulos.insertOne{
+        _id: i,
+        nombre: 'nombre'+i
+    }
+};
+
+Desplegar el codigo JavaScript de los metodos de MongoDB
+Podemos desplegar el codigo JavaScript de cada metodo visto en conceptos anteriores simplemente indicando su nombre desde el shell:
+
+db.articulos.insertOne
+
+Muy util si tenemos conocimeintos de JavaScript para conocer su implementacion.
+
+26.- MONGODB SHELL - CARGAR Y EJECUTAR UN ARCHIVO *.JS
+Vimos en el comcepto anterior que desde la aplicacion de consola de MongoDB (shell) podemos ejecutar comandos JavaScript, ahora veremos que dichos comandos podemos tenerlos en un archivo *.js y cargarlos mendiante un comando.
+
+Luego de haver grabado el archivo con el nombre 'creation.js' en la carpeta c:\scriptmongodb procedamos a ejecutar el comando load desde el shell de MongoDB:
+
+load("c:\\scriptmongodb\\cracion.js")
+
+Luego de ejecutar la funcion load nos informara si se ejecuto el bloque de comandos en forma exitosa con un 'true'.
+
+Hemos pasado el path absoluto donde se encuentra el archivo, si el archivo *.js se encuentra en la msima carpeta desde donde iniciamos MongoDB shell podemos especificar solamente el nombre del archivo al llamar a load:
+
+load("creacion.js")
+
+Si queremos ejecutar mongo.exe desde cualquier carpeta de Windows 10, debemos configurar una cariable de entorno con la carpeta donde hemos instalado MongoDB.
+
+Comandos de MongoDB en un archivo *.js
+
+En un script no podemos utilizar los comandos show dbs, use, show collections, etc. pero podemos sustituirlos llamando a metodos:
+
+use base1                   ->  db = db.getSiblingDB('base1')
+show dbs, show databases    ->  db.adminCommand('listDatabases')
+show collections            ->  db.getCollectionNames()
+show users                  ->  db.getUsers()
+show roles                  ->  db.getRoles({showBuiltinRoles: true})
+show log                    ->  db.adminCommand({'getLog':''})
+show logs                   ->  db.adminCoomand({'getLog':'*'})
+it                          ->  cursor = db.collection.find();
+                                while(cursor.hasNext()){
+                                    printjson(cursor.next());
+                                }
+
+En un script simpre que necesitemos hacer salidas por pantalla debemos utilizar la funcion print y printjson, por ejemplo:
+
+printjson(db.adminCommand('listDatabases))
+
+Ejemplo:
+
+printjson(db.adminCommand('listDatabases'))
+
+db = db.getSiblingDB('base1')
+
+print(db.gerCollectionNames())
+
+deb.articuls.drop()
+
+for(i = 1; i<= 10; i++){
+    db.articulos.insertOne(
+        {
+            _id; i,
+            nombre: 'nombre' + i
+        }
+    )
+}
+
+cursor = db.articulos.find();
+
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+27.- MONGODB SHELL - CONECTARNOS A UN SERVIDOR REMOTO
+Hasta ahora hemos trabajado con nuestro servidor instalado en forma local. Veremos ahora los pasos que debemos dar para conectarnos a un servidor remoto desde MongoDB shell.
+
+Creamos un servidor en forma gratuita, un servicio que presta la empresa que desarrolla MongoDB.
+
+Primero debemos obtener una cuenta, para ello debemos registrarmos en MongoDB Atlas.
+Debemos crear como primer paso un "Cluster".
+Seguidamente debemos crear un usuario ingresando su nombre y clave.
+Una vez registrado se nos suministran todos los accesos para poder crear bases de datos en nuestro servidor remoto.
+Desde su panel de control podemos obtener la cadna de conexion para conectarnos al servidor remoto MongoDB desde nuestro shell.
+Presionando el boton "Connect" aparece un dialogo que nos informa las distintas formas que tenemos para conectarnos al servidor segun la aplicacion que utilicemos.
+Utilizaremos Short SRV connection string (shell 3.6+)
+Desde una consola de Windows procedemos a ejecutar 'mongo' con la cadena indicada en el panel de control, se nos solicita la clave definida para el ususario que creamos anteriormente.
+
+Todas las actividades qeu desarrollemos ahora se efectuaran en el servidor remoto que acabamos de crear.
+

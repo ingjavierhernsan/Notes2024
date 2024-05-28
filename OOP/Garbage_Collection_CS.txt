@@ -1,0 +1,60 @@
+C# = Lenguaje administrado
+
+New
+- Se crea la instancia del objeto en el heap. (Que es el heap en C#?)
+- Regresa una referencia de ese objeto, no el objeto en si.
+
+Variable
+- Se crea en el stack si es una variable local.
+- Guarda la referencia.
+
+Variable => Stack
+Instancia => Heap Administrado
+
+Ciclo de vida del objeto
+El CLR se encarga del objeto una vez que ha sido creado.
+
+El recolector de basura lo destruira cuando ya no sea necesario.
+- Remueve el objeto cuando ya no puede ser alvanzado por alguna parte del codigo (cuando el objeto ya no esta referenciado).
+- Ejemplo: Cuando se crea localmente en un metodo y el metodo finaliza ejecucion.
+- No hay garantia que sera destruido exactamente en ese momento.
+
+Creacion de la instancia (new)
+Se calcula la cantidad de memoria requerida para el objeto.
+Se verifica que el heap administrado tenga suficiente espacio.
+- Si lo hay, el constructor es invocado y quien lo hizo recibe una referencia al nuevo objeto en memoria.
+- La direccion es la del "apuntador al siguiente objeto".
+La direccion del apuntador al siguiente objeto es actualizada al siguente espacio disponible.
+
+Application Roots
+Locacion donde se guarda una referencia hacia un objeto en el heap administrado.
+- Referencias a objetos globales (C# no lo permite, si CIL).
+- Referencias a objetos estaticos.
+- Referencias a objetos locales.
+- Referencias a objetos pasados como parametros en un metodo.
+- Referencias a objetos esperando ser finalizados.
+- Cualquier regisgtro del CPU que referencia a un objeto.
+
+Recoleccion de basura
+Se investiga el heap administrado para ver que objetos estan rooted.
+- Para esto el CLR crea un objeto graph.
+- Ningun objeto puede aparecer dos o mas veces en la grafica.
+Los objetos que no se pueden alcanzar son marcados como basura.
+Se eliminan de memoria y el heap es compactado.
+El apuntador a siguiente objeto es actualizado.
+
+Generaciones de objetos
+Generacion 0: Objetos recien creados que nunca han sido marcados para recoleccion.
+Generacion 1: Objetos que han sobrevivido una recoleccion.
+Generacion 2: Objetos que han sobrevivido mas de una recoleccion.
+Las generaciones 0 y 1 se conocen como efimeras.
+
+Recoleccion de basura .NET 1.0 a 3.5
+Recoleccion de basura concurrente.
+Cuando se hace recoleccion de basura para generacioneas efimeras, el recolecgtor de basura suspende hilos activos.
+Esto con el fin de evitar que los procesos accesen al heap durante la recoleccion.
+
+Recoleccion de basura de .NET 4.0 en adelante
+Background garbage collection.
+Si el recolector trabaja en una generacion no efimera, puede usar un hilo dedicado para las generaciones efimeras.
+Reduce la cantidad de tiempo necesaria.

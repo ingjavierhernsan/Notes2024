@@ -1,0 +1,391 @@
+Gangs of Four/GoF Design patterns
+
+GoF Design patterns types
+
+Creational:
+The design patterns that deal with the creation of an object.
+
+Structural:
+The design patterns in this catefory deals with the class structure such as Inheritance and Composition.
+
+Behavioral:
+This type of design patterns provide solution for the better interaction between objects, how to provide lose coupling, and flexibility to extend easily in future.
+
+Creational design patterns
+
+Singleton
+The siglenton pattern restricts the initializarion of a class to ensure that only one instance of the class can be created.
+
+Factory
+The factory pattern takes out the responsiblility of instantiating a object from the class to  Factory class.
+
+Abstract factory
+Allows us to create a Factory for factory classes.
+
+Builder
+Creation an object step by step and a method to finally get the object instance.
+
+Prototype
+Creating a new object instance from another similar instance and then modify according to our requirements.
+
+Structural design patterns
+
+Adapter
+Provides an interface between two unrelated entities so that they can work together.
+
+Composite
+Used when have to implement a part-whole hierarchy. For example, a diagram made of other pieces such as circle, square, triangle, etc.
+
+Proxy
+Provide a surrogate or placeholder for another object to control access to it.
+
+Flyweight
+Catching and reusing object instances, used with immutable object. For example, string pool.
+
+Facade
+Creating a wrapper interfaces on top of existing interfaces to help client applications.
+
+Bridge
+The bridge design parttern is used to decouple the interfaces from implementation and hiding the implementation details from the client program.
+
+Decorator
+The decorator design pattern is used to modify the functionality of an object at runtime.
+
+Behavioral design patterns
+Template method
+Used to create a template method stub and defer some of the stpes of implementation to the subclasees.
+
+Mediator
+Used to provide a centralized communication medium between different objects in a system.
+
+Chain of responsibility
+Used to achieve loose coupling in software design where a request from the client is passed to a chain of objects to process them.
+
+Observer
+Useful when you are interested in the state of an object and want to get notified whenever there is any change.
+
+Strategy
+Strategy pattern is used when we have multiple algorithm for a specific tadk and clinet decides the actual implementation to be used at runtime.
+
+Command
+Command pattern is used to implement lose coupling in a request-response model.
+
+State
+State design pattern is used when an Object change it's behavior based on it's internal state.
+
+Visitor
+Visitor pattern is used when we have to perform an operation on a group of similar kind of Objects.
+
+Interpreter
+Defines a grammatical representation for a language and provides an interpreter to deal with this grammar.
+
+Iterator
+Used to provide a standard way to traverse through a group of Objects.
+
+Memento
+The memento design pattern is used when we want to save the state of an object so that we can restore later on.
+
+CREATIONAL PATTERN
+
+Singleton pattern
+1.- GoF creational pattern
+2.- Only one instance of class.
+3.- Must have global access point to create the instance.
+
+Singleton pattern principles
+- Singleton pattern resticts the instantiation of a class and ensures that only one instance of the class exists in the Java Virtual Machine.
+- The singleton class must provide a global access point to get the instance of the class.
+- Singleton pattern is used for logging, drivers objects, caching, and thread pool.
+- Singleton design pattern is also used in other design patterns like Abstract Factory, Builder, Prototype, Facade, etc.
+- Singleton design pattern is used in core Java classes also (for example, java.lang.Runtime, java.awt.Desktop).
+
+Approaches:
+- Private constructor to restict instantiation of the class from other classes.
+- Private static variable of the same class that is only instance of the class.
+- Public static method that returns the instance of the class, this is the global access point of the outer world to get the instance of the singleton class.
+
+1.- Eager initialization
+In eager initialization, the instance of the singleton class is created at the time of class loading.
+
+public class Class01{
+	private static final Class01 instance = new Class01();
+	
+	//private constructor to avoid client applications using the constructor
+	private Class01(){}
+	
+	public static Class01 getInstance(){
+		return instance;
+	}
+}
+
+2.- Static block initialization
+Static block initialization implementation is similar to eager initialization, except that instance of the class is created in the static block that provides the option for exception handling.
+
+public class Class01{
+	private static final Class01 instance;
+	
+	//private constructor to avoid client applications using the constructor
+	private Class01(){}
+	
+	static {
+		try{
+			instance = new Class01();
+		} catch (Exception e) {
+			throw new RuntimeException("Exception occurred in creation singleton instance");
+		}
+	}
+	
+	public static Class01 getInstance(){
+		return instance;
+	}
+}
+
+3.- Lazy Initialization
+Lazy initialization method to implement the singleton pattern creates the isntance in the global access method. Here is the sample code for creating the singleton class with this approach:
+
+public class Class01{
+	private static final Class01 instance;
+	
+	private Class01(){}
+	
+	public static Class01 getInstance(){
+		if (instance == null) {
+			instance = new Class01();
+		}
+		
+		return instance;
+	}
+}
+
+The preceding implementation works fine in the case of the single-threaded environment, but when it comes to multi-threaded systems, it can cause issues id multiple threads are inside the if condition at the same time. It will destroy the singleton pattern and both threads will get different instances of the singleton class. In the next section, we will see different ways to create a thread-safe singleton class.
+
+4.- Thread safe singleton
+A simple way to create a thread-safe singleton class is to make the global access method synchronized so that only one thread can execute this method at a time. Here is a general implementation of this approach:
+
+public class Class01{
+	private static final Class01 instance;
+	
+	private Class01(){}
+	
+	public static sinchronized Class01 getInstance(){
+		if (instance == null) {
+			instance = new Class01();
+		}
+		
+		return instance;
+	}
+}
+
+The preceding implemetation works fine and provides thread-safety, but it reduces the performance because of the cost associated with the syncronized method, although we need it only for the first few threads that might vreate separate instances. To avoid this extra overhead every time, double-checked locking principle is used. In this approach, the synchronized block is used inside the if condition with an additional chekc to ensure that only one instance of a singleton class is created. The following code snippet provides the double-checked locking implementation:
+
+	public static sinchronized Class01 getInstance(){
+		if (instance == null) {
+			synchronized (Class01.class){
+				if (instance == null) {
+					instance = new Class01();
+				}
+			}	
+		}
+		
+		return instance;
+	}
+
+5.- Bill Pugh Singleton Implementation
+Prior to Java 5, the Java memory model had a lot of issues, and the previous approaches used to fail in certain scenarios where too many threads tried to get the isntance of the singleton class simultaneously. So Bill Pugh came up with a different approach to create the singleton class using an inner static helper class.
+
+public class Class01{
+	private Class01(){}
+	
+	private static class Singletonhelper{
+		private static final Class01 INSTANCE = new Class01();
+	}
+	
+	public static Class01 getInstance(){
+		return SingletonHelpet.INSTANCE;
+	}
+}
+
+This is the most widely used approach for the singleton class as it doesn't require synchronization.
+
+6.- Using reflection to destroy singleton pattern
+Reflection can be used to destroy all the previous singleton implementation approaches.
+
+import java.lang.reflect.Constructor;
+
+public class ReflectionSingletonTest{
+	public static void main(String[] args){
+		Class01 instanceOne = Class01.getInstance();
+		Class01 instanceTwo = null;
+	
+		try{
+			Constructor[] constructor = Class01.class.getDeclaredConstructors();
+			
+			for (Constructor constructor : constructors){
+				//This code will destroy the singleton pattern
+				constructor.setAccessible(true);
+				instanceTwo = (Class01) constructor.newInstace();
+				break;
+			}			
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		System.out.println(instanceOne.hashCode());
+		System.out.println(instanceTwo.hashCode());
+	}
+}
+
+Reflection is very powerful and used in a lot of frameworks like Spring and Hibernate.
+
+7.- Enum Singleton
+To overcome this situation with Reflection, Joshua Bloch suggests the use of enum to implement the singleton design pattern as Java ensures that any enum value is instantiated only once in a Java program. Since Java Enum values are globally accessible, so is the singleton. The drawback is that the enum type is somewhat inflexible (for example, it does not allow lazy initialization).
+
+public enum EnumSingleton{
+	INSTANCE;
+	
+	public static void doSomething(){
+		// do something
+	}
+}
+
+8.- Serialization and Singleton
+Sometimes in distributed systems, we need to implement Serializable interface in the singleton class so that we can store its state in the file system and retrieve it at a later point in time. Here is a small singleton class that implements Serializable interface also:
+
+import java.io.Serializable;
+
+public class serializedSingleton implements Serializable {
+	private static final long serialVersionUID = -7604766932017737115L;
+	
+	private SerializedSingleton(){}
+	
+	private static class SingletonHelper{
+		private static final serializedSingleton instance = new SerializedSingleton();
+	}
+	
+	public static SerializedSingleton getInstance() {
+		return SingletonHelper.instance;
+	}
+}
+
+FACTORY DESIGN PATTERN IN JAVA
+
+The factory design pattern is used when we have a superclass with multiple sub-classes and based on input, we need to return one of the sub-class. This pattern takes out the responsibility of the instantiation of a class from the client program to the factory class. Let's first learn how to implement a factory design pattern in java and then we will look into factory pattern advantages. We will see some of the factory design pattern usage in JDK. Note that this pattern is also known as Factory Method design pattern.
+
+Factory Design pattern super class
+Super class in factory design pattern can be an interface, abstract class or a normal java class. For our factory design pattern example, we have to abstract super class with overridden toString() method for testinf purpose.
+
+public abstract class Computer {
+	public abstract String getRAM();
+	public abstract String getHDD();
+	public abstract String getCPU();
+	
+	@Override
+	public String toString(){
+		return "RAM= " + this.getRAM() + ", HDD= " + this.getHDD() + ", CPU= " + this.getCPU();
+	}
+}
+
+Factory Design pattern sub classes
+
+Let's say we have two sub-classes PC and Server with below implementation.
+
+public class PC extends Computer {
+	private String ram;
+	private String hdd;
+	private String CPU;
+	
+	public PC(String ram, String hdd, String cpu){
+		this.ram=ram;
+		this.hdd=hdd;
+		this.cpu=cpu;
+	}
+	
+	@Override
+	public String getRAM(){
+		return this.ram;
+	}
+	
+	@Override
+	public String getHDD(){
+		return this.hdd;
+	}
+	
+	@Override
+	public String getCPU(){
+		return this.cpu;
+	}
+}
+
+Notice that both the classes are extending Computer super class.
+
+public class Server extends Computer {
+	private String ram;
+	private String hdd;
+	private String CPU;
+	
+	public PC(String ram, String hdd, String cpu){
+		this.ram=ram;
+		this.hdd=hdd;
+		this.cpu=cpu;
+	}
+	
+	@Override
+	public String getRAM(){
+		return this.ram;
+	}
+	
+	@Override
+	public String getHDD(){
+		return this.hdd;
+	}
+	
+	@Override
+	public String getCPU(){
+		return this.cpu;
+	}
+}
+
+Factory class
+
+Now that we have super classes and sub-classes ready, we can write our factory class. Here is the basic implementation.
+
+import model.Computer;
+import model.PC;
+import model.Server;
+
+public class ComputerFactory{
+	public static Computer getComputer(String type, String ram, String hdd, String cpu){
+		if("PC".equalsIgenoreCase(type)){
+			return new PC(ram, hdd, cpu);
+		} else if("Server".equalsIgnoreCase(type)) {
+			return new Server(ram, hdd, cpu);
+		}
+		
+		return null;
+	}
+}
+
+Some importan pints about Factory Design pattern method are:
+
+1.- We can keep Factory class Singleton or we can keep the method that return the subclass as static.
+2.- Notice that based on the imput parameter, different subclass is created and returned. getComputer is the factory method.
+
+Her is a simple test client program that uses above factory design pattern implementation.
+
+import factory.ComputerFactory;
+import model.Computer;
+
+public class TestFactory {
+	public static void main(String[] args){
+		Computer PC = ComputerFactory.getComputer("pc", "2 GB", "500 GB", "2.4 GHz");
+		Computer Server = ComputerFactory.getComputer("server", "16 GB", "1 TB", "2.9 GHz");
+		
+		System.out.println("Factory PC Config::" + pc);
+		System.out.println("Factory Server Config::" + server);
+	}
+}
+
+Factory Design pattern advantages
+1.- Factory design pattern provides approach to code for interface rather than implementation.
+2.- Factory pattern removes the instatiation of actual implementation classes from client code. Factory pattern makes our code more robust, less coupled and easy to extend. For example, we can easily change PC class implementation because client program is unaware of this.
+3.- Factory pattern provides abstraction between implementation and client classes through inheritance.

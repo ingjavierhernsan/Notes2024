@@ -1,0 +1,2175 @@
+C++
+
+1.- COMPILAR CODIGO C++
+2.- CORRER PROGRAMA
+3.- CODIGO BASICO
+4.- SALIDA DE CONSOLA
+5.- DECLARAR VARIABLES
+6.- ASIGNAR VALOR A LAS VARIABLES DESDE CONSOLA
+7.- MOSTRAR VALOR DE VARIABLE EN SALIDADE CONSOLA
+8.- IF
+9.- OPERADORES RELACIONALES
+10.- OPERADORES MATEMATICOS
+11.- OPERADORES LOGICOS
+12.- WHILE
+13.- DO WHILE
+14.- FOR
+15.- CADENA DE CARACTERES MEDIANTE VECTORES
+16.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+17.- SINTAXIS DE UN METODO
+18.- ESTRUCTURA DE DATOS TIPO VECTOR EN C++
+19.- ESTRUCTURA DE DATOS TIPO MATRIZ
+20.- CONSTRUCTOR DE LA CLASE
+21.- DESTRUCTOR DE LA CLASE
+22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
+23.- SOBRECARGA DE METODOS
+24.- COLABORACION DE CLASES EN C++
+25.- HERENCIA EN C++
+26.- LOS PUNTEDOS EN C++
+27.- PARAMETROS DE METODOS DE TIPO PUNTERO
+28.- VECTORES Y PUNTEROS
+29.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+30.- PILA DINAMICA
+31.- OBJETOS DINAMICOS
+32.- METODOS INLINE
+33.- FUNCIONES AMIGAS (FRIEND)
+34.- CLASE AMIGAS (FRIEND)
+35.- ATRIBUTOS ESTATICOS DE UNA CLASE
+36.- METODOS ESTATICOS DE UNA CLASE
+37.- PUNTERO THIS
+38.- DIRECTIVA #DEFINE
+39.- DEFINICION DE CONSTANTES (CONST)
+40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
+41.- METODOS CONSTANTES (CONST)
+42.- PARAMETROS POR VALOR Y POR REFERENCIA DE DATOS SIMPLES
+43.- PARAMETROS POR VALOR Y POR REFERENCIA DE OBJETOS
+44.- CLASE STRING
+45.- CLASE STRING (SIZE - LENGTH - EMPTY - AT)
+46.- CLASE STRING (APPEND - INSERT - ERASE)
+
+1.- COMPILAR CODIGO C++
+g++ file.cpp -o file
+
+2.- CORRER PROGRAMA
+./file
+
+3.- CODIGO BASICO
+#include<iostream>
+
+using namespace std;
+
+int main(){
+
+	return 0;
+}
+
+4.- SALIDA DE CONSOLA
+cout <<"Hola mundo.";
+
+5.- DECLARAR VARIABLES
+int intVar;
+int intVar = 0;
+
+float floatVar;
+
+6.- ASIGNAR VALOR A LAS VARIABLES DESDE CONSOLA
+cin >>intVar;
+cin >>floarVar;
+
+7.- MOSTRAR VALOR DE VARIABLE EN SALIDADE CONSOLA
+int intVar=19;
+
+cout <<intVar;
+
+8.- IF
+if (condicion)
+{
+	accion();
+}
+
+float sueldo=0;
+
+if (sueldo>3000)
+{
+	cout<<"Esta persona debe abonar impuestos";
+}
+
+if(sueldo>3000)
+{
+	accion1();
+}
+else
+{
+	accion2();
+}
+
+if(suldo>3000)
+{
+	accion1();
+}
+else
+{
+	if(sueldo==1000)
+	{
+		accion2()
+	}
+	else
+	{
+		accion3()
+	}
+}
+
+if(suldo>3000)
+{
+	accion1();
+}
+else if (sueldo==2000)
+{
+	accion2();
+}
+else
+{
+	accion3();
+}
+
+if(sueldo<1000 || sueldo>3000)
+{
+	accion1();
+}
+
+9.- OPERADORES RELACIONALES
+== Igualdad
+!= diferente
+> Mayor que
+>= Mayor o igual que
+< Menor que
+<= Menor o igual que
+
+10.- OPERADORES MATEMATICOS
++ Suma
+- Resta
+* Multiplicacion
+/ Division
+% Resto de la division
+
+11.- OPERADORES LOGICOS
+&& and
+|| or
+
+12.- WHILE
+int x;
+x=1;
+
+while (x<=100)
+{
+	cout<<x;
+	cout<<" - ";
+	x=x+1;
+}
+
+
+int n, x;
+n=10;
+x=1;
+
+while (x<=n)
+{
+	cout<<x;
+	cout<<" - ";
+	x=x+1;
+}
+
+13.- DO WHILE
+int valor;
+
+do
+{
+	accion();
+}
+while(valor!=0);
+
+14.- FOR
+int f;
+for(f=1; f<=100; f++)
+{
+	cout<<f;
+	cout<<"=";
+}
+
+for(int x=0; x<=10; x++)
+{
+	accion();
+}
+
+15.- CADENA DE CARACTERES MEDIANTE VECTORES
+char <nombre> [<Cantidad de caracteres>];
+
+char cadena[8];
+
+La variable cadena puede almacenar hasta 7 caracteres (lo definimos de 8 ya que requiere un caracter para indicar el fin).
+El terminador de cadena es \0.
+
+char cadena[8]="hola";
+
+char mes1[20]="enero";
+
+cout<<mes1;
+
+Para ingresar cadenas de caracteres por teclado debemos emplear el metodo getline del objeto cin (le pasamos como parametro la cadena a ingresar y el tamano de la cadena)
+
+cin.getline(cadena, 40);
+
+char nombre[40]
+cout<<"Ingrese su nombre: ";
+
+cin.getline(nombre, 40);
+
+cout<<"El nombre ingresado es: ";
+cout<<nombre;
+
+Comparar cadenas
+int strcmp(cadena1, cadena2)
+
+Retorna 0 si las dos cadenas son exactamente iguales, mayor a cero si cadena1 es mayor alfabeticamente que cadena2 y meno a cero en caso contrario.
+
+if (strcmp(cadena1, cadena2)==0)
+{
+	cout<<"Son iguales";
+}
+
+16.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+#include <iostream>
+
+using namespace std;
+
+class Persona{
+	private:
+		char nombre[40];
+		int edad;
+	public:
+		void inicializar();
+		void implimir();
+		void esMayorEdad();
+};
+
+void Persona::inicializar()
+{
+	cout<<"Ingrese nombre: ";
+	cin.getline(nombre, 40);
+	cout<<"Ingrese edad: "'
+	cin>>edad;
+}
+
+void Persona::imprimir()
+{
+	cout<<"Nombre: ";
+	cout<<nombre;
+	cout<<"\n";
+	cout<<"Edad: ";
+	cout<<edad;
+	cout<<"\n";
+}
+
+void Persona::esMayorEdad()
+{
+	if(edad>=18)
+	{
+		cout<<"Es mayor de edad.";
+	}
+	else
+	{
+		cout<<"No es mayor de edad.";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main()
+{
+	Persona persona1;
+	persona1.inicializar();
+	persona1.imprimir();
+	persona1.esMayorEdad();
+
+	return 0;
+}
+
+17.- SINTAXIS DE UN METODO
+Sintaxis:
+
+void [nombre de la clase]::[nombre del metodo]()
+{
+	[algoritmo]
+}
+
+Metodo con parametros
+
+void [nombre de la clase]::[nombre del metodo]([parametros])
+{
+	[algoritmo]
+}
+
+Los parametros los podemos imaginar como variables locales al metodo, pero su valor se inicializa con datos que llegan cuando lo llamamos.
+
+#include<iostrem>
+
+using namespace std;
+
+clss TablaMultiplicar{
+	private:
+		void calcular(int v);
+	public:
+		void cargarValor();
+};
+
+void TablaMultiplicar::calcular(int v)
+{
+	for(int f=v; f<=v*10; f=f+v)
+	{
+		cout <<f;
+		cout<<"-";
+	}
+
+	cout<<"\n";
+}
+
+void TablaMultiplicar::cargarValor()
+{
+	int valor;
+
+	do{
+		cout <<"Ingrese un valor (-1 para finalizar): ";
+		cin >>valor;
+
+		if(valor!=-1)
+		{
+			calcular(valor);
+		}
+	} while (valor!=-1);
+}
+
+int main()
+{
+	TablaMultiplicar tabla1;
+	tabla1.cargarValor();
+	return 0;
+}
+
+Un metodo puede no tener parametros como hemos visto en problemas anteriores o puede tener uno o mas parametros (en caso de tener mas de un parametro los mismos se separan por coma).
+
+Metrods que retornan un dato
+
+[tipo de dato] [nombre de la clase]::[nombre del metodo]([parametros])
+{	
+	[algoritmo]
+	return [tipo de dato]
+}
+
+#include<iostream>
+
+using namespace std;
+
+class MayorMenor{
+	public:
+		int calcularMenor(int v1, int v2, int v3);
+};
+
+int MayorMenor::calcularMenor(int v1, int v2, int v3)
+{
+	int m;
+
+	if(v1<v2 && v1<v3)
+	{
+		m=v1;
+	}
+	else{
+		if(v2<v2)
+		{
+			m=v2;
+		}
+		else{
+			m=v3;
+		}
+	}
+
+	return m;
+}
+
+int main()
+{
+	int valor;
+
+	MayorMenor mayormenor1;
+	valor = mayormenor1.calcularMenor(1, 2, 3);
+
+	return 0;
+}
+
+18.- ESTRUCTURA DE DATOS TIPO VECTOR EN C++
+Un vector es una estructura de datos que permite alamcenar un conjunto de datos del mismo tipo. Con un unico nombre se define un vector y por medio de un subindice hacemos regerencia a cada elemento del mismo (componente).
+
+#include<iosgtream>
+
+using namespace std;
+
+class PruebaVector1{
+	private:
+		int sueldos[5];
+	public:
+		void cargar();
+		void imprimir();
+};
+
+void PruebaVector1::cargar()
+{
+	for(int f=0; f<5; f++)
+	{
+		cout <<"Ingrese valor del sueldo: ";
+		cin >>sueldos[f];
+	}
+}
+
+void PruebaVector1::imprimir()
+{
+	cout <<"Listado de sueldos.";
+	cout <<"\n";
+
+	for(int f = 0; f<5; f++)
+	{
+		cout <<sueldos[f];
+		cout <<"\n";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main()
+{
+	PruebaVector1 pv1;
+	pv1.cargar();
+	pv1.imprimir();
+
+	return 0;
+}
+
+int sueldos[5]
+Lo definimos como atributo de la clase ya que lo utilizatemos en los dos metodos y ademas lo ubicamos en la zona private para no poder accederlo fuera de la clase.
+
+19.- ESTRUCTURA DE DATOS TIPO MATRIZ
+Una matriz es una estructura de datos que permite almacenar un conjunto de datos del mismo tipo. Con una unico nombre se define la matriz y por medio de dos subindices hacemos referencia a cada elemento de la misma (componente).
+
+		Columnas
+Filas	50	5	27	400	7
+		0	67	90	6	97
+		30	14	23	251	490
+
+Hemos graficado una matriz de 3 filas y 5 columnas. Para hacer referencia a cada elemento debemos indicar primero la fila y luego la columna, por ejemplo en la componente 1, 4  se alamcena el valor 97.
+
+int mat [3][5];
+
+20.- CONSTRUCTOR DE LA CLASE
+En c++ podemos definir un metodo que se ejecute inicialmente y en forma automatica. Este metodo se lo llama constuctor.
+
+Elconstructor tiene las siguientes caracteristicas:
+- Tiene el mismo nombre de la clase.
+- Es el primer metodo que se ejecuta.
+- Se ejecuta en forma automatica.
+- No puede retornar datos.
+- Se ejecuta una unica vez.
+- Un constuctor tiene por objetivo inicializar atributos.
+
+#include<iostream>
+
+using namespace std;
+
+class operarios{
+	private:
+		float sueldos[5];
+	public:
+		Operarios();
+		void imprimir();
+};
+
+Operarios::Operarios(){
+	cout<<"Carga de sueldos. " <<"\n";
+
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese el sueldo: ";
+		cin>>sueldos[f];
+	}
+}
+
+void Operarios::imprimir(){
+	for(int f=0; f<5; f++){
+		cout<<sueldos[f] <<"\n";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Operarios op;
+	op.imprimir();
+
+	return 0;
+}
+
+21.- DESTRUCTOR DE LA CLASE
+En C++ podemos definir un metodo que se ejecute cuando se elimine el objeto y en forma automatica. Este metodo se lo llama destructor.
+
+El destructor tiene las siguientes caracteristicas:
+- Tiene el mismo nombre de la clase mas el caracter ~ al principio.
+- Es el ultimo metodo que se ejecuta.
+- Se ejecuta en forma automatica.
+- No puede retornar datos.
+- Se ejcuta una unica vez.
+- No es obligatorio.
+
+#include<iostream>
+
+using namespace std;
+
+class Tabla{
+	private:
+		int valor;
+	public:
+		Tabla();
+		void imprimir();
+		~Tabla();
+};
+
+Tabla::Tabla(){
+	cout<<"Ingrese un valor: ";
+	cin>>valor;
+}
+
+void Tabla::imprimir(){
+	for(int f=vlaor; f<=valor*10; f=f+valor){
+		cout<< f << "-";
+	}
+	
+	cout<<"\n";
+}
+
+Tabla::~Tabla(){
+	cout<<"Gracias por utilizar este programa.";
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Tabla tabla1;
+	tabla1.imprimir();
+
+	return 0;
+}
+
+Luego de llamar a metodo imprimir llega la llave del final de la main pero previo a esto se llama el destructor de la clase Tabla.
+
+22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
+Uno de los principios fundamentales de la programacion orientada a objetos es el encapsulamiento, esto se logra agrupando una serie de metodos (funciones) y atributos (varibles) dentro de una clase.
+
+Hemos visto que una clase tiene dos secciones: una publica y otra privada. Por principios de la programacion orientada a objetos los atributos (variables) deben definirse en la parte privada y los metodos dependiendo si queremos que se los pueda llamar desde la main los definiremos de tipo publico y si queremos que queden ocultos y solo puedan ser llamados dentro de la clase los definimos en la parte privada.
+
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+class Dado{
+	private:
+		int valor;
+		void separador();
+	public:
+		void tirar();
+		void imprimir();
+};
+
+void Dado::separador(){
+	cout<<"********************************";
+	cout<<"\n";
+}
+
+void Dado::tirar(){
+	srand(time(NULL));
+	valor=rand()%6+1;
+}
+
+void Dado::imprimir(){
+	seaparador();
+	cout<<valor;
+	cout<<"\n";
+	separador();
+}
+
+int main(){
+	Dado d;
+	d.tirar();
+	d.imprimir();
+
+	return 0;
+}
+
+El atributo valor y el metodo separador() como estan antecedidas por la palabra clave private: significa que desde la main no se podran acceder, es decir que si escribimos en la main lo siguiente se genera un error sintactico.
+
+La ventaja dee definir losatributos en al zona privada de la clase es que en el caso de haber un error logico en nuestro programa el mismo queda encapsulado en una clase y es mas facil identificarlo.
+
+Dentro de la clase para llamar a otro metodo de la misma clase lo hacemos indicando solo el nombre del otro metodo (dentro del metodo imprimir llamamos al metodo separador por su nombre).
+
+Importante
+Una forma muy comun de escribir la declaracion de una clase es obviar la palabra clave private:
+
+class Dado {
+	int valor;
+	void separador();
+	public:
+		void tirar();
+		void imprimir();
+};
+
+El lenguaje C++ inclusive nos permite especificar varias secciones privadas y publicas:
+
+class Dado{
+	public:
+		void tirar();
+	private:
+		int valor;
+		void separar();
+	public:
+		void imprimir();
+};
+
+23.- SOBRECARGA DE METODOS
+Otra caracteristica de C++ con respecto a los metodos es que podemos definir varios con el mismo nombre.
+
+Cuando definimos dos o mas metodos con el mismo nombre decimos que los estamos sobrecargando.
+
+La resticcion para la sobrecarga de metodos es qeu lso mismos deben diferir en cantidad o tipo de parametros. Es decir podemos definir dos metodos con el mismo nombre pero uno tenga por ejemplo 3 parametros y otro tenga 2 parametros:
+
+void mayor(int x1, int x2, int x3)
+void mayor(int x1, int x2)
+
+O tengan la misma cantidad de parametros pero sean de distinto tipo:
+
+void mayor(int x1, int x2)
+void mayor(char nombre1[40], char nombre2[40])
+
+Sobrecarga del constructor
+
+Como sabemos el constructor es un metodo de la clase y como tal podemos sobrecargarlo, es decir definir mas de un constructor.
+
+Cuando definimos un objeto de la clase es cuando indicamos a que constructo llamaremos segun nuestras necesidades.
+
+24.- COLABORACION DE CLASES EN C++
+Normalmente un problema resulto con la metodologia de programacion orientada a objetos no interviene una sola clase, sino que hay muchas clases que interactuan y se comunican.
+
+Plantearemos un problema separando las actividades en dos clases.
+
+archivo1.cpp
+#include<iostream>
+
+using namespace std;
+
+class Cliente {
+	char nombre[40];
+	float monto;
+
+	public:
+		Cliente(const char nom[40]);
+		void depositar(int m);
+		void extraer(int m);
+		float retornarMonto();
+		void imprimir();
+};
+
+class Banco {
+	Cliente cliente1, cliente2, cliente3;
+
+	public:
+		Banco();
+		void operar();
+		void depositosTotales();
+};
+
+Cliente::Cliente(const char nom[40])
+{
+	strcpy_s(nombre, nom);
+	monto=0;
+}
+
+void Cliente::depositar(int m)
+{
+	monto=monto+m;
+}
+
+void Cliente::extraer(int m)
+{
+	monto=monto-m;
+}
+
+float Cliente::retornarMonto()
+{
+	return monto;
+}
+
+void Cliente::imprimir()
+{
+	cout << "Nombre: " << nombre << " Monto:" << monto << "\n\n";
+}
+
+Banco::Banco() :cliente1("juan"), cliente2("pedro"), cliente3("luis")
+{
+
+}
+
+void Banco::operar()
+{
+	cliente1.depositar(100);
+	cliente2.depositar(150);
+	cliente3.depositar(200);
+	cliente3.extraer(150);
+}
+
+void Banco::depositosTotales()
+{
+	float t = cliente1.retornarMonto() + cliente2.retornarMonto() + cliente3.retornarMonto();
+	cout << "El total de dinero en el banco es: " << t << "\n\n";
+	cliente1.imprimir();
+	cliente2.imprimir();
+	cliente3.imprimir();
+}
+
+int main()
+{
+	Banco banco1;
+	banco1.operar();
+	banco1.depositosTotales();
+	return 0;
+}
+
+Segundo ejemplo:
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+class Dado{
+	int valor;
+
+	public:
+		void tirar();
+		void imprimir();
+		int retornarValor();
+};
+
+class JuegoDeDados{
+	Dado dado1, dado2, dado3;
+	
+	public:
+		void jugar();
+};
+
+void Dado::tirar()
+{
+	valor=rand()%6+1;
+}
+
+void Dado:imprimir()
+{
+	cout << "Valor del Dado: " << valor << "\n";
+}
+
+int Dado::retornarValor()
+{
+	return valor;
+}
+
+void JuegoDeDados::jugar()
+{
+	dado1.tirar();
+	dado1.imprimir();
+	dado2.tirar();
+	dado2.imprimir();
+	dado3.tirar();
+	dado3.imprimir();
+
+	if(dado1.retornarValor() == dado2.rerornarValor() && 
+		dado1.retornarValor() == dato3.retornarValor())
+		{
+			cout<<"Gano";
+		}
+		else
+		{
+			cout<<"Perdio";
+		}
+}
+
+int main()
+{
+	srand(time(NULL));
+	JuegoDeDados juego1;
+	juego1.jugar();
+	return 0;
+}
+
+25.- HERENCIA EN C++
+La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendra todas los atributos y los metodos de su 'superclase' o 'clase padre' y ademas se le podran anadir otros atributos y metodos.
+
+Clase padre
+Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automaticamente los atriburos y metodos de la clase padre.
+
+Subclase
+Clase que desciende de otra. Hereda automaticamente los atributos y metodos de su superclase. Es una especializacion de otra clase. Admiten la definicion de nuevos atributos y metodos para aumentar la especializacion de la clase.
+
+#include<iostream>
+
+using namespace std;
+
+class Operacion{
+	protected:
+		int valor1;
+		int valor2;
+		int resultado;
+	public:
+		void cargar1();
+		void cargar2();
+		void mostrarResultado();
+};
+
+class Suma: public Operacion{
+	public:
+		void opearar();
+};
+
+class Resta: public Operacion{
+	public:
+		void operar();
+};
+
+
+void Operacion::cargar1(){
+	cout << "Ingrese primer valot: ";
+	cin >> valor1;
+}
+
+void Operacion::cargar2(){
+	cout << "Ingrese segundo valor: ";
+	cin >> valor2;
+}
+
+void Operacio::mostrarResultado(){
+	cout << resultado << "\n";
+}
+
+void Suma::operar(){
+	resultado=valro1+valor2;
+}
+
+void Resta::operar(){
+	resultado=valor1-valor2;
+}
+
+int main(){
+	Suma suma1;
+	suma1.cargar1();
+	suma1.cargar2();
+	suma1.operar();
+
+	cout<<"Lasuma de los dos valores es: ";
+
+	suma1.mostratResultado();
+
+	Resta resta1;
+	resta1.cargar1();
+	resta1.cargar2();
+	resta1.operar();
+
+	cout<<"La diferencia de los dos valores es: ";
+
+	resta1.mostrarResultado();
+
+	return 0;
+}
+
+Definimos los atributos con modificador de acceso 'protected' para que la subclase tenga acceso a dichos atributos. Si los definimos private las subclases no pueden acceder a dichos atributos.
+
+Ahora veamos como es la sintaxis para indicar que una clase hereda de otra:
+
+class Suma: public Operacion{
+	public:
+		void operar();
+};
+
+Luego la caracteristica que anade la clase Suma es el siguiente metodo:
+
+void Suma::operar()
+{
+	resultado = valor1+valor2;
+}
+
+El metod operar puede acceder a los atributos heredados (siempre y cuando lso mismos se declaren protected, en caso que sean private si bien lo hereda de al clase padre solo los pueden modificar metodos de dicha clase padre).
+
+Ahorea podemos decir que la clase Suma tiene cuatro metodos (tres heredados y uno propio) y 3 atributos (todos heredados).
+
+26.- LOS PUNTEDOS EN C++
+Los punteros son variables que almacenan direcciones de memoria de otra variable.
+
+El manejo de punteros es fundamental para conceptos futuros como la creacion y liberacion de objetos en tiempo de ejecucion de una programa.
+
+hemos visto las estructuras de datos tipo vector y matrices, pero hay otro tipo de estructuras llamadas estructuras dinamicas que requieren obligatoriamente el empleo de punteros y resuelven otro conjunto de problemas qeu las estructuras estaticas no pueden.
+
+Un puntero se define de la siguiente manera:
+
+<tipo de dato al que apunta> * <nombre del puntero>;
+
+Puntero a tipo de dato numerico
+
+int *pe;
+
+Asignacion de contenido a un puntero:
+
+int x=9;
+pe=&x;
+
+Un puntero contiene una direccion, aqui le asignamos la direccion de la variable entera x, por eso debemos anteceder el simbolo &.
+
+Podemos asignar un valor a lo apuntado por el puntero:
+
+int x=9;
+pe=&x;
+*pe=5; //la variable x almacena 5
+cout<<x; //5
+
+Aqui le asignamos el valor 5 a la direccion a la cual apunta el puntero pe, es decir, a la variable entera x. Para indicar que el valor 5 es asignado a donde apunta el puntero pe, antecedemos al nombre del puntero el simbolo *.
+
+Impresion:
+No se puede imprimir el contenido de un puntero, que es una direccion de memoria, lo que imprimimos es el contenido de la variable a la cual apunta el puntero:
+
+int x=9;
+pe=&x;
+cout<<*pe; // imprime 9
+
+27.- PARAMETROS DE METODOS DE TIPO PUNTERO
+Hemos visto que cuando un metodo debe retornar un dato diponemos al principio del metodo el tipo de dato que retornara (int, float, etc.) y dentro del metodo especificamos con la palabra return el valor que devuelve.
+
+Que sucede si queremos rerotnar dos valores o mas en un solo metodo? Una forma de solucionar este problma es pasar la direccion de dos variables y que las recivan dos parametros de tipo puntero, luego por medio de estos punteros modificamos las variables que les pasamos por ejemplo desdde la main.
+
+#include<iostream>
+
+using namesapce std;
+
+class Vector{
+	int vec[5];
+
+	public:
+		void cargar();
+		void retornarMayorMenor(int *pmay, int *pmen);
+};
+
+void Vector::cargar()
+{
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese component: ";
+		cin >> vec[f];
+	}
+}
+
+void Vector::retornarMayorMenor(int *pmay, int *pmen){
+	*pmay=vec[0];
+	*pment=vec[0];
+
+	for (int f=1; f<5; f++){
+		if (vec[f]>*pmay){
+			*pmay=vec[f];
+		} else {
+			if(vec[f]<*pmen){
+				*pmen=vec[f];
+			}
+		}
+	}
+}
+
+int main(){
+	Vector vector1;
+	vector1.cargar();
+
+	int ma, me;
+
+	vector1.teronarMayorMenor(&ma, &me);
+
+	cout<<"El elemento mayor del vector es: " << ma << "\n";
+	cout<<"El elemento menor del vector es: " << me << "\n";
+
+	return 0;
+}
+
+28.- VECTORES Y PUNTEROS
+Cundo definimos un vector, por ejemplo:
+
+int vec[3];
+vec[0]=10;
+vec[1]=50;
+vec[2]=100;
+
+Lo que estamos definiendo es un puntero que reserva espacio para 3 componentes de tipo entero, guardando la direccion del primer elemento. Esto sucede en memoria (suponiendo que un tipo int ocupa 4 bytes).
+
+Cuando accedemos a una componente en particular del vector, calcula la direccion correspondiente de la siguiente manera: direccion del puntero + (bytes que ocupa segun tipo de dato * subindice).
+
+Suma a la direccion que almacena, que es la del primer elemento, los bytes segun el tipo de dato * subindice indicado.
+
+Para ejecutar esta linea:
+
+cout<<x[0];
+
+Encuentra la direccion de la componente 0 utilizando el calculo anterior: 1004 + (4*0), o sea 1004.
+
+Para encontrar la direccion de la componente subindice 2: 1004 +(4*2), o sea 1012.
+
+Vectores de caracteres
+Cuanod definimos un vector de caracteres, por ejemplo:
+
+char cadena[10];
+
+lo que estamos definiendo es un puntero que reserva espacio para 10 componentes de tipo char, guardando la direccion del primer elemento, el cero. Esto sucede en memoria:
+
+Dir. de Mem.		Contenido		Nombre de variable
+1000				1004			Cadena
+1004								[0]
+1005								[1]
+1006								[2]
+1007								[3]
+1008								[4]
+1009								[5]
+
+Cuando cargamos la cadena con:
+
+strcpy_s(Cadena, 10, "Hola");
+
+busca la direccion del puntero (1004) y comienza a cargar los caracteres, cuando la cadena finaliza, agrega el terminador de cadena. En memoria:
+
+Dir. de Mem.		Contenido		Nombre de variable
+1000				1004			Cadena
+1004				'H'				[0]
+1005				'o'				[1]
+1006				'l'				[2]
+1007				'a'				[3]
+1008				'\0'			[4]
+1009								[5]
+
+cout<<cad[5];
+
+Cuando solicitamos la impresion de la componete 5, encuenta la direccion de dicha componente utilizando el calculo cisto anteriormente: direccion del vector + (bytes segun tio de dato *subindice). El tipo de dato caht ocupan normalmente 1 byte.
+
+Punteros a char
+Carga e impresion
+
+char cad[10];
+strcpy_s(cad, 10, "Sol");
+char *pc;
+pc=cad;
+cout<<pc
+
+Cuando asignamos a un puntero a char una cadena, no antecedemos a cad el simbolo & porque cad contine una direccion. Tampoco antecedemos el asterisco * antes de pc. Estamos manejando direcciones.
+
+Imprimimos donde apunta el puntero:
+
+cout<<pc;
+
+29.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+Los operadores de incremento y devremento ++ y -- pueden utilizarse con punteros. Estos operadores aplicados a un puntero incrementa o decrementan la direccion que contiene el puntero seugn el tipo de dato a que apunta. Si aun puntro a entero le aplicamos el operador ++, incrementa la direccion en 4 bytes (puede depender del sistema operativo). Si este puntero a entero almacena la direccion 5000, al aplicarle el operador ++ sucesivamente la direccion ira aumentando 5004, 5008, 5012, 5016, etc.
+
+Si a un puntero a float le aplicamos el operador --, incrementa la direcion en 4 bytes (puede depender del sistema operativo). Si este puntero almacena la direccion 5000, al aplicarle el operador ++ sucesivamente la direccion ira aumentando 5004, 5008, 5012, etc.
+
+Si a un puntero a char le aplicamos el operador --, decrementa la direccion en 1 byte (puede depender del sistema operativo). Si este puntero alamacena la direccion 5000, al aplicarle el operador -- sucesivamente la direccion ira disminuyendo: 4009, 4008, 4007, 4006, etc.
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	char cad[5];
+	strcpy_s(cad, 5, "sol");
+
+	char *pc;
+	pc=cad;
+
+	cout<<pc; //imprime sol
+	pc++;
+
+	cout<<pc; //imprime ol
+	pc++;
+
+	cout<<pc; //imprime l
+	pc--;
+
+	cout<<pc; //imprime ol
+
+	int x[5] = {10, 50, 100, 99, 33};
+
+	int *pe;
+	pe = &x[3];
+	
+	cout<<*pe; //imprime 99
+	pe--;
+
+	cout<<*pe; //imprime 100
+
+	return 0;
+}
+
+30.- PILA DINAMICA
+Otra utilizacion fundamental de los punteros es para hacer uso de la pila dinamica de la memoria que administra el sistema operativo.
+
+Lo primero que veremos es qeu todas las variables qeu definimos ocupan un sapcio llamado PILA ESTATITCA del programa (esta pila es limitada).
+
+A medida que definimos variables se reduce el espacio disponible para definir otras variables.
+
+Por ejemplo si definimos un vector con 10000 componente de tipo entero en la funcion main debemos tener en cuenta que 40 Kb (si cada entero ocupa 4 bytes) de la pila estatica estara reservado para dicha estructura.
+
+Es colun que en programas de mediano y gran tamano la pila estatica no nos alcance para almacenar los datos. En estos casos debemos recurrir a la PILA DINAMICA.
+
+La PILA DINAMICA solo se puede acceder por medio de punteros.
+
+La pila dinamica solo esta limitada por la cantidad de memoria ram del equipo.
+
+Memoria:
+Sistema Operativo | Programa (exe) | Pila Estatica | Pila Dinamica
+
+Podemos observer que la memoria del equipo tiene cargado el sistema operativo que administra entre otras cosas los programas que se ejecutan. Todo programa que se ejecuta (exe) tiene asignado un espacio para la pila estatica (puede variar a partir, por ejemplo 64 Kb).
+
+La pila dinamica es toda la memoria RAM que no es ocupada por el sistema operativo y otros programas que estan ejecuatandose actualmente.
+
+Para acceder al espacio de memoria llamada Pila dinamica debemos solicitarla al sistema operativo.
+
+Para solicitar espacio en la pila dinamica debemos utilizar el operador new y es funcamental devolverla mediante el operador delete (la no devolucion del espacio solicitado hara que nuestra computadora en algun momento se bloquee por falta de espacio en la memoria RAM).
+
+La administracion de la memoria dinamica ofrece una gran libertad al programador pro trae como contrapartida una gran responsabilidad para administrarla correctamente.
+
+Definir un vector de 5 elementos y localizarlo en la pila dinamica.
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int=*p;
+
+	p=new int[5];
+
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese elemento: ";
+		cin>>p[f];
+	}
+
+	cout<<"Contenido del vector: ";
+
+	for(int f=0; f<5; f++){
+		cout<<p[f]<<"-";
+	}
+
+	delete []p;
+
+	return \0;
+}
+
+Para crear un vector en la pila dinamica debemos utilizar el operador new:
+int=*p;
+p=new int[5];
+
+Finalmente otro punto nuevo a tener en cuenta cuando trabajamos con variables licalizadas en la pila dinamica es devolver el espacio utilizado:
+
+delete []p;
+
+La localicacion de variables en la pila dinamica trae consigo dos ventajas, por una parte la pila dinamica es mucho mas grande que la pila estatica por lo que podemos definir muchas mas variables que en la pila estatica.
+
+Por otro lado podemos solicitar espacio para estructura de datos en tiempo de ejecucion (Por ejemplo podemos definir un vector con una cantidad de componentes que dependa de una variable).
+
+31.- OBJETOS DINAMICOS
+Hemos visto que podemos localizar vectores en la pila dinamica, lo mismo podemos hacer cuando creamos objetos de una determinada clase.
+
+Tengamos en cuenta que almacenar objetos en la pila dinamica nos provee como ventaja tener mas espacio y  poderlo crear y destruir segun la necesidad de nuestro programa. Veremos que cambia la sintaxis cuanod trabajamos con objetos dinamicos.
+
+Desarrollar una clase que permita cargar el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad>=18) o no. Crear en la main un objeto dinamico de esta clase y llamar a sus metodos.
+
+#include<iostream>
+
+using namespace std;
+
+class Persona {
+	private:
+		char nombre[40];
+		int edad;
+	public:
+		void inicializar();
+		void imprimir();
+		void esMayorEdad();
+};
+
+void Persona::inicializar(){
+	cout<<"Ingrese nombre: ";
+	cin.getline(nombre, 40);
+	cout<<"Ingrese edad: ";
+	cin>>edad;
+}
+
+void Persona::imprimir(){
+	cout<<"Nombre: ";
+	cout<<nombre;
+	cout<<"\n";
+	cout<<"Edad: ";
+	cout<<edad;
+	cout<<"\n";
+}
+
+void Persona::esMayorEdad(){
+	if(edad>=18){
+		cout<<"Es mayor de edad.";
+
+	} else {
+		cout<<"No es mayor de edad.";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Persona *persona1;
+	
+	persona1=new Persona();
+	
+	persona1->inicializar();
+	persona1->imprimir();
+	perosna1->esMayorEdad();
+
+	delete persona1;
+
+	return 0;
+}
+
+Para llamar a los metodos debemos utilizar el operador -> (flecha) que son los caracteres: menos y el mayor.
+
+persona1->imprimir();
+
+Si bien podemos utilizar el caracter *(que significa lo apuntado) luego debemos disponer entre parentesis el nombre del puntero (es una sintaxis poco utilizada):
+
+(*persona1).imprimir();
+
+32.- METODOS INLINE
+Los metodos inline tienen por objetivo hacer partes de nuestro programas mas eficientes en tiempo de jecucion.
+
+Cuando definimos un metodo inline el codigo de la misma hace que se copie en el lugar donde se la llama a dicha funcion. Hay que tener en cuenta que cuando llamamos a un metodo hay una perdida de tiempo en la llamada en si mismo.
+
+Es conveniente utilizar metodos inline solo para algoritmos pequenas ya que si bien hacen el codigo mas eficiente por otro lado generan un codigo compilado mas grande.
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act);
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Temperatura::Temperatura (int min, int max, int act){
+	minima = min;
+	maxima = max;
+	actual = act;
+}
+
+void Temperatura::imprimir(){
+	cout<<"Minima: "<<minima<<"\n";
+	cout<<"Maxima: "<<maxima<<"\n";
+	cout<<"Actual: "<<actual<<"\n";
+}
+
+int main(){
+	Temperatura temperatura1(5, 25, 17);
+
+	cout<<"Rango de variacion de temperaturas: " <<temperatura1.rango()<<"\n\n";
+
+	temperatura1.imprimir();
+
+	return 0;
+}
+
+En C++ un metodo es inline solo con implementarlo en la declaracion de la clase:
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act);
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Si bien podemos agregar la palabra clave inline normalmente los programadores no lo hacen:
+
+	inline int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+
+Tanto constuctores como destructores pueden implementarse inline, en el problema anterior si implementamos el constructor inline el codigo queda como sigue:
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act){
+		minima = min;
+		maxima = max;
+		actual = act;
+	}
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Otra cosa que podemos notar en programas escritos en C++ es que cuando se declaran metodos inline se codifiquen en una sola linea, tener en cuenta que el resultado del algoritmo no cambi en absoluto, sino es solo una forma de organizar el codigo fuente de la declaracion de la clase. En nuestro ejemplo tendriamos:
+
+Public:
+	Temperatura(int min, int max, int act){minima = min; maxima = max; actual = act;}
+	int rango (){int valor = maxima-minima; return valor;}
+	void imprimir();
+
+33.- FUNCIONES AMIGAS (FRIEND)
+El lenguaje C++ es compatible y hereda todas las caracteristivas del lenguaje C. El lenguaje C es un lenguaje estructurado y solo permite definir funciones (no existen las clases).
+
+En C++ seguimos pudiendo definir funciones independientes fuera de una clase pero no es convenienre pra uan buena organizacion de nuestro codigo.
+
+En algunas situaciones puede ser conveniente definir una funcion independiente pero que tenga acceso a los atributos privados y protegidos de una clase, esto se logra con las funciones amiga (friend).
+
+Para definir una funcion amiga debemos anteceder la palabra clave friend y cuando la llamamos como realmente no pertenece a la clase sino que es amiga la invocamos por su nombre y no antededemos un nombre de objeto.
+
+#include<iostream>
+
+using namesapce std;
+
+class Temperatura {
+	int minima, maxima, actual;
+
+public:
+	Temperatura (int min, int max, int act) {minima=min; maxima=max; actual=act;}
+	friend int temperaturaMedia(Temperatura t1, Temperatura t2);
+};
+
+int temperaturaMedia(Temperatura t1, Temperatura t2){
+	int pro=(t1.actual + t2.actual)/2;
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(12, 25, 17);
+
+	cout<<"La temperatura promedio de las temperaturas actuales es: ";
+	cout<<temperatureaMedia(temperatura1, temperatura2);
+
+	return 0;
+}
+
+34.- CLASE AMIGAS (FRIEND)
+Otra posibilidad en C++ es que una clase sea amiga. Esto hace que todos los metodos de la clase amiga tengan acceso a los atributos privados y protegidos.
+
+#include<iostream>
+
+using namespace st;
+
+class Nodo{
+	int info;
+	Nodo *ant, *sig;
+public:
+	Nodo (int x){info=x;};
+	friend class ListaGenerica;
+}
+
+class ListaGeneriaca {
+	Nodo *raiz;
+Public:
+	ListaGenerica(){raiz=NULL;};
+	~ListaGenerica();
+	void insertarprimero(int x);
+	void imprimir();
+};
+
+ListaGenerica::~ListaGenerica(){
+	Nodo *reco=raiz;
+	Nodo *bor;
+
+	while(reco != NULL){
+		bor=reco;
+		reco=reco->sig;
+		delete bor;
+	}
+}
+
+void ListaGenerica::insertarPrimero(int x){
+	Nodo *nuevo = new Nodo(x);
+	nuevo->ant = NULL;
+
+	if(raiz==NULL){
+		nuevo->sig=NULL;
+		raiz=nuevo;
+	} else {
+		nuevo->sig=raiz;
+		raiz->ant=raiz;
+		raiz=nuevo;
+	}
+}
+
+void ListaGenerica::imprimir(){
+	Nodo *reco=raiz;
+
+	while(reco != NULL){
+		cout<<reco->info<<"-";
+		reco=reco->sig;
+	}
+
+	cout<<"\n";
+}
+
+int main(){
+	ListaGenerica *lista1 = new ListaGenerica();
+
+	lista1->insertarPrimero(10);
+	lista1->insertarPrimero(20);
+	lista1->insertarPrimero(5);
+	lista1->imprimir();
+
+	delete lista1;
+
+	return 0;
+}
+
+Las clases amigas deben utilizarse en situaciones especiales ya que deteriora el concepto de encapsulamiento de nuestra aplicacion.
+
+35.- ATRIBUTOS ESTATICOS DE UNA CLASE
+Un atrivuto estatico de una clse se crea independientemente a que se definan objetos de la misma, y en el caso que se creen mas de un objeto de dicha clase dicho atributos es compartido por todas las instancias.
+
+Como vemos es muy distinto el funcionamiento a los atributos de la clase que hemos visto hasta ahora. Un atributo estatico pertenece a la clase pero su existencia es independiente a que se difinan o no objetos de la misma.
+
+#include<iostream>
+
+using namespace std;
+
+class Prueba{
+	int x1;
+	static int x2;
+	public:
+		Prueba(int v1, int v2) {x1=v1; x2=v2;};
+		void imprimir();
+};
+
+int Prueba::x2;
+
+void Prueba::imprimir(){
+	cout<<x1<<"-"<<x2<<"\n";
+}
+
+int main(){
+	Prueba prueba1(1, 1);
+	prueba1.imprimir();
+	
+	Prueba prueba2(20, 20);
+	prueba1.imprimir();
+
+	return 0;
+}
+
+Para declarar un atributo estatico tenemos que agregar la palabra clave static:
+
+static int x2;
+
+Y luego fuera de la clase crearlo con la siguiente sintaxis:
+
+int Prueba::x2;
+
+Como vemos no alcanza con solo declararlo dentro de la clase debemos definirlo fuera de la clase. Si necesitamos inicializarlo con un valor podemos hacerlo en este momento:
+
+int Prueba::x2=100;
+
+Se puede inicializar el atributo estatico ya que se reserba espacio para esta variable indistintamente se creen o no objetos de la clase que contiene dicho atributo estatico.
+
+Es muy importante entender que el atributo estatico es compartido por todos los objetos que se definan de dicha clase.
+
+36.- METODOS ESTATICOS DE UNA CLASE
+Las funciones o metofos de la clase pueden definirse de tipo estatico.
+
+Un metodo estatico solo puede acceder a los atributos estaticos declarados en la clase.
+
+No se pueden definir dos funciones con igual nombre y que una sea estatica y la otra no.
+
+Un metodo estatico se lo puede llamar sin la necesidad de crear un objeto de dicha clase. Para poder llamarlo debemos anteceder el nombre de la clase y el modificador :: (dos veces dos puntos).
+
+#include<iostream>
+
+using namespace std;
+
+class Prueba{
+	static int x1;
+	public:
+		static int retornarX();
+};
+
+int Prueba::x1=20;
+
+int Prueba::retornarX(){
+	return x1;
+}
+
+int main(){
+	cout << Prueba::retornaX();
+
+	return 0;
+}
+
+La implementacion del metodo estatico es similar a lo ya visto teniendo encuenta que dentro de dicho emtodo solo podemos acceder a atributos estaticos (tengamos en cuenta que este metodo se crea y existe independientemente a que se creen objetos de la clase Prueba).
+
+Finalmente podemos ver que para acceder a dicho metodo no es necesario crear un objeto de la clase Prueba, solo con anteceder al nombre del metodo conel nombre de la clase y los caracteres :: tenemos acceso.
+
+37.- PUNTERO THIS
+Hasata ahora no hemos nombrado un puntero especial que se pasa a todos los metodos llamado this.
+
+Como sabemos podemos crear varios objetos de una clase. Cada objeto tiene una copia en memoria de todos los atributos (variables) que son independientes de los otros objetos. en el lenguaje C++ para poder identificar a que objeto en particular estamos accediento cuando llamamos a un metodo se le pasa un parametro llamado this (significa este objeto).
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	int minima;
+	int maxima;
+	int actual;
+	void imprimir();
+public:
+	Tempoeratura(int min, int max, int actual);
+};
+
+Temperatura::Temperatura(int min, int max, int act){
+	this->minima=min;
+	this->maxima=max;
+	this->actual=act;
+	this->imprimir();
+}
+
+void Temperatura::imprimir(){
+	cout<<this->minima<<" "<< this->actual<<" "<< this->maxima<<"\n";
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(25, 35, 29);
+	
+	return 0;
+}
+
+Podemos ver que cada vez que accedemos a un atributo o llamamos en un metodo dentro de la clase le antecedemos el puntero this.
+
+Este puntero almacena la direccion de memoria donde se guardan los atriburos del objeto respectivo, por ejemplo cuando en la main creamos un objeto de la clase Temperatura.
+
+Cuando llamamos a n metodo dentro de la clase estamos antecediendo elpuntero this para saber de cuan objeto se trata:
+
+this->imprimir();
+
+Pero porque no lo hemos estado haciendo hasta ahora? Es que no es obligatorio anteceder a los nombres de atributos y metodos, pero en realidad la direccion de los atributos de cada objeto en C++ se resuelve mediante este puntero.
+
+Un caso muy sencillo donde debemos utilizar el puntero this obligatorio es cuando un metodo tiene parametros con el mismo nombre que los atributos de la clase.
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	int minima;
+	int maxima;
+	int actual;
+	void imprimir();
+public:
+	Temperatura(int min, int max, int actual);
+};
+
+Temperatura::Temperatura(int minima, int maxima, int actual){
+	this->minima=minima;
+	this->maxima=maxima;
+	this->actual=actual;
+	imprimir();
+}
+
+void Temperatura::imprimir(){
+	cout << minima << " " << actual << " " << maxima << "\n";
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(25, 35, 29);
+	
+	return 0;
+}
+
+Como podemos observar en este caso si tenemos que hacer uso al puntero this para hacer referencia a los atributos del objeto y diferenciarlos de los parametros (cuando llamamos al metodo imprimir no hace falta anteceder el puntero this, es tacito).
+
+38.- DIRECTIVA #DEFINE
+La directiva #define especifica un nombre que sera reemplazado por un ciento valor en todos los lugaras del programa donde se haga referencia.
+
+Se crean fuera de cualquier funcion o clase normalmente en la parte inicial del archivo. La sintaxis es la siguiente:
+
+#define [nombre de la macro] [valor de la macro]
+
+Un ejemplo concreto es:
+
+#define TAMANO 20
+#define MENSAJEFIN "Presione una tecla para finalizar"
+
+El nombre de la macro es comun que se la escriba con caracteres mayusculas (es una regla que utilizan muchos programadores pero no es obligatoria).
+
+Luego de especificar el nombre de la macro hay uno o mas espacios y debemos especificar el valor de la macro.
+
+El primer paso del compilador es reemplazar todas las partes del programa donde hay delcaradas macros por los valores de dichas macros.
+
+El uso excesivo de macros puede tornar dificil el mantenimiento de programas.
+
+#include<iostream>
+
+#define TAMANO 5
+#define MENSAJEFIN "Presione una tecla para finalizar\n"
+#define DETENER cin.get();cin.get();
+
+using namespace std;
+
+int main(){
+	int vec[TAMANO];
+	
+	for(int f=0; f<TAMANO; f++){
+		cout << "Ingrese elemeto: ";
+		cin >> vec[f];
+	}
+	
+	for(int f=0; f<TAMANO; f++){
+		cout << vec[f] << "-";
+	}
+	
+	cout << "\n";
+	cout << MENSAJEFIN;
+	
+	DETENER
+	
+	return 0;
+}
+
+Es importante entender que lo primero que hace el compilador es reemplazar todos los luegares donde se hace referencia a la macro por el valor de la misma, luego este programa lo que realmente se esta compilando es:
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int vec[5];
+	
+	for(int f=0; f<5; f++){
+		cout << "Ingrese elemeto: ";
+		cin >> vec[f];
+	}
+	
+	for(int f=0; f<5; f++){
+		cout << vec[f] << "-";
+	}
+	
+	cout << "\n";
+	cout << "Presione una tecla para finalizar\n";
+	
+	cin.get();cin.get();
+	
+	return 0;
+}
+
+Es decir en el programa en ejecucion no podemos hacer referencias a las macros como hacemos en las variables. Las macros en el programa final no ocupan espacio ya que son sustituidas por los valores asignados a las mismas en tiempo de compilacion.
+
+39.- DEFINICION DE CONSTANTES (CONST)
+Una constante es un identificador con un valor inmodificable, permanece fijo durante toda la ejecucion del programa. Se las define antecediendole la palabra reservada const. No existe una zona determinada par su declaracion. Pueden ser globales o locales.
+
+Una constante a diferencia de una macro ocupa un espacio durante la ejecucion del programa.
+
+#include<iostream>
+
+using namespace std;
+
+const int inicio=1;
+cost float altura=1.92f;
+const char mensaje1[]="Bienvenido al programa";
+
+int main(){
+	cout << "Constante entera: " << inicio << "\n";
+	cout << "Constante flotante: " << altura << "\n";
+	cout << "Constante de tipo cadena de caracteres: " << mensaje1 << "\n";
+
+	const int fin=10;
+
+	cout << "Constante local: " << fing;
+
+	return 0;
+}
+
+Definicion de constantes dentro de la clase. Una primer forma es definir una constante estatica que podemos utilizar dentro de la clase. Al ser estatica todos los objetos de la clase acceden al mismo elemento en memoria.
+
+#include<iostream>
+
+using namespace std;
+
+class Vector{
+	static const int tamano = 5;
+	int vec[tamano];
+public:
+	void cargar();
+	void imprimir();
+};
+
+void Vector::cargar(){
+	for(int f=0; f<tamano; f++){
+		cout << "Ingese elemento: ";
+		cin >> vec[f];
+	}
+}
+
+void Vector::imprimir(){
+	for(int f=0; f<tamano; f++){
+		cout << vec[f] << "-";
+	}
+}
+
+int main(){
+	Vector vec1;
+
+	vec1.cargar();
+	vec1.imprimir();
+
+	return 0;
+}
+
+Como podemos observar cuando definimos la constante le antecedemos los modificadores static const. Es importante tener en cuenta que solo podemos definir constantes estaticas si se trata de valores enteros.
+
+Para definir atriburos de una clase que sean constantes debemos inicializarlos por unica vez en la zona de inicializacion del constructor:
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	const int media;
+	int minima, maxima;
+public:
+	Temperatura(int min, int max, int me);
+	void impirmir();
+};
+
+Temperatura::Temperatura(int min, int max, int me):media(me){
+	minima=min;
+	maxima=max;
+}
+
+void Temperatura::imprimir(){
+	cout << minima << " " << maxima << " " << media << "\n";
+}
+
+int main(){
+	Temperatura t1(10, 20, 14);	
+	t1.imprimir();
+
+	Temperatura t2(5, 9, 7);
+	t2.imprimir();
+
+	return 0;
+}
+
+No podemos asignarle un valor (no tendria sentido ya que todos los objetos de la clase tendrian el mismo valor) entonces inicializamos la constante por unica vez en el constructor:
+
+Temperatura::Temperatura(int min, int max, int me):media(me){
+	minima=min;
+	maxima=max;
+}
+
+Como vemos luego de los parametros del constructor disponemos el nombre de la constante y entre parentesis el valor con el que inicializamos la constante normalmente un dato que llega como parametro al constructor.
+
+Si la clase tiene que inicializar mas de una constante no estatica la sintaxies en le constructor quedaria (con dos constantes):
+
+Temperatura::Temperatura(int min, int max, int me, int valor2):media(me), constante2(valor2)
+
+40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
+En muchas situaciones podemos enviar a un metodo puntero a objetos para trabajar en el mismo cons us contenido y sin la intencion de modificar el objeto que le pasamos. Por defecto tenemos la posibilidad de modificar el objeto pasado por parametros.
+
+El lenguaje C++ nos provee el modificardor const para ser utilizado en los parametros de los metodos de la clases.
+
+Cuando indicamos que un parametro es de tipo const significa que el cuaerpo del metod no puede modificarlo, pero si consultar la informacion del mismo.
+
+El no definir un paramtero de tipo const no hace que nuestro programa no funcione. El objetivo de definir un parametro de tipo const es ecitar por descuido modificar con dicho parametro del dato que llega.
+
+#include <iostream>
+
+using namespace std;
+
+Class ListaGenerica{
+	public:
+		bool iguales(const ListaGenerica *lista2);
+};
+
+bool ListaGenerica::iguales(const ListaGenerica *Lista2)
+{
+
+}
+
+41.- METODOS CONSTANTES (CONST)
+Otra parte mas donde podemos utilizar la palabra clave "const" es al final de la declaracion de un metodo.
+
+Cuando implementamos un metodo y sabemos que no moficara en ningun momento atributos de la clase lo mas conveniente es hacerlo explicito agregando la palabra "const" luego del nombre del metodo.
+
+#include <iostream>
+
+using namespace std;
+
+class ListGenerica{
+	public:
+		bool iguales(const ListaGeneriaca *lista2) const;
+};
+
+boot ListaGenerica::iguales(const ListaGEneriaca *lista2) const{
+
+}
+
+Como vemos los parametros constantes y los metodods constantes nos permiten dejar mas claro y seguro el codigo en cuanto a que pueden modificar. Ahora el metodo iguales en nuestro problema no puede modificar ni la lista que llega ni la lista propiamente dicha del objeto actual.
+
+Es importante notar que el constructor y el destructor no pueden ser constantes. Casi siempre es un constructor inicializamos atributos y en el destructor liberamos espacio.
+
+42.- PARAMETROS POR VALOR Y POR REFERENCIA DE DATOS SIMPLES
+En C++ hay dos formas de pasar parametros a un metodo: por valor o por referencia.
+
+Hasta ahora siempre hemos pasado los parametros por valor, cuando pasamos un tipo de dato simple (int, float, etc.) se hace una copia del dato en otra parte de la memoria. Veremos que podemos pasar una variable y que el parametro pueda acceder y modificar directamente la variable que le pasamos.
+
+#include <iostream>
+
+using namespace std;
+
+class Prueba{
+	public:
+		void cambiar1(int z);
+		void cambiar2(int &z);
+};
+
+void Prueba::cambiar1(int z){
+	z = 0;
+}
+
+void Prueba:cambiar2(int &z){
+	z = 0;
+}
+
+int main(){
+	Prueba prueba1;
+
+	int num = 10;
+
+	cout << "Valor de la variable num: " << num << "\n";
+
+	prueba1.cambiar1(num);
+
+	cout << "Valor de la variable num luego de envuarla por valor: " << num << "\n";
+
+	prueba1.cambiar2(num);
+	
+	cout << "Valor de la variable num luego de enviarla por referencia: " << num << "\n";
+
+	return 0;
+}
+
+Los parametros por valor solo se le antecede el nombre del tipo de dato.
+
+El parametro z recibe una copia del valor alamacenado en la variable num definida en la main. Cuando modificamos z con el valor 0 no se modifica la variable nom definida en la main.
+
+Loas parametrod por referencia se les antecede al nombre del parametro el caracter &. Un parametro por referencia es como un alias del nombre de la variable que le pasamos desde la main. En nuetro ejemplo el parametro z accede directamente al contenido de la variable num que definimos en la main.
+
+Cuando modificamos z estamos realmente modificando la variable num definida en la main.
+
+43.- PARAMETROS POR VALOR Y POR REFERENCIA DE OBJETOS
+Los parametros de un metodo pueden ser de tipo objeto y tambien los podemos hacer por valor o referencia.
+
+Cuando un parametro de tipo objeto se hace por valor se hace una copia identica de dichao objeto en otra parte de memoria.
+
+Si modificaramos los atributos de dicho parametro no se estarian modificando los atributos del objeto que le pasamos en la llamada.
+
+#include <iostream>
+
+using namespace std;
+
+Class Reloj{
+	int hora;
+	int minuto;
+	int segundo;
+public:
+	Reloj(int hora, int minuto, int segundo) {this->hora = hora; this->minuto = minuto; this->segundo = segundo;};
+	void imprimir();
+	void intentoCambiar(Reloj r);
+};
+
+void Reloj::imprimir(){
+	cout << hora << ":" << minuto << ":" << segundo << "\n";
+}
+
+void Reloj::intentoCambiar(Reloj r){
+	r.hora = 1;
+	r.minuto = 0;
+	r.segundo = 0;
+}
+
+int main(){
+	Reloj reloj1(10, 10, 10);
+	Reloj reloj2(20, 20, 20);
+
+	reloj1.intentoCambiar(reloj2);
+	reloj1.imprimir(); // imprime: 10:10:10
+
+	reloj2.imprimir(); // imprime: 20:20:20
+
+	return 0;
+}
+
+Como podemos comprobar cuando desde la main le enviamos el objeto reloj2 al metodo intentoCambiar los atributos originales de dicho objeto no se alteran (siguen teniendo los valores que le pasamos ala cosntructor):
+
+Esto funciona asi ya que dentro del metodod intentoCambiar se crea un parametro r de la clase Reloj con una copia identica del objeto que le pasamos desde la main. Es importante hacer notar que si la clase Reloj tiene destructor el mismo se ejecutara cuando se libere el espacio del parametro r al finalizar el metodo intentoCambiar.
+
+Modifiquemos este mismpo problema y definamos el parametro por referencia:
+
+#include <iostream>
+
+using namespace std;
+
+Class Reloj{
+	int hora;
+	int minuto;
+	int segundo;
+public:
+	Reloj(int hora, int minuto, int segundo) {this->hora = hora; this->minuto = minuto; this->segundo = segundo;};
+	void imprimir();
+	void intentoCambiar(Reloj &r);
+};
+
+void Reloj::imprimir(){
+	cout << hora << ":" << minuto << ":" << segundo << "\n";
+}
+
+void Reloj::intentoCambiar(Reloj &r){
+	r.hora = 1;
+	r.minuto = 0;
+	r.segundo = 0;
+}
+
+int main(){
+	Reloj reloj1(10, 10, 10);
+	Reloj reloj2(20, 20, 20);
+
+	reloj1.intentoCambiar(reloj2);
+	reloj1.imprimir(); // imprime: 10:10:10
+
+	reloj2.imprimir(); // imprime: 20:20:20
+
+	return 0;
+}
+
+El unico cambio que hemos dispuesto es qeu el parametro r pasa por referencia (es decir ahora r es un alias de la varaible que le pasamos desde la main).
+
+Otra cosa importante que hay que destacar que cuando pasamos un parametro por referencia el destructor de dicho parametro no se ejecuta.
+
+Cuando se pasan objetos grandes el tiempo de hacer la copia en el parametro puede ser costoso para la eficiencia de nuestro programa. Es muy comun en estos casos pasar por referencia aunque no tengamos que modificar el objeto que le pasamos, le agregamos el modificador const al parametro por referencia para evitar modificarlo.
+
+44.- CLASE STRING
+Para poder utilizar la clase string debemos incluir en nuestro programa:
+
+#include <string>
+
+Para crear un objeto de la clase sting podemos hacerlo de dos formas:
+
+string cadena1("Hola mundo");
+
+o la mas comoda y legible:
+
+sting cadena1 = "Hola mundo";
+
+Creacion, iniciazion por asignacion y carga por teclado de un objeto de tipo string.
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	string cadena1 = "Hola mundo";
+	string cadena2;
+
+	cout << "Ingrese una cadena de caraxteres son espacions en blanco: ";
+
+	cin >> cadena2;
+	cin.get();
+
+	cout << "Primer string: " << cadena1 << "\n";
+	cout << "Segundo string: " << cadena2;
+
+	return 0;
+}
+
+cin >> cadena2;
+
+Como el cin deja en el buffer de teclado un enter procedemos a extraerlo mediante la llamada al get:
+
+cin.get();
+
+Es importante hacer notar que cuando ingresamos una cadena con el objeto cin no podemos ingresar el espacio en blanco, sino se corta el string de dicho caracter.
+
+Para permitir ingresar esapcios en blanco dentro del string por teclado debemos utilizar la funcion getline:
+
+getline(cin, cadena2);
+
+Esta funcion ya libera el buffer del ultimo "enter" ingresado. El programa visto anteriormente queda finalmente codificado como:
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	string cadena1 = "Hola mundo";
+	string cadena2;
+
+	cout << "Ingrese una cadena de caraxteres son espacions en blanco: ";
+
+	cin >> cadena2;
+	getline(cin, cadena2);
+
+	cout << "Primer string: " << cadena1 << "\n";
+	cout << "Segundo string: " << cadena2;
+
+	return 0;
+}
+
+Operadores relacionales aplicados a la clase string.
+Asi como vimos que a un objeto de la clase string podemos iniciarlo por el operador = (asignacion) tambien podemos utilizar los operadores relacionales para comparar el contenido de dos string:
+
+==
+!=
+>
+>=
+<
+<=
+
+La clase string facilita la comparacion de cadenas de caracteres a diferencia del manejo con vectores de caracteres donde debemos utilizar las funciones strcmp.
+
+string s1 = "";
+string s2 = "";
+
+if(s1 > s2)
+
+if(s2>s1)
+
+Hay que tener en cuenta que cuando utilizamos el operador > estamos haciendo una comparacion no por la cantidad de caracteres sono alfabeticamente (por ejemplo el sting "bien" es mayor al string "alma" ya que la "b" es mayor a la "a").
+
+Operador +
+La clase string redefine el operador + con el objeto de generar otro objeto de la clase string que resulte de concatenar los contenidos de los string respectivos.
+
+string s1 = "";
+string s2 = "";
+string s3 = s1 + "-" + s2;
+
+Acceder a un caracter individual del string por medio de un subindice.
+Podemos acceder a cualquier caracter del string indicando la posicion del elemento que queremos acceder. Las posisiones comienzan a numerarse a partir de cero.
+
+string cadena1 = "Hola";
+cout << cadena1[0];
+cout << cadena1[3];
+
+Hay que tener cuidado de acceder siempre a posiciones dentro del string que tengan caracteres, por ejemplo se generara un error en tiempo de ejecucion si queremos acceder al caracter de la posicion 12.
+
+45.- CLASE STRING (SIZE - LENGTH - EMPTY - AT)
+Metodos: length() y size()
+Estos metodos retornan la cantidad de caracteres qeu contiene el string. Podemos utilizar indistintamente uno u otro (similar a la funcion strlen con vectores de caracteres)
+
+string cadena1 = "Hola";
+cout << "Cadena: " << cadena1;
+cout << "\n";
+cout << cadena1.size();
+cout << "\n";
+cout << cadena1.length();
+
+Metodo: empty()
+El metodo empty returna true si el string tiene una cadena vacia. Por ejemplo un string vacio se inicia con:
+
+string cad="";
+
+Pero tambien podemos hacerlo sin asignar un valor (laforma anterior es solo para dejarlo mas legible):
+
+string cad;
+
+string cadena;
+
+if(cadena.empty())
+
+Metodo: at()
+El metodo at me permite recuperar un caracter de una determina posicion dentro del string, por ejemplo para recuperar el tercer caracter almacenado en el string:
+
+char letra = str.at(2);
+
+El resultado es identico a acceder por medio de subindices:
+
+char letra = str[2];
+
+string cadena;
+
+for (int f=0; f<cadena.length(); f++){
+	cout << cadena.at(f) << "=";
+}
+
+46.- CLASE STRING (APPEND - INSERT - ERASE)
+Veamos algunos metodos que nos provee la clase stirng para modificar el contenido de un string.
+
+append: Para anadir al final otra cadena de caracteres.
+
+insert: Para anadir otra cadena en cualquier parte de la cadena indicando la posicion inicial.
+
+erase: Borrar desde una determinada posicion una determinada cantidad de caracteres del string.
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+	string cad = "uno tres";
+	cout << "Cadena original: " << cad << "\n";
+
+	cad.append(" cuatro");
+	cout << "Cadena despues de llamar a append: " << cad << "\n";
+
+	cad.insert(3, " dos");
+	cout << "Cadena despues de llamar a insert: " << cad << "\n";
+	
+	cad.erase(0, 4);
+	cout << "Cadena despues de llamar a erase: " << cad << "\n";
+
+	return 0;
+}

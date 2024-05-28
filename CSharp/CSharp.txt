@@ -1,0 +1,2793 @@
+3.- CODIFICACION DEL DIAGRAMA DE FLUJO
+6.- ESTRUCTURAS CONDICIONALES SIMPLES Y COMPUESTAS
+9.- ESTRUCTURA REPETITIVA WHILE
+10.- ESTRUCTURA REPETITIVA FOR
+11.- ESTRUCTURA REPETITIVA DO WHILE
+12.- CADENAS DE CARACTERES
+13.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+14.- DECLARACION DE METODOS
+15.- ESTRUCTURA DE DATOS TIPO VECTOR
+16.- VECTOR (TAMANO DE UN VECTOR)
+18.- VECTORES (MAYOR Y MENOR ELEMENTO)
+19.- VECOTRES (ORDENAMIENTO)
+21.- ESTRUCTURAS DE DATOS TIPO MATRIZ
+22.- MATRICES (CANTIDAD DE FILAS Y COLUMNAS)
+24.- MATRICES IRREGULARES O DENTADAS
+25.- CONTRUCTOR DE LA CLASE
+26.- COLABORACION DE CLASES
+27.- CONCEPTO DE PROPIEDAD
+28.- HERENCIA
+29.- ORDEN DE EJECUCION DE LOS CONSTRUCTORES CON HERENCIA
+30.- CLASE PARCIAL (PARTIAL CLASS)
+41.- ESTRUCTURAS DINAMICAS
+42.- ESTRUCTURAS DINAMICAS: LISTAS
+43.- ESTRUCTURAS DINAMICAS: LISTAS TIPO PILA
+45.- ESTRUCTURAS DINAMICAS: LISTAS TIPO COLA
+47.- ESTRUCTURAS DINAMICAS: LISTAS GENERIACAS
+48.- ESTRUCTURAS DINAMICAS: LISTAS GENERIACAS ORDENADAS
+49.- ESTRUCTURA DINAMICAS: LISTAS GENERICAS DOBLEMENTE ENCADENADAS
+50.- ESTRUCTURAS DINAMICAS: LISTAS GENERICAS CIRCULARES
+51.- RECURSIVIDAD: CONCEPTOS BASICOS
+56.- TIPOS DE DATOS PRIMITIVOS C#
+57.- DEFINICION DE VARIABLES CON TIPOS IMPLICITOS
+58.- PALABRA CLAVE THIS
+59.- ESTRUCTURA REPETITIVA FOREACH
+60.- ESTRUCTURA CONDICIONAL SWITCH
+61.- PARAMETROS POR VALOR
+62.- PARAMETROS POR REFERENCIA (REF)
+63.- PARAMETROS POR REFERENCIA (OUT)
+64.- NUMERO VARIABLE DE PARAMETROS
+
+89.- COLECCIONES: QUEUE<T> Y STACK<T>
+90.- COLECCION: LIST<T>
+91.- COLECCION: LINKEDLIST<T>
+92.- COLECCION: DICTIONARY<TKEY, TVALUE>
+93.- DELEGADOS
+94.- EXPRESIONES LAMBDA
+95.- EXPRESIONES LAMBDA: ACCESO A LAS VARIABLES EXTERNAS A LA EXPRESION LAMBDA
+96.- METODOS DE EXTENSION
+97.- INTERPOLACION DE STRING EN C# CON EL MODIFICADOR $
+98.- CREAR STRING DE MULTIPLES LINEAS CON EL MODIFICADOR @
+99.- EXCEPCIONES EN C# - TRY/CATCH
+100.- EXCEPCIONES - MULTIPLES CATCH PARA UN TRY
+101.- EXCEPCIONES - CLASE PADRE EXCEPTION
+102.- EXCEPCIONES - BLOQUE FINALLY
+103.- EXCEPCIONES - LANZAR UNA EXCEPCION MEDIANTE COMANDO THROW
+104.- EXCEPCIONES PROPIAS
+105.- NAMESPACE
+
+==================================================================================================================
+3.- CODIFICACION DEL DIAGRAMA DE FLUJO
+Estructura basica
+
+namespace Proyecto
+{
+	class Program
+	{
+		static void Main(String[] args)
+		{
+		
+		}
+	}
+}
+
+Declaracion de variables
+int horas;
+int horas = 0;
+
+float costoHora;
+float costoHora = 2.5;
+
+string linea;
+string linea = "Hellos";
+
+Imprimir una mensaje
+Console.Write("Ingrese un numero: ");
+
+Console.WriteLine("Procesando...");
+
+Tomar un valor
+Console.Write("Ingrese un numero: ");
+string numero = Console.ReadLine();
+
+Imprimir un valor
+Console.Write(numero);
+
+Convertir un valor
+string numero = "3";
+
+int intnum = int.Parse(numero);
+
+numero = "2.5";
+
+float floatnum = float.Parse(numero);
+
+Console.Write(intnum.ToString());
+
+Espera despues de finalizar el codigo
+Console.ReadKey();
+
+6.- ESTRUCTURAS CONDICIONALES SIMPLES Y COMPUESTAS
+Operadores realcionales
+> mayor
+< menor
+>= mayor o igual
+<= menor o igual
+== igual
+!= distinto
+
+Operadores matematicos
++ mas
+- menos
+* producto
+/ division
+% resto de una division
+
+Operadores logicos
+&& and
+|| or
+
+if(sueldo > 3000)
+{
+
+}
+
+if(num1 > num2)
+{
+
+}
+else
+{
+
+}
+
+if(promedio >= 7)
+{
+
+}
+else
+{
+	if(promedio >= 4)
+	{
+	
+	}
+	else
+	{
+	
+	}
+}
+
+if(promedio >= 7)
+{
+
+}
+else if (promedio >= 4)
+{
+
+}
+else
+{
+
+}
+
+if (num1 > num2 && num1 > num3)
+{
+
+}
+
+if(mes == 1 || mes == 2 || mes == 3)
+{
+
+}
+
+9.- ESTRUCTURA REPETITIVA WHILE
+int x = 1;
+
+while (x <= 100)
+{
+	Console.Write(x);
+	Console.Write(" = ");
+	x = x+1;
+}
+
+10.- ESTRUCTURA REPETITIVA FOR
+int f;
+
+for(f = 1; f <= 100; f++)
+{
+	Console.Write(f);
+	Console.Write("-");
+}
+
+for(int x = 1; x <= 100; x++)
+{
+	Console.Write(x);
+	Console.Write("-");
+}
+
+11.- ESTRUCTURA REPETITIVA DO WHILE
+int valor = 0;
+
+do{
+	Console.WriteLine("Primer mensaje");
+	valor++;
+} while (valor != 0);
+
+valor = 0;
+
+do{
+	Console.WriteLine("Primer mensaje");
+	valor++;
+} while (valor != 3);
+
+12.- CADENAS DE CARACTERES
+string apellido1 = "";
+string apellido2 = "";
+
+if(apellido1 == apellido2)
+{
+
+}
+
+13.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+class [nombre de la clase]
+{
+	[atributos o variables de la clase]
+	[Medotod o funciones de la clase]
+	[main]
+}
+
+class classone{
+	private string strvar = "";
+	
+	public classone()
+	{
+	
+	}
+	
+	public void testmet()
+	{
+		Console.WriteLine("Hello");
+	}
+	
+	static void Main(String[] args)
+	{
+		classone cls1 = new classone();
+		cls1.testmet();
+	}
+}
+
+14.- DECLARACION DE METODOS
+public void [nombre del metodo]()
+{
+
+}
+
+public void [nombre del metodo]([parametro])
+{
+
+}
+
+public [tipo dato] [nombre del metodo]()
+{
+	return [tipo dato];
+}
+
+public [tipo dato] [nombre del metodo]([parametro])
+{
+	return [tipo datp];
+}
+
+public void hello()
+{
+	Console.Write("Hello");
+}
+
+public void printMessage(string message)
+{
+	Console.Writr(message);
+}
+
+public int returnInteger()
+{
+	return 1;
+}
+
+public bool isOne(int testnum)
+{
+	if(testnum == 1)
+		return true;
+		
+	return false;
+}
+
+15.- ESTRUCTURA DE DATOS TIPO VECTOR
+int[] sueldos;
+sueldo = new int[5];
+
+int[] sueldo = new int[5];
+
+sueldo[0] = 1;
+sueldo[1] = 2;
+
+int total = sueldo[0] + sueldo[1];
+
+Console.Write(sueldo[0].ToString());
+
+16.- VECTOR (TAMANO DE UN VECTOR)
+int tamanoVector = sueldo.Length;
+
+for(int x=0; x<sueldo.Length; x++)
+{
+	sueldo[x] = x + 1;
+	Console.WriteLine(sueldo[x].ToString());
+}
+
+18.- VECTORES (MAYOR Y MENOR ELEMENTO)
+
+float[] sueldos = new float[5];
+float mayor;
+
+mayor = sueldos[0];
+
+for(int f=1; f<nombres.Length; f++)
+{
+	if(sueldos[f] > mayor)
+	{
+		mayor = sueldos[f];
+	}
+}
+
+19.- VECOTRES (ORDENAMIENTO)
+int[] sueldos = new int[5];
+
+for(int k=0; k<4; k++)
+{
+	for(int f=0; f<4-k; f++)
+	{
+		if(sueldos[f] > sueldos[f+1])
+		{
+			int aux;
+			aux = sueldos[f];
+			sueldos[f] = sueldos[f+1];
+			sueldos[f+1] = aux;
+		}
+	}
+}
+
+string[] paises = new string[5];
+
+for(int k=0; k<4; k++)
+{
+	for(int f=0; f<4-k; f++)
+	{
+		if(paises[f].CompareTo(paises[f+1]) > 0)
+		{
+			string aux;
+			aux = paises[f];
+			paises[f] = paises[f+1];
+			paises[f+1] = aux;
+		}
+	}
+}
+
+21.- ESTRUCTURAS DE DATOS TIPO MATRIZ
+mat[Filas, Columnas]
+
+int[,] mat;
+mat = new int[3, 5];
+
+int[,] mat = new int[3, 5];
+
+mat[0, 0] = 1;
+mat[0, 1] = 2'
+mat[1, 0] = 3;
+mat[1, 1] = 4;
+
+Console.Write(mat[0, 0].ToString());
+
+for(int f=0; f<3; f++)
+{
+	for(int c=0; c<5; c++)
+	{
+		mat[f, c] = f++;
+		Console.WriteLine(mat[f, c].ToString());
+	}
+}
+
+22.- MATRICES (CANTIDAD DE FILAS Y COLUMNAS)
+Cantidad de filas
+int filas = mat.GetLength(0);
+
+Cantidad de columnas
+int columnas = mat.GetLength(1);
+
+24.- MATRICES IRREGULARES O DENTADAS
+int[][] mat;
+mat = new int[3][];
+
+mat[0] = new int[2];
+mat[1] = new int[4];
+mat[2] = new int[3];
+
+Cantidad de elementos de la fila 0: mat[0].Length
+Cantidad de elementos de la fila 1: mat[1].Length
+Cantidad de elementos de la fila 2: mat[2].Length
+
+for(int f=0; f<mat.Length; f++)
+{
+	for(int c=0; c<mat[f].Length; c++)
+	{
+		Console.WriteLine(mat[f][c]);
+	}
+}
+
+25.- CONTRUCTOR DE LA CLASE
+En C# podemos definr un metodo que se ejecute inicialmente y en forma automatica. Este metodo se lo llama constructor.
+
+El constructor tiene las siguientes caracteristicas:
+- Tienes el mismo nombre de la clase.
+- Es el primer metodo que se ejecuta.
+- Se ejecuta en forma auntomatica.
+- No puede retornar datos.
+- Se ejecuta una unica vez.
+- Un constructor tieen por objetico inicializar atributos.
+
+class Operarios
+{
+	public Operarios()
+	{
+	
+	}
+}
+
+26.- COLABORACION DE CLASES
+Normalmente un problema resulto con la metodologia de programacion orientada a objetos no interviene una sola clase, sino que hay muchas clases que interactuan y se comunican.
+
+namespace Colaboracion1
+{
+	class Cliente
+	{
+		private string nombre;
+		private int monto;
+		
+		public Cliente(string nom)
+		{
+			nombre=nom;
+			monto=0;
+		}
+		
+		public void Imprimir()
+		{
+			Console.WriteLine(nombre + " tiene depositado la suma de " + monto);
+		}
+	}
+	
+	clase Banco
+	{
+		private Cliente cliente1;
+		
+		public Banco()
+		{
+			cliente1 = new Cliente("Juan");
+		}
+		
+		public void DepositosTotales()
+		{
+			cliente1.Imprimir();
+		}
+		
+		static void Main(string[] args)
+		{
+			Banco banco1 = new Banco();
+			banco1.DepositosTotales();
+			Console.ReadKey();
+		}
+	}
+}
+
+27.- CONCEPTO DE PROPIEDAD
+La mayoria de los lenguajes de programacion orientado a objetos acceden a sus atributos a traves de metodos. Esto lo vimos en el concepto anterior cuando accediamos al atributo monto de un clients. En C# normalmente este tipo de problemasse lo resuelve implementando una propiedad.
+
+class Cliente
+{
+	private string nombre;
+	private int monto;
+	
+	public string Nombre
+	{
+		set { nombre = value; }
+		get { return nombre; }
+	}
+	
+	public int Monto
+	{
+		set { monto = value; }
+		get { return monto; }
+	}
+	
+	public void Imprimir()
+	{
+		Console.WriteLine(Nombre + " tiene depositado la suma de " + Monto);
+	}
+}
+
+class Banco
+{
+	private Cliente cliente1;
+	
+	public Banco()
+	{
+		cliente1 = new Cliente();
+		cliente1.Nombre = "Juan";
+		cliente1.Monto = 0;
+	}
+	
+	public void DepositosTotales()
+	{
+		cliente1.Imprimir();
+	}
+	
+	static void Main(string[] args)
+	{
+		Banco banco1 = new Banco();
+		banco1.DepositosTotales();
+	}
+}
+
+Tambien se puede utilizar:
+private int valor;
+
+public int Valor
+{
+	get{ return valor; };
+	private set { valor = value; }
+}
+
+public void Tirar()
+{
+	Random aleatorio = new Random();
+	Valor = aleatorio.Next(1, 7);
+}
+
+Al definir set como privado no se puede cambiar el valor de la variable directamente.
+
+Con el metodo Tirar, hacemos que solo los metodos de la clase puedan ejecutar el set.
+
+28.- HERENCIA
+La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendra todas los atributos, propiedades y los metodos de su superclase o clase padre y ademas se le podran anadir otros atributos, profpiedades y metodos propios.
+
+Clase padre
+Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automaticamente los atributos, propiedades y metodos de la clase padre.
+
+Subclase
+Clase desciendiente de otro. Hereda automaticamente los atributos, propiedades y metodos de su superclase. Es una especializacion de otra clase. Admiten la definicion de nuevos atributos y metodos para aumentar la especializacion de la clase.
+
+namespace Herencia1{
+	public class Opreacion{
+		protected int valor1;
+		protected int valor2;
+		protected int resultado;
+	
+		public int Valor1{
+			...
+		}
+		
+		public int Valor2{
+			...
+		}
+		
+		public int Resultado{
+			...
+		}
+	}
+	
+	public class Suma: Operacion{
+		public void Operar(){
+			Resultado=Valor1+Valor2;
+		}
+	}
+	
+	public class Resta: Operacion{
+		public void Operar(){
+			Resultado=Valor1-Valor2;
+		}
+	}
+	
+	class Prueba{
+		static void Main(string[] args){
+			Suma suma1 = new Suma();
+			suma1.Valor1 = 10;
+			suma1.Valor2 = 7;
+			suma1.Operar();
+			int resultado = suma1.Resultado;
+			
+			Resta resta1 = new Resta();
+			resta1.Valor1 = 10;
+			resta1.Valor2 = 7;
+			resta1.Operar();
+			resultado = resta1.Resultado;
+		}
+	}
+}
+
+Disponemos dos putnos y seguidamente el nombre de la clase padre (con esto estamos indicando que todas las propiedades de la clase Operacion son tambien propiedades de la clase Suma).
+
+29.- ORDEN DE EJECUCION DE LOS CONSTRUCTORES CON HERENCIA
+Cuando tenmos cosntructores en las clases y subclases el orden de ejecucion de los mismos es:
+
+Primero se ejecuta el constructor de la clase Padre.
+Segundo se ejecuta el constructor de la subclase.
+
+Problema:
+Plantear tres clases A, B, C que B herede de A y C herede de B. Definir un constructor a cada clase que meustre un mensaje. Luego definir un objeto de la clase C.
+
+La salida seria:
+Constructor de la clase A.
+Constructor de la clase B.
+Constructor de la clase C.
+
+Es decir cuando creamos un objeto de la clase C lo primero que se ejecuta es el constructor de la clase de nivel superior (en este caso la clase A), luego el constructor de la clase B y finalmente se ejecuta el constructor de la clase C.
+
+30.- CLASE PARCIAL (PARTIAL CLASS)
+Hasta ahora hemos visto que una clase se la implemeta en forma completa dentro de un arcvhivo. El lenguaje C# permite la implemetacion de una clse en dos o mas archivos. Para esto hay que agregarle el modificador partial cuando declaramos la clase.
+
+Este concepto es ampliamanete utilizado por el entorno del Visual Studio .Net en la generacion de interfaces visuales.
+
+Como veremos en conceptos futuros es necesario presentar partial class para su entendimiento.
+
+Una clase parcial no es mas ni menos que crear uan clase completa y luego agrupar metodos y propiedades en dos o mas archivos.
+
+namespace ClaseParcial1{
+	partial class Rectangulo{
+		private int lado1;
+		public int Lado1{
+			...
+		}
+		
+		private int lado2;
+		public int Lado2{
+			...
+		}
+	}
+}
+
+namespace ClaseParcial1{
+	partial class Rectangulo{
+		public int RetornarSuperficie(){
+			int sup=Lado1*Lado2;
+			return sup;
+		}
+		
+		public int RetornarPerimetro(){
+			int per=Lado1*2+Lado2*2;
+			return per;
+		}
+	}
+}
+
+namespace ClaseParcial1{
+	class Program{
+		static void Main(string[] args){
+			Rectangulo rectangulo1 = new Rectangulo();
+			rectangulo1.Lado1=5;
+			rectangulo1.Lado2=10;
+			int superficie=rectangulo1.RetornarSuperficie();
+			int perimetro=retuacgulo1.RetornarPerimetro();
+		}
+	}
+}
+
+41.- ESTRUCTURAS DINAMICAS
+42.- ESTRUCTURAS DINAMICAS: LISTAS
+43.- ESTRUCTURAS DINAMICAS: LISTAS TIPO PILA
+Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista. Tambien se las llama listas LIFO (Last In First Out - ultimo en entrar primero en salir).
+
+Importante: Una pila al ser una lista puede alamcenar en el campo de informacion cualquier tipo de valor (int, char, float, vector de caracteres, un objeto, etc).
+
+namespace ListasTipoPila1{
+	class Pila{
+		class Nodo{
+			public int info;
+			public Nodo sig;
+		}
+		
+		private Nodo raiz;
+		
+		pbulic Pila(){
+			raiz = null;
+		}
+		
+		public void Insertar(int x){
+			Nodo nuebo;
+			nuevo = new Nodo();
+			nuebo.info = x;
+			
+			if(raiz == null){
+				nuevo.sig = null;
+				raiz = nuevo;
+			} else {
+				nuevo.sig = raiz;
+				raiz = nuevo;
+			}
+		}
+		
+		public int Extraer(){
+			if(raiz != null){
+				int informacion = raiz.info;
+				raiz = raiz.sig;
+				return informacion;
+			} else {
+				return int.MaxValue;
+			}
+		}
+		
+		public void Imprimir(){
+			Nodo reco = raiz;
+			Console.WriteLine("Listado de todos los elementos de la pila.");
+			
+			while(reco != null){
+				Console.Write(reco.info + "-");
+				reco = reco.sig;
+			}
+			
+			Console.WriteLine();
+		}
+		
+		static void Main(string[] args){
+			Pila pila1 = new Pila();
+			pila1.Insertar(10);
+			pila1.Insertar(40);
+			pila1.Insertar(3);
+			pila1.Imprimir();
+			
+			Console.WriteLine("Extraemos de la pila: " + pila1.Extraer());
+			
+			pila1.Imprimir();
+			Console.ReadKey();
+		}
+	}
+}
+
+45.- ESTRUCTURAS DINAMICAS: LISTAS TIPO COLA
+Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. Tambine se las llama listas FIFO (First In First Out - Primero en entrar primero en salir).
+
+class Cola{
+	class Nodo{
+		public int info;
+		public Nodo sig;
+	}
+	
+	private Nodo raiz, fondo;
+	
+	public Cola(){
+		raiz = null;
+		fondo = null;
+	}
+	
+	public bool Vacia(){
+		if(raiz == null){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void Insertar(int info){
+		Nodo nuevo;
+		nuevo = new Nodo();
+		nuevo.info = info;
+		nuevo.sig = null;
+		
+		if(Vacia()){
+			raiz = nuevo;
+			fondo = nuevo;
+		} else {
+			fondo.sig = nuevo;
+			fondo = nuevo;
+		}
+	}
+	
+	public int Extrar(){
+		if(!Vacia()){
+			int informacion = raiz.info;
+			
+			if(raiz == fondo){
+				raiz = null;
+				fondo = null;
+			} else {
+				raiz = raiz.sig;
+			}
+			
+			return informacion;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public void Imprimir(){
+		Nodo reco = raiz;
+		
+		Console.WriteLine("Listado de todos los elementos de la cola.");
+		
+		while(reco != null){
+			Console.Write(reco.info + "-");
+			reco = reco.sig;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	static void Main(string[] args){
+		Cola cola1 = new Cola();
+		
+		cola1.Insertar(5);
+		cola1.Insertar(10);
+		cola1.Insertar(50);
+		
+		cola1.Imprimir();
+		
+		Console.WriteLine("Extraemos uno de la cola: " + cola1.Extraer());
+		
+		cola1.Imprimir();
+		
+		Console.ReadKey();
+	}
+}
+
+47.- ESTRUCTURAS DINAMICAS: LISTAS GENERIACAS
+Una lista se comporta como generica cunado las inserciones y extracciones se realizan en cualquier parte de la lista.
+
+Class ListaGeneriaca{
+	class Nodo{
+		public int info;
+		public Nodo sig;
+	}
+	
+	private Nodo raiz;
+	
+	public ListaGeneriaca(){
+		raiz = null;
+	}
+	
+	void Insertar(int pos, int x){
+		if(pos <= Cantidad() + 1){
+			Nodo nuevo = new Nodo();
+			nuevo.info = x;
+			
+			if(pos == 1){
+				nuevo.sig = raiz;
+				raiz = nuevo;
+			} esle {
+				if(pos == Cantidad() + 1){
+					Nodo reco = raiz;
+					
+					while(reco.sig != null){
+						reco = reco.sig;
+					}
+					
+					reco.sig = nuevo;
+					nuevo.sig = null;
+				} else {
+					Nodo reco = raiz;
+					
+					for(int f=1; f<=pos-1; f++){
+						reco = reco.sig;
+					}
+					
+					Nodo siguiente = reco.sig;
+					reco.sig = nuevo;
+					nuevo.sig = siguiente;
+				}
+			}
+		}
+	}
+	
+	public int Extraer(int pos){
+		if(pos <= Cantidad()){
+			int informacion;
+			
+			if(pos == 1){
+				informacion = raiz.info;
+				raiz = raiz.sig;
+			} else {
+				Nodo reco;
+				reco = raiz;
+				
+				for(int f=1; f<=pos-2; f++){
+					reco = reco.sig;
+				}
+				
+				Nodo prox = reco.sig;
+				reco.sig = prox.sig;
+				informacion = prox.info;
+			}
+			
+			return informacion;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public void Borrar(int pos){
+		if(pos <= Cantidad()){
+			if(pos == 1){
+				raiz = raiz.sig;
+			} else {
+				Nodo reco;
+				reco = raiz;
+				
+				for(int f=1; f<=pos-2; f++){
+					reco = reco.sig;
+				}
+				
+				Nodo prox = reco.sig;
+				reco.sig = prox.sig;
+			}
+		}
+	}
+	
+	public void Intercambiar(int pos1, int pos2){
+		if(pos1 <= Cantidad() && pos2 <= Cantidad()){
+			Nodo reco1 = raiz;
+			
+			for(int f=1; f<pos1; f++){
+				reco1 = reco1.sig;
+			}
+			
+			Nodo reco2 = raiz;
+			
+			for(int f=1; f<pos2; f++){
+				reco2 = reco2.sig;
+			}
+			
+			int aux = reco1.sig;
+			reco1.info = reco2.info;
+			reco2.info = aux;
+		}
+	}
+	
+	public int Mayor(){
+		if(!Vacia()){
+			int may = raiz.info;
+			Nodo reco = raiz.sig;
+			
+			while(reco != null){
+				if(reco.info > nay){
+					may = reco.info;
+				}
+				
+				reco = reco.sig;
+			}
+			
+			return may;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public int PosMayor(){
+		if(!Vacia()){
+			int may = raiz.info;
+			int x = 1;
+			int pos = x;
+			
+			Nodo reco = raiz.sig;
+			
+			while(reco != null){
+				if(reco.info > may){
+					may = reco.info;
+					pos = x;
+				}
+				
+				reco = reco.sig;
+				x++;
+			}
+			
+			return pos;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public int Cantidad(){
+		int cant = 0;
+		
+		Nodo reco = raiz;
+		
+		while(reco != null){
+			reco = reco.sig;
+			cant++;
+		}
+		
+		return cant;
+	}
+	
+	public bool Ordenada(){
+		if(Cantidad() > 1){
+			Nodo reco1 = raiz;
+			Nodo reco2 = raiz.sig;
+			
+			while(reco2 != null){
+				if(reco2.info < reco1.info){
+					return false;
+				}
+				
+				reco2 = reco2.sig;
+				reco1 = reco1.sig;
+			}
+		}
+		
+		return true;
+	}
+	
+	public bool Existe(int x){
+		Nodo reco = raiz;
+		
+		while(reco != null){
+			if(reco.info == x){
+				return true;
+			}
+			
+			reco = reco.sig;
+		}
+		
+		return false;
+	}
+	
+	public bool Vacia(){
+		if(raiz == null){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void Imprimir(){
+		Nodo reco = raiz;
+		
+		while(reco != null){
+			Console.Write(reco.info + "-");
+			reco = reco.sig;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	static void Main(string[] args){
+		ListaGeneriaca lg = new ListaGenerica();
+		
+		lg.Insertar(1, 10);
+		lg.Insertar(2, 20);
+		lg.Insertar(3, 30);
+		lg.Insertar(2, 15);
+		lg.Insertar(1, 115);
+		
+		lg.Imprimir();
+		
+		Console.WriteLine("Luego de borrar el primero.");
+		
+		lg.Borrar(1);
+		lg.Imprimir();
+		
+		Console.WriteLine("Luego de extraer el segundo.");
+		
+		lg.Extraer(2);
+		lg.Imprimir();
+		
+		Console.WriteLine("Luego de intercambiar el primero con el tercero.");
+		
+		lg.Intercambiar(1, 3);
+		lg.Imprimir();
+		
+		if(ls.Existe(10)){
+			Console.WtriteLine("Se encuentra el 20 en la lista.");
+		} else {
+			Console.WriteLine("No se encuentra el 20 en la lista.");
+		}
+		
+		Console.WriteLine("La posicion del mayor es: " + lg.PosMayor());
+		
+		if(lg.Ordenada()){
+			Console.WriteLine("La lista esta ordenada de menor a mayor.");
+		} else {
+			Console.WriteLine("La lista no esta ordenada de menor a mayor.");
+		}
+		
+		Console.ReadKey();
+	}
+}
+
+48.- ESTRUCTURAS DINAMICAS: LISTAS GENERIACAS ORDENADAS
+Una lista generica es ordenada si cuando insertamos informacion en la lista queda ordenada respecto al campo info (sea de menor a mayor o a la inversa).
+
+class ListaOrdenada{
+	class Nodo{
+		public int info;
+		public Nodo sig;
+	}
+	
+	private Nodo raiz;
+	
+	public ListaOrdenada(){
+		raiz = null;
+	}
+	
+	voind Insertar(int x){
+		Nodo nuevo = new Nodo();
+		nuevo.info = x;
+		
+		if(raiz == null){
+			raiz = nuevo;
+		} else {
+			if(x < raiz.info){
+				nuevo.sig = raiz;
+				raiz = nuevo;
+			} else {
+				Nodo reco = raiz;
+				Nodo atras = raiz;
+				
+				while(x >= reco.info && reco.sig != null){
+					atras = reco;
+					reco = reco.sig;
+				}
+				
+				if(x >= reco.info){
+					reco.sig = nuevo;
+				} else {
+					nuevo.sig = reco;
+					atras.sig = nuevo;
+				}
+			}
+		}
+	}
+	
+	public void Imprimir(){
+		Nodo reco = raiz;
+		
+		while (reco != null){
+			Console.Write(reco.info + "-");
+			reco = reco.sig;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	static void Main(string[] args){
+		ListaOrdenada lo = new ListaOrdenada();
+		
+		lo.Insertar(10);
+		lo.Insertar(5);
+		lo.Insertar(7);
+		lo.Insertar(50);
+		
+		lo.Imprimir();
+		
+		Console.ReadKey();
+	}
+}
+
+49.- ESTRUCTURA DINAMICAS: LISTAS GENERICAS DOBLEMENTE ENCADENADAS
+A las listas vistas hasta el momento podemos recorrerlas solamente en una direccion (Listas simplemente encadenadas). Hay problemas donde se requiere recorrer la lista en ambas direcciones, en estos casos el empleo de listas doblemnete encadenadas es recomenddable.
+
+Como ejemplo pensemos que debemos alamacenar un meno de opciones en una lista, la opcion a seleccionar puede ser la siguiente o la anterior, podemos desplazarnos en ambas direcciones.
+
+Observemos que una lista doblemente encadenada tiene dos punteros por cada nodo, uno apunta al nodo siguiente y otro al nodo anterior.
+
+Seguimos teniendo un puntero (raiz) que tiene la direccion del primer nodo.
+
+El puntero sig del ultimo nodo igula que las listas simplemente encadenadas apunta a null, y el puntero ant del primer nodo apunta a null.
+
+Se puede plantear listas tipo pila, cola, genericas con enlace doble.
+
+Hay que tener encuenta que el requrmiento de memoria es mayor en las listas doblemente encadenadas ya que tenemos dos punteros por nodo.
+
+class ListaGenericaDoble{
+	class Nodo{
+		public int info;
+		public Nodo ant, sig;
+	}
+	
+	private Nodo raiz;
+	
+	public ListaGenericaDoble(){
+		raiz = null;
+	}
+	
+	void Insertar(int pos, int x){
+		if(pos <= Cantidad() + 1){
+			Nodo nuevo = new Nodo();
+			nuevo.info = x;
+			
+			if(pos == 1){
+				nuevo.sig = raiz;
+				
+				if(raiz != null){
+					raiz.ant = nuevo;
+				}
+				
+				raiz = nuevo/
+			} else {
+				if(pos == Cantidad() + 1){
+					Nodo reco = raiz;
+					
+					while(reco.sig != null){
+						reco = reco.sig;
+					}
+					
+					reco.sig = nuevo;
+					nuevo.ant = reco;
+					nuevo.sig = null;
+				} else {
+					Nodo reco = raiz;
+					
+					for(int f=1; f<=pos-2; f++){
+						reco = reco.sig;
+					}
+					
+					Nodo siguiente = reco.sig;
+					reco.sig = nuevo;
+					nuevo.ant = reco;
+					nuevo.sig = siguiente;
+					siguiente.ant = nuevo;
+				}
+			}
+		}
+	}
+	
+	public int Extraer(int pos){
+		if(pos <= Cantidad()){
+			int informacion;
+			
+			if(pos == 1){
+				informacion = raiz.info;
+				raiz = raiz.sig;
+				
+				if(raiz != null){
+					raiz.ant = null;
+				}
+			} else {
+				Nodo reco;
+				reco = raiz;
+				
+				for(int f=1; f<=pos - 2; f++){
+					reco = reco.sig;
+				}
+				
+				Nodo prox = reco.sig;
+				reco.sig = prox.sig;
+				
+				Nodo siguiente = prox.sig;
+				
+				if(siguiente != null){
+					siguiente.ant = reco;
+				}
+				
+				informacion = prox.info;
+			}
+			
+			return informacion;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public void Borrar(int pos){
+		if(pos <= Cantidad()){
+			if(pos == 1){
+				raiz = raiz.sig;
+				
+				if(raiz != null){
+					raiz.ant = null;
+				}
+			} else {
+				Nodo reco;
+				reco = raiz;
+				
+				for(int f=1; f<=pos-2; f++){
+					reco = reco.sig;
+				}
+				
+				Nodo prox = reco.sig;
+				prox = prox.sig;
+				reco.sig = prox;
+				
+				if(prox != null){
+					prox.ant = reco;
+				}
+			}
+		}
+	}
+	
+	public void Intercambiar(int pos1, int pos2){
+		if(pos1 <= Cantidad() && pos2 <= Cantidad()){
+			Nodo reco1 =  raiz;
+			
+			for(int f=1; f<pos1; f++){
+				reco1 = reco1.sig;
+			}
+			
+			Nodo reco2 = raiz;
+			
+			for(int f=1; f<pos2; f++){
+				reco2 = reco2.sig;
+			}
+			
+			int aux = reco1.info;
+			reco1.info = reco2.info;
+			reco2.info = aux;
+		}
+	}
+	
+	public int Mayor(){
+		if(!Vacia()){
+			int may = raiz.info;
+			Nodo reco = raiz.sig;
+			
+			while(reco != null){
+				if(reco.info > may){
+					may = reco.info;
+				}
+				
+				reco = reco.sig;
+			}
+			
+			return may;
+		} else {
+			return int MaxValue;
+		}
+	}
+	
+	public int PosMayor(){
+		if(!Vacia()){
+			int may = raiz.info;
+			int x = 1;
+			int pos = x;
+			Nodo reco = raiz.sig;
+			
+			while(reco != null){
+				if(reco.info > may){
+					may = reco.info;
+					pos = x;
+				}
+				
+				reco = reco.sig;
+				x++;
+			}
+			
+			return pos;
+		} else {
+			return int.MaxValue;
+		}
+	}
+	
+	public int cantidad(){
+		int cant = 0;
+		Nodo reco = raiz;
+		
+		while(reco != null){
+			reco = reco.sig;
+			cant++;
+		}
+		
+		return cant;
+	}
+	
+	public bool Ordenada(){
+		if(Cantidad() > 1){
+			Nodo reco1 = raiz;
+			Nodo reco2 = raiz.sig;
+			
+			while(reco2 != null){
+				if(reco2.info < reco1.info){
+					return false;
+				}
+				
+				reco2 = reco.sig;
+				reco1 = reco1.sig;
+			}
+		}
+		
+		return false;
+	}
+	
+	public bool Vacia(){
+		if(raiz == null){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void Imprimir(){
+		Nodo reco = raiz;
+		
+		while(reco != null){
+			Cosnole.Write(reco.info + "-");
+			reco = reco.sig;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	static void Main(string[] args){
+		ListaGenericaDoble lg = new ListaGeneriacaDoble();
+		
+		lg.Insertar(1 , 10);
+		lg.Insertar(2 , 20);
+		lg.Insertar(3 , 30);
+		lg.Insertar(2 , 15);
+		lg.Insertar(1 , 115);
+		lg.Imprimir();
+		
+		Cosnole.WriteLine("Luego de borrar el primero.");
+		
+		lg.Borrar(1);
+		lg.Imprimir();
+		
+		Console.WriteLine("Luego de extrar el segundo.");
+		
+		lg.Extraer(2);
+		lg.Imprimir();
+		
+		Console.WriteLine("Luego de intercambiar el primero con el tercero.");
+		
+		lg.Intercambiar(1, 3);
+		lg.Imprimir();
+		
+		if(lg.Existe(10)){
+			Console.WriteLine("Se encuentra el 20 en la lista.");
+		} else {
+			Console.WriteLine("No se encuentra el 20 en la lista.");
+		}
+		
+		Console.WriteLine("La posicion del mayor es: " + lg.PosMayor());
+		
+		if(lg.Ordenada()){
+			Console.WriteLine("La lista esta ordenada de menor a mayor.");
+		} else {
+			Console.WriteLine("La lista no esta ordenada de menor a mayor.");
+		}
+		
+		Console.ReadKey();
+	}
+}
+
+50.- ESTRUCTURAS DINAMICAS: LISTAS GENERICAS CIRCULARES
+Observemos que el puntero sig del ultimo nodo apunta al primer nodo. En este tipo de listas si avanzamos raiz no perdemos la referencia la nodo anteriror ya que es un circulo.
+
+Una lista circular puede tambien ser doblemente encadenada.
+
+El puntero ant del primer nodo apunta al ultimo nodo de la lista y el puntero sig del ultimo nodo de la lista apunta al primero.
+
+public class ListaCircular{
+	class Nodo{
+		public int info;
+		public Nodo and, sig;
+	}
+	
+	private Nodo raiz;
+	
+	public ListaCircular(){
+		raiz = null;
+	}
+	
+	public void InsertarPrimero(int x){
+		Nodo nuevo = new Nodo();
+		nuevo.info = x;
+		
+		if(raiz == null){
+			nuevo.sig = nuevo;
+			nuevo.ant = nuevo;
+			raiz = nuevo;
+		} else {
+			Nodo ultimo = raiz.ant;
+			nuevo.sig = raiz;
+			nuevo.ant = ultimo;
+			raiz.ant = nuevo;
+			ultimo.sig = nuevo;
+			raiz = nuevo;
+		}
+	}
+	
+	public void InsertarUltimo(int x){
+		Nodo nuevo = new Nodo();
+		nuevo.info = x;
+		
+		if(raiz == null){
+			nuevo.sig = nuevo;
+			nuevo.ant = nuevo;
+			raiz = nuevo;
+		} else {
+			Nodo ultimo = raiz.ant;
+			nuevo.sig = raiz;
+			nuevo.ant = ultimo;
+			raiz.ant = nuevo;
+			ultimo.sig = nuevo;
+		}
+	}
+	
+	pbulic bool Vacia(){
+		if(raiz == null){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void Imprimir(){
+		if(!Vacia()){
+			Nodo reco = raiz;
+			
+			do{
+				Console.Write(recon.info + "-");
+				reco = reco.sig;
+			} while (reco != raiz);
+			
+			Console.WriteLien();
+		}
+	}
+	
+	public int Cantidad(){
+		int cant = 0;
+		
+		if(!Vacia()){
+			Nodo reco = raiz;
+			
+			do{
+				cant++;
+				reco = reco.sig;
+			} while(reco != raiz);
+		}
+		
+		return cant;
+	}
+	
+	public void Borrar(int pos){
+		if(pos <= Cantidad()){
+			if(pos == 1){
+				if(Cantidad() == 1){
+					raiz = null;
+				} else {
+					Nodo ultimo = raiz.ant;
+					raiz = raiz.sig;
+					ultimo.sig = raiz;
+					raiz.ant = ultimo;
+				}
+			} else {
+				Nodo reco = raiz;
+				
+				for(int f=1; f<=pos-1; f++){
+					reco = reco.sig;
+				}
+				
+				Nodo anterior = reco.ant;
+				reco = reco.sig;
+				anterior.sig = reco;
+				reco.ant = anterior;
+			}
+		}
+	}
+	
+	static void Main(string[] args){
+		ListaCircular lc = new ListaCircular();
+		
+		lc.InsertarPrimero(100);
+		lc.InsertarPrimero(45);
+		lc.InsertarPrimero(12);
+		lc.InsertarPrimero(4);
+		
+		Console.WriteLine("Luego de insertar 4 nodos al principio.");
+		
+		lc.Imprimir();
+		lc.InsertarUltimo(250);
+		lc.InsertarUltimo(7);
+		
+		Console.WriteLine("Luego de insertar 2 nodos al final.");
+		
+		lc.Imprimir();
+		
+		Console.WriteLine("Cantidad de nodos: " + lc.Cantidad());
+		Console.WriteLIne("Luego de borrar el de la primer posicion: ");
+		
+		lc.Borrar(1);
+		lc.Imprimir();
+		
+		Console.WriteLine("Luego de borrar el de la cuarta posicion: ");
+		
+		lc.Borrar(4);
+		lc.Imprimir();
+		
+		Console.ReadKey();
+	}
+}
+
+
+
+
+
+
+51.- RECURSIVIDAD: CONCEPTOS BASICOS
+Primero debemos decir que la recursividad no es una estructura de datos, sino que es una tecnica de programacion que nos permite que un vloque de instrucciones se ejecute n veces. Remplaza en ocuaciones a estructuras repetitivas.
+
+Este concepto sera de gran utilidad para el capitulo de la estructura de datos tipo arbol.
+
+La recursividad es un concepto deficil de entender en principio, pero luego de analizar diferentes problemas aparecen puntos comunes.
+
+En C# los metodos pueden llamarse a si mismos. Si dentro de un metodo existe la llamada a si mismo decimos que el metodod es recursivo.
+
+Cuando un metodod se llama a si mismo, se asigna espacio en la pila para las nuevas variables locales y parametros.
+
+Al volver de una llamada recursiva, se recuperan de la pila las variables locales y los parametros antiguos y la ejecucion se reanuda en el punto de la llamada al metodo.
+
+namespace Recursividad5{
+	public class Recursividad{
+		int Factorial(int fact){
+			if(fact > 0){
+				int valor = fact * Factorial(fact - 1);
+				return valor;
+			} else {
+				return 1;
+			}
+		}
+		
+		static void Main(string[] args){
+			Recursividad re = new Recursividad();
+			int f = re.Factorial(4);
+			Console.WriteLine("El factorial de 4 es " + f);
+			Console.ReadKey();
+		}
+	}
+}
+
+56.- TIPOS DE DATOS PRIMITIVOS C#
+Los tipos de datos primitivos son aquellos que almacenan directamente el valor, a diferencia de los tipos de datos referencia que almacenan la direccion de memoria donde se almacena el datos (los objetos son tipo de datos referencia).
+
+Los tipos de datos primitivos los podemos agrupar en:
+
+Tipo enteros
+Segun el valor entero maximo a almacenar podemos elegir entre:
+int (-2,147,483,648 a 2,147,483,647) (es el que normalmente hemos elegido hasta este momento cada vez que ncesitamos alamacenar un valor entero)
+byte (0 a 255)
+sbyte (-128 a 127)
+short (-32,768 a 32,767)
+ushort (0 a 65,535)
+uint (0 a 4,294,967,295)
+long
+ulong 0 a 18,446,744,073,709,551,615)
+
+byte v1 = 200;
+sbyte v2 = -100;
+short v3 = 30000;
+ushort v4 = 60000;
+int v6 = -2000000;
+
+Valor minimo de una variable:
+byte.MinValue;
+byte.MaxValue;
+
+Tipos reales
+Podemos almacenar la parte entera y la parte fraccionaria. Disponemos tres tipos de datos reales:
+float
+double
+decimal
+
+Tipo char
+El tipo de dato primitivo char puede almacenar un caracter Unicode.
+char letra = 'A';
+
+Tipo logico
+Puede alamcenar el valor true o false:
+bool encontrado = false;
+
+Mostrar bytes de memoria de cada tipo de dato primitivo:
+sizeof(byte)
+sizeof(short)
+sizeof(int)
+sizeof(char)
+sizeof(float)
+
+57.- DEFINICION DE VARIABLES CON TIPOS IMPLICITOS
+El lenguaje C# es fuertemente tipado (es decir que toda variable en tiempo de compilacion tiene que identificar que tipo de variable se trata).
+
+Por ejemplo siempre que definimos una variable le antecemos su tipo:
+
+int x;
+double altura;
+bool existe;
+
+C# nos permite mediante la palabra clave var dfinicr e inicializar una varible y que el compilador se encargue de definir su tipo teniendo en cuenta el valor que le asignamos:
+
+var x = 10;
+
+El compilador interpreta que estamos definiendo una variable entera.
+
+var altura = 1.92;
+
+El compilador reserva espacio para una variable double.
+
+El compilador se fija del lado derecho del operador de asignacion el dato que estamos asignando y a partir de dicho valor dfine la variable.
+
+Solo las variables definidas en un metodo podemos utilizar la palabra clave var.
+
+58.- PALABRA CLAVE THIS
+Mediante la palabra clave this podemos acceder a los atributos y metodos de la clase.
+
+namespace PalabraClaveThis1{
+	class Persona {
+		private string nombre;
+		private int edad;
+		
+		public Persona(string nom, int ed){
+			this.nombre = nom;
+			this.edad = ed;
+			this.Imprimir();
+		}
+		
+		public void Imprimir(){
+			Console.WriteLine("Nombre: " + this.nombre);
+			Console.WriteLine("Edad: " + this.edad);
+			Console.ReadKey();
+		}
+		
+		static void Main(string[] args){
+			Persona persona1 = new Persona("Juan Carlos", 30);
+		}
+}
+
+59.- ESTRUCTURA REPETITIVA FOREACH
+La estructura repetitiva foreach es utilizada para recorrer colecciones de datos (por ejemplo vectores), si bien podemos utilizar de forma tradicional las otras estructuras repetitivas el empleo del foreach hacen mas natural el acceso a los elementos.
+
+private int[] sueldos = new int[5];
+sueldos[0] = 1;
+sueldos[1] = 2;
+sueldos[2] = 3;
+sueldos[3] = 4;
+sueldos[4] = 5;
+
+foreach(int s in sueldos){
+	Console.WriteLine(s);
+}
+
+La variable s almacena la primera vez el primer elemento del vector sueldos, seguidamente se ejecuta el bloque del foreach (en este caso imprimimos el contenido de la variable s). Es decir que s alamacena en cada vuelta del foreach un elemento del vector.
+
+Con la estructura foreach recorremos en forma completa el vector y en cada iteracion tenemos acceso a un elemento del vector que se copia en una variable auxiliar.
+
+60.- ESTRUCTURA CONDICIONAL SWITCH
+La estructura condicional switch remplaza en algunos casos un conjunto de if:
+
+La estructura del switch:
+
+switch(variable){
+	case valor1:
+		Instrucciones
+		break;
+	case valor2:
+		Instrucciones
+		break;
+	.
+	.
+	.
+	default:
+		Instrucciones
+		break;
+}
+
+Luego de la palabra clave switch entre parentesis indicamos una variable, con una serie de case verificamos si dicha variable alamacena un valor igual a [valor1, valor2, valor3, etc] en el caso de ser igual se ejecutan las instrucciones contenidas en dicho case.
+
+Si todos los case son falsos, luego se ejecutan las instrucciones contenidas despues de la palabra default.
+
+Es obligatorio que este entre parentesis la varaible luego de la palabra clave switch.
+
+Luego de cada case debemos indicar el valor con el que se comparara la variable (siempre debe ser un valor constante y no podemos disponer una variable luego de la palabra case.
+
+Es necesario la palabra break luego de cada bloque de instruecciones por cada case.
+
+switch (valor){
+	case 1: 
+		Console.Write("uno");
+		break;
+	case 2: 
+		Console.Write("dos");
+		break;
+	case 3: 
+		Console.Write("tres");
+		break;
+	default: 
+		Console.Write("Se ingreso un valor fuera de rango");
+		break;
+}
+
+switch (nro) {
+	case "uno":
+		Console.Write(1);
+		break;
+	case "dos":
+		Console.Write(2);
+		break;
+	case "tres":
+		Console.Write(3);
+		break;
+	default:
+		Console.Write("Debe ingresar un valor entre uno y cinco.");
+		break;
+}
+
+61.- PARAMETROS POR VALOR
+Un metodo puede recibir datos cuando lo llamamos. Si los datos llegan para ser utilizados en dicho metodo utilizamos parametros por valor.
+
+class Program{
+	public void MostrarRango(int menor, int mayor){
+		for(var x=menor; x<=mayor; x++){
+			Console.Writr(x + " ");
+		}
+	}
+	
+	static void Main(string[] args){
+ 		Program p = new Program();
+		p.MostrarRango(1, 25);
+		Console.ReadKey();
+	}
+}
+
+Como podemos ver los prarmetros se separan por coma y son utilizados en el metodo (en este metodo los dos parametros por valor se llaman menor y mayor).
+
+62.- PARAMETROS POR REFERENCIA (REF)
+Hasta ahora habiamos visto que podemos pasar datos a un metodo para que sean utilizados en el mismo. Si queremos que un metodo retorne mas de un dato es comun utilizar los parametros por referencia.
+
+La idea cantral es pasar a un metodo las direcciones de las variables para que el metodo pueda modificar los datos de las variables pasadas.
+
+class Program{
+	public void Intercambiar(ref int valor1, ref int valor2){
+		int aux = valor1;
+		valor1 = valor2;
+		valor2 = aux;
+	}
+	
+	static void Main(string[] args){
+		Program p = new Program();
+		int x1 = 10;
+		int x2 = 20;
+		
+		Console.WriteLine("Los valores antes de intercambiar son " + x1 + " " + x2);
+		p.Intercambiar(ref x1, ref x2);
+		
+		Console.WriteLine("Los valores despues de intercambiar son " + x1 + " " + x2);
+		Console.ReadKey();
+	}
+}
+
+63.- PARAMETROS POR REFERENCIA (OUT)
+Existe una segunda forma de implementar parametros por referencia utilizando la palabra out. La diferencia es que las variables que le pasamos al metodo no requieren que esten inicializadas.
+
+public void MayorMsnor(out int may, out int men){
+	.
+	.
+	.
+}
+
+static void Main(string[] args){
+	Program p = new Program();
+	int ma, me;
+	
+	p.MayorMenor(out ma, out me);
+	
+	Console.ReadKey();
+}
+
+64.- NUMERO VARIABLE DE PARAMETROS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+89.- COLECCIONES: QUEUE<T> Y STACK<T>
+En el espacio de nombres: System.Collections.Generic se encuentran las clases Queue<T> y Stack<T>.
+
+Queue<T>: Implementa el concepto de una cola (FIFO - First In First Out).
+Stack<T>: Implementa el concepto de una pila (LIFO - Last In First Out).
+
+Stack<int> pila1 = new Stack<int>();
+
+pila1.Push(10);
+pila1.Push(25);
+pila1.Pust(70);
+
+Console.WriteLine(pila1.Count);
+Console.WriteLine(pila1.Pop());
+Console.WrireLine(pila1.Count);
+
+Queue<string> cola1 = new Queue<string>();
+
+cola1.Enqueue("ana");
+cola1.Enqueue("juan");
+cola1.Enqueue("pedro");
+
+Console.WriteLine(cola1.Count);
+Console.WriteLine(cola1.Dequeue());
+Console.WriteLine(cola1.Count);
+Console.ReadKey();
+
+90.- COLECCION: LIST<T>
+La clase List<T> nos facilita administrar un conjunto de datos en forma similar a un vector por medio de subindices.
+
+Esta clase trae una serie de ventajas con respecto a los vectores:
+
+- No tenemos que definir en forma obligada el tamano inicial de la coleccion.
+- Puede crecer la coleccion a lo largo de la ejecucion del programa.
+- Podemos borrar elementos de cualquier posicion dentro de la coleccion y automaticamente se reorganiza.
+- Podemos insertar elementos en cualquier posicion dentro de la coleccion.
+- Contiene un metodo para ordenar la coleccion.
+
+Como desventaja podemos hacer notar que los tiempos de redimensionar la coleccion son costosos.
+
+private static bool BorrarSiCumple(int valor){
+	if(valor > 100)
+		return true;
+	else
+		return false;
+}
+
+List<int> lista1 = new List<int>();
+
+Console.WriteLine(lista1.Count);
+
+lista1.Add(10);
+lista1.Add(20);
+lista1.Add(30);
+
+for(int x=0; x<lista1.Count; x++){
+	Console.Write(lista[x] + "-");
+}
+
+foreach(var elemento in lista1){
+	Console.Write(elemento + "-");
+}
+
+Console.WriteLine();
+
+lista1.Insert(0, 100);
+
+lista1.Remove(10);
+
+lista1.RemoveAt(0);
+
+lista1.RemoveAll(BorrarSiCumple);
+
+lista1.RemoveRange(1, 3);
+
+lista1.Sort();
+
+lista1.Clear();
+
+91.- COLECCION: LINKEDLIST<T>
+La clase LinkedList<T> nos facilita administrar una lista doblemente encadenada. A diferencia de la clase List<T> es mas eficiente cuando tenemos que insertar y borrar elementos del medio de la coleccion.
+
+Hay que tener en cuenta que con la clase List<T> si insertamos un elemento en la primer posicion se debe desplazar todos los elmentos una posicion hacia adelante, en cambio con la clase LinkedList<T> solo se modifican punteros.
+
+Como desventaja no podremos acceder a los elementos por medio de un subindice como lo hacemos con la clase List<T> y deberemos ecorrerla mediante una estructura repetitiva.
+
+class Program{
+	private static void ImprimirLista(LinkedList<int> lista){
+		LinkedListNode<int> reco = lista.First;
+		
+		while(reco != null){
+			Console.Write(reco.Value + "-");
+			reco = reco.Nexto;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	private static void ImprimirUltimoAlPrimero(LinkedList<int> lista){
+		LinkedListNode<int> reco = lista.Last;
+		
+		while(reco != null){
+			Console.Write(reco.Value + "-");
+			reco = reco.Previous;
+		}
+		
+		Console.WriteLine();
+	}
+	
+	static void Main(string[] args){
+		LinkedList<int> lista1 = new LinkedList<int>();
+		
+		lista1.AddFirst(30);
+		lista1.AddFirst(20);
+		lista1.AddFirst(10);
+		lista1.AddFirst(5);
+		lista1.AddLast(1);
+		
+		ImprimirLista(lista1);
+		
+		int countList = lista1.Count;
+		
+		ImprimirUltimaAlPrimero(lista1);
+		
+		Console.ReadKey();
+	}
+}
+
+92.- COLECCION: DICTIONARY<TKEY, TVALUE>
+Esta clase Dictionary<TKey, TValue> nos permite almacenar elementos asociando a cada clave un valor.
+
+Para cada clave tenemos un valor asociado. Podemos despues buscar facilmente un valor para una determinada clave. Las claves en el diccionario no pueden repetirse.
+
+Algunos ejemplos donde podriamos usar un diccionario:
+- Guardar en la clave las extensiones de archivos y en el valor los nombres de archivos que los pueden abrir.
+- En una agenda podemos guardar como 'clave' la fecha y hora y las actividades en el 'valor'.
+
+class Program{
+	static void Main(string[] args){
+		Dictionary<string, string> dicc1 = new Dictionary<string, string>();
+		
+		dicc1["rojo"] = "red";
+		dicc1["verde"] = "green";
+		dicc1["azul"] = "blue";
+		dicc1["blanco"] = "white";
+		
+		foreach(KeyValuePair<string, string> elemento in dicc1){
+			Console.WriteLine(elemento.Key + " = " + elemento.Value);
+		}
+		
+		if(dicc1.ContainsKey("rojo"){
+			Console.WriteLine(dicc1["rojo"]);
+		}
+		
+		dicc1.Remove("rojo");
+		
+		if(dicc1.ContainsKey("rojo")){
+			Console.WriteLine(dicc1["rojo"]);
+		} else {
+			Console.WriteLine("No existe la clave rojo");
+		}
+		
+		Console.ReadKey();
+	}
+}
+
+=============================================================================
+class Producto{
+	public string Descripcion { get; set; }
+	public float Precio { get; set; }
+}
+
+class Program{
+	static void Main(string[] args){
+		Dictionary<int, Productos> articulos = new Dictionary<int, Productos>();
+		
+		articulos[1] = new Producto { Descripcion = "Papas", Precio = 12.67f };
+		articulos[2] = new Producto { Descripcion = "Manzanas", Precio = 20f };
+		articulos[3] = new Producto { Descripcion = "Naranjas", Precio = 25f };
+		
+		foreach(KeyValuePair<int, Producto> art in articulos){
+			Console.WriteLine(art.Key + "  " + art.Value.Descripcion + "  " + art.Value.Precio);
+		}
+		
+		Console.Write("Ingrese el codigo de proucto a consultar: ");
+		
+		int codigo = int.Parse(Console.ReadLine());
+		
+		if(articulos.ConstainsKwy(codigo)){
+			Console.WriteLine(articulos[codigo].Descripcion + " " + articulos[codigo].Precio);
+		} else {
+			Console.WriteLine("No existe un articulu con dicho codigo.");
+		}
+		
+		Console.ReadKey();
+	}
+}
+
+93.- DELEGADOS
+Un delegado almacena la referencia de una metodo con una estructura definida (en cuando al tipo de dato que devuelve y los tipos y cantidad de parametros).
+
+Un ejemplo de sintaxis para declarar un delegado:
+
+delegate void delegadoA(int x, int y);
+
+namespace Delegados1{
+	delegate int Operar(int x1, int x2);
+	
+	class Program{
+		public int Sumar(int x, int y){
+			return x+y;
+		}
+		
+		public int Restar(int x, int y){
+			return x-y;
+		}
+		
+		static void Main(string[] args({
+			Program p = new Program();
+			
+			Console.WriteLine(p.Sumar(10, 5));
+			Console.WriteLine(p.Restar(10, 5));
+			
+			Operar delegado=p.Sumar;
+			Console.WriteLine(delegado(10, 5));
+			
+			Operar delegado=p.Restar;
+			Console.WriteLine(delegado(10, 5));
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+En este problema no tiene ninguna ventaja definir un delegado y llamar a los metodos Sumar y Restar a traves de delegados. Hemos presentado este problema con el objetivo de comenzar a entender la sintaxis de como se declara un delegado y que almacena una variable de este tipo. A medida que avancemos veremos las ventajas de delegados cuando definamos lambdas y entremos al tema de LINQ.
+
+Parametros de tipo delegado
+Un metodo puede recibir como parametro un delegado y a partir de esto llamar al metodo que almacena el delegado.
+
+namespace Delegados1{
+	delegate int Operar(int x1, int x2);
+	
+	class Program{
+		public int Sumar(int x, int y){
+			return x+y;
+		}
+		
+		public int Restar(int x, int y){
+			return x-y;
+		}
+		
+		public void operacion(Operador d, int x, int y){
+			Console.WriteLine(d(10, 5));
+		}
+		
+		static void Main(string[] args({
+			Program p = new Program();
+			
+			p.operacion(p.Sumar, 10, 5);
+			p.operacion(p.Restar, 10, 5);
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+94.- EXPRESIONES LAMBDA
+Una expresion lambda es una funcion anonima que normamente se la utiliza para enviarla como parametro a un metodo para ser evaluada en el mismo.
+
+namespace Lambda1{
+	delegate int Operacion(int x1, int x2);
+	
+	class Program{
+		public static int Operar(int x1, int x2, Operacion delegado){
+			return delegado(x1, x2);
+		}
+		
+		static void Main(string[] args){
+			var suma = Program.Operar(10, 3, (x, y) => {return x+y;});
+			
+			var resta = Program.Operar(10, 3, (x, y) => {return x-y;});
+			
+			var elevadoOctava = Program.Operar(2, 8, (x, y) => {
+				var valor = x;
+				for(int f=1; f<y; f++)
+					valor=valor*x;
+				return valo;
+			});
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+Acotaciones
+Cuando el algoritmo de una expresion lambda tiene una sola instruccion lo mas comun es no disponer las llaves ni la palabra clave return (esto hace nuestra expresion lambda mas concisa).
+
+var suma = Program.Operar(10, 3, (x, y) => x+y);
+
+var resta = Program.Operar(10, 3, (x, y) => x-y);
+
+El orden temporal de ejecucion de metodos lo podemos resumir con 4 pasos:
+1.- Llamamos al metodo Operar y le enviamos dos enteros y una expresion lambda.
+2.- Desde el metodo Operar llamamos a la fucnion anonima y le enviamos dos enteros, que son los recibidos en el metodo Operar.
+3.- Se ejecuta el algoritmo de la funcion anonima (suma los parametros x e y y los retorna.
+4.- Finaliza la ejecucion del metodo Operar retornando el valor devuelto en la llamada al delegado.
+
+namespace Lambda2{
+	public delegate bool Comparacion(int elemento);
+	
+	public class Estudiante{
+		public String Nombre { get; set; }
+		public int Nota { get; set; }
+	}
+	
+	public class Curso{
+		private Estudiante[] vec = new Estudiante[5];
+		
+		public void Cargar(int pos, Estudiante est){
+			vec[pos] = est;
+		}
+		
+		public void ImprimirTodo(){
+			foreach(var elemento in vec)
+				Console.WriteLine("Nombre {0} Nota: {1}", elemento.Nombre, elemento.Nota);
+		}
+		
+		public void ImprimirSi(Comparacion compara){
+			foreach(var elemento in vec)
+				if(compara(elemento.Nota))
+					Console.WriteLine("Nombre {0} Nota: {1}", elemento.Nombre, elemento.Nota);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Curso curso1 = new Curso();
+			
+			curso1.Cargar(0, new Estudiante { Nombre="jose", Nota=9 });
+			
+			curso1.ImprimirTodo();
+			
+			curso1.ImprimirSi((nota) => nota >= 7);
+			
+			curso1.ImprimirSi((nota) => nota == 2);
+			
+			curso1.ImprimirSi((nota) => true);
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+Acotaciones
+El lenguaje C# nos permite eliminar los parentesis cuando la expresion lambda tiene un solo parametro, luego el codigo queda con una sintaxis mas concisa:
+
+curso1.ImprimirSi(nota => nota >= 7);
+curso1.ImprimirSi(nota => nota == 2);
+curso1.ImprimirSi(nota => true);
+
+95.- EXPRESIONES LAMBDA: ACCESO A LAS VARIABLES EXTERNAS A LA EXPRESION LAMBDA
+Hemos visto en conceptos anteriores que una expresion lambda es cuando envialos a un metodo una fucnion anonima.
+
+Dentro de la funcion lambda podemos acceder a los parametros de la misma si los tiene, definir variables locales y veremos ahora que podemos acceder a variables externas a la expresion lambda definida.
+
+namespace Lambda4{
+	public delegate void Retorna(int elemento);
+	
+	public class Vector{
+		private int[] vec = {10, 23, 200, 12, 75};
+		
+		public void Recorrer(Retorna retorna){
+			foreach(var elemento in vec)
+				retorna (elemento);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Vector v = new Vector();
+			
+			var multiplos3 = 0;
+			
+			v.Recorrer(elemento => {
+				if(elemento % 3 == 0)
+					multiplos3++;
+			});
+			
+			var suma = 0;
+			
+			v.Recorrer(elemento => {
+				if(elemento > 50)
+					suma += elemeto;
+			});
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+96.- METODOS DE EXTENSION
+Otra de las caracteristicas del lenguaje C# es el concepto de metodos de extension.
+
+Mediante los metodos de extension C# nos permite agregar otros metodos a un clase existente sin tener que heredar de la misma.
+
+namespace MedotosExtesnion1{
+	public static class Extesion{
+		public static string MitadPrimera(this string cadena){
+			return cadena.Substring(0, cadena.Length/2);
+		}
+		
+		public static string MitadSegunda(this string cadena){
+			return cadena.Substring(cadena.Length/2, cadena.Length/2);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			string cadena1 = "Viento";
+			Console.WriteLine(cadena1.MitadPrimera());
+			Console.WriteLine(cadena1.MitadSegunda());
+			Console.ReadKey();
+		}
+	}
+}
+
+namespace MedotosExtesnion2{
+	public static class Extesion{
+		public static void Imprimir<T>(this List<T> lista){
+			foreach(var elemento in lista)
+				Console.Write("{0} ", elemento);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			List<int> lista1 = new List<int>();
+			
+			lista1.Add(10);
+			
+			lista1.Imprimir();
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+namespace MedotosExtesnion1{
+	public static class Extesion{
+		public static void ImprimirHasta(this int valor, int fin){
+			for(var inicio=valor; inicio<=fin; inicio++)
+				Console.Write("{0} ", inicio);
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			10.ImprimirHasta(30);
+			
+			Console.WriteLine();
+			
+			int va=100;
+			
+			va.ImprimirHasta(150);
+				
+			Console.ReadKey();
+		}
+	}
+}
+
+97.- INTERPOLACION DE STRING EN C# CON EL MODIFICADOR $
+Hay una segunda forma de generar un string evitando utilizar sucesivas concatenaciones con el operador +, esto los logra con la interpolacion de string.
+
+Veamos con un simple ejemplo cual es la sintaxis para definir cadenas que pueden sustituir variable y expresiones.
+
+int valor1 = 1;
+int valor2 = 2;
+int suma = valor1+valor2;
+
+Console.WriteLine($"La suma de {valor1} + {valor2} es {suma}");
+
+Llamada a metodos
+Dentro de un string con interpolacion podemos llamar a un metodo, siempre y cuando retorne un valor:
+
+public static int Mayor(int v1, int v2){
+	if(v1 > v2)
+		return v1;
+	else
+		return v2;
+}
+
+static void Main(string[] args){
+	int valor1 = 1;
+	int valor2 = 2;
+	Console.WriteLine($"El mayor entre {valor1} y {valor2} es {Mayor(valor1, valor2)});
+	Console.ReadKey();
+}
+
+Alineacion
+Cuando se produce la interpolacion de variables y expresiones podemos indicar la alineacion del resultado a izquierda o derecha.
+
+Console.WriteLine($"{alumnos[f], -20} {notas[f], 2}");
+
+Mediante un valor negativo indicamos que la alimeacion es a la izquierda y el valor indica cuanto espacio se reserva: {alumnos[f], -20}
+
+Luego para la alineacion a derecha debemos indicar un valor positivo: {notas[f], 2}
+
+Formato de string
+Segun el tipo de dato podemos especificar un formato al dato que se interpolara.
+
+La estructura completa cuando especificamos entre llaves la variable o expresion a sustituir es:
+
+{<variable o expresion>[,<alineacion>][:<formato del string>]}
+
+Tanto la alineacion como el formato de string son parametros opcionales.
+
+DateTime fecha = DateTime.Now;
+Console.WriteLine($"La fecha y hora actual es {fecha:dd MM yyyy HH:mm:ss}");
+
+double precio = 10.252;
+Console.WriteLine($"La variable precio {precio:.##} con 2 decimales");
+Console.WriteLine($"La variable precio {precio:E} con formato exponencial");
+
+byte color=255;
+Console.WriteLine($"La variable color {color:X} con formato exadecimal");
+
+Como vemos debemos indicar luego de los dos puntos el formato a aplicar a la variable o expresion, por ejemplo para mostrar el valor en formato hexadecimal debemos disponer el caracter 'X'.
+
+98.- CREAR STRING DE MULTIPLES LINEAS CON EL MODIFICADOR @
+Normalmente cuando definimos una variable de tipo string e inmediatamente la inicializamos lo hacemos en una unica linea:
+
+string nombre = "Juan Carlos";
+
+Sila cadena es grande normamente podemos utilizar el operador + para conacatenar cada uno de los string:
+
+string sql = "select codigo, descripcion, precio " +
+" from articulos " +
+" where precio>10";
+
+Pero eventualmente podemos utilizar el modificador @ previo a las comillas dobles y disponer un string de multiples lineas sin tener que concatenar:
+
+string sql = @"select codigo, descripcion, precio
+from articulos
+where precio>10";
+
+Cuando antecedemos el caracter @ luego significa que el string estara constituido por multiples lineas, los saltos de linea luefo estan presentes en el string almacenado.
+
+Interpolacion de string con strings de multiples lineas
+Podemos utilizar la interpolacion de string si los mismos tienen multiples lineas. Es importante disponer el modificador '$' previo al modificar '@' si no disponemos de la version C# 8 o superiores:
+
+string resultado = $@"La suma de {numero1} y {numero2} es {numero1 + numero2}
+La resta de {numero1} y {numero2} es {numero1 - numero2}";
+
+Console.WriteLine(resultado);
+
+99.- EXCEPCIONES EN C# - TRY/CATCH
+C# dispone de un mecanismo de capturar (catch) ciertos tipos de errores que solo pueden ser detectados en tiempo de ejecucion del programa.
+
+Los ejemplos mas comunes que podemos nombrar de excepciones:
+
+- Tratar de convertir a entero un string que no contine valores numericos.
+- Tratar de dividir por cero.
+- Abrir un archivo de texto inexistente o que se encuentra bloqueado por otra aplicacion.
+- Conectar con un sevidor de bases de datos que no se encuentra activo.
+- Acceder a subindices de vectores y matrices fuera de rango.
+
+La captura de excepciones nos permite crear programas mucho mas robustos  tolerante a fallas que ocurren en escasas situaciones, pero en caso que se presenten disponemo de un algoritmo alternativo para reaccionar a dicha situacion evitando que el programa finalice su ejecucion.
+
+try{
+	Console.Write("Ingrese un valor: ");
+	
+	string linea = Console.ReadLine();
+	var num = int.Parse(linea);
+	var cuadrado = num * num;
+	
+	Console.WriteLine($"El cuadrado de {num} es {cuadrado}");
+} catch(FormatException e) {
+	Console.Write("Debe ingresar obligatoriamente un numero entero.");
+}
+
+100.- EXCEPTIONES - MULTIPLES CATCH PARA UN TRY
+Podemos definir varios bloques cthc para un solo bloque try. Es comun que en un bloque try haya mas de un metodo que pueda elevar exceptiones o inclusive un mismo metod puede generar mas de un tipo de excepcion.
+
+Luego podemos disponer una sintaxis de try/catch:
+
+try{
+	[instrucciones 1]
+} catch([excepcion 1]) {
+	[instrucciones 2]
+} catch([excepcion 2]) {
+	[instrucciones 3]
+} catch([excepcion n]) {
+	[instrucciones n]
+}
+
+try {
+	Console.Write("Ingrese primer valor: ");
+	var num1 = int.Parse(Console.ReadLine());
+	
+	Console.Write("Ingrese segundo valor: ");
+	var num2 = int.Parse(Console.ReadLine());
+	
+	var resu = num1/num2;
+	Cosnle.WriteLine($"La division {num1} respecto a {num2} es {resu}");
+} catch(FormatException e) {
+	Console.Write("Debe ingresar obligatoriamente numeros enteros.");
+} catch(DivideByZeroException e) {
+	Console.Write("No se puede dividir por cero.");
+}
+
+101.- EXCEPCIONES - CLASE PADRE EXCEPTION
+El API de .Net define numerosas eceptiones, algunas de als que vimos en conceptos anteriores son: FormatException, IndexOutOfRangeException, DivideByZeroException, etc.
+
+Todas estas clases tienen en comun que heredan directamente o indirectamente de la clase Exception.
+
+try{
+	Console.Write("Ingrese un valor: ");
+	string linea = Console.ReadLine();
+	var num = int.Parse(linea);
+	
+	var cuadraro = num * num;
+	
+	Console.WriteLine($"El cuadrardo de {sum} es {cuadrado}");
+} catch(FormatException e) {
+	Console.WriteLine($"Propiedad Message: {e.Message}\n");
+	Console.WriteLine($"Propiedad StackTrade: {e.StackTrade}\n");
+	Console.WriteLine($"Propiedad Source: {e.Source}\n");
+	Console.WriteLine($"Propiedad TargetSize: {e.TargetSize}");
+}
+
+Propiedades
+Message: Esta propiedad retorna la descripcion de la excepcion generada. Es una propiedad de solo lectura.
+StackTrade: Esta propiedad tambien de solo lectura contine una cadena que identifica la secuencia de llamada que desencadenaron la excepcion. Esta propiedad es util durante la depuracion, ya que disponemos del numero de linea del metodo que genera la excepcion y toda la pila de llamadas a metodos internos.
+Source: Esta propiedad tiene el nombre del ensamblaje, o el objeto, que lanzo la excepcion.
+TargetSize: Nos retorna el metodo que disparo la excepcion.
+
+102.- EXCEPCIONES - BLOQUE FINALLY
+El manejo de exceptiones en C# puede incluir otro bloque llamado 'finally'"
+
+try{
+	[instucciones 1]
+} catch([excepcion 1]) {
+	[instrucciones 2]
+} finally {
+	[instrucciones 3]
+}
+
+El objetivo de este bloque es liberar recursos que se solicitan en el bloque try. El bloque finally se ejecuta siempr, inclusive si se genera la captura de una excepcion.
+
+Los recursos mas comunes que se deben liberar son las conexciones a base de datos, uso de arcvhivos y conexiones de red. Un recurso que no se libera inpide que otro programa lo pueda utilizar. Al disponer la liberacion de recursos en el bloque 'finally' nos aseguramos que todo recurso se liberara, inclusive aunque se dispare una excepcion.
+
+Tener en cuenta que si no se disparan ninguna excepcion en un bloque try luego de esto se ejecuta el bloque 'finally'.
+
+El bloque finally es opcional y en el caso de estar presente se coloca despues del ultimo bloque catch.
+
+StreamWriter txt = null;
+
+try{
+	txt = new StreamWriter("datos.txt");
+	txt.WriteLine("Linea 1");
+	txt.WriteLIne("Linea 2");
+} catch(IOException e) {
+	Console.WriteLine(e.Message);
+} finally {
+	if(txt != null)
+		txt.Close();
+}
+
+103.- EXCEPCIONES - LANZAR UNA EXCEPCION MEDIANTE COMANDO THROW
+Ahora veremos como podemos lanzar una excepcion para que sea eventualmente capturada posteriormente.
+
+Hay que definir con juicio que metodos de uan clase deben lanzar excepciones cuando el dato es incorrecto debido que luego se hace mas dificil consumir dicho metodo.
+
+Aquellas partes criticas de nuestras clases pueden lanzar exceptiones para que sean mas robustas. Por ejemplo si tenemos una clase 'ClienteBanco' y queremos controlar que nunca pueda savar mas dinero del que tiene depositado, el metodo extraer puede lanzar una excepcion evitando que quede en negativo el monto del cliente.
+
+namespace PruebaExcepcion{
+	public class PersonaAdulta{
+		public string Nombre { get; set; }
+		
+		private int edad;
+		
+		public int Edad{
+			get{
+				return edad;
+			}
+			set {
+				if (value < 18)
+					throw new Exception($"No es adulta la persona {Nombre} porque tiene {value} anios.");
+				edad = value;
+			}
+		}
+		
+		public PersonaAdulta(string nombre, int edad){
+			Nombre = nombre;
+			Edad = edad;
+		}
+		
+		public void imprimir(){
+			Console.WriteLine($"{Nomber} - {Edad}");
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			try{
+				PersonaAdulta persona1 = new PersonaAdulta("Ana", 50);
+				persona1.imprimir();
+				
+				PersonaAdulta persona2 = new PersonaAdulta("Juan", 13);
+				persona2.imprimir();
+			} catch (Exception ex) [
+				Console.WriteLine(ex.Message);
+			}
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+104.- EXCEPCIONES PROPIAS
+La libreria .Net proporciona gran cantidad de clases que manejan casi cualquier tipo de excepcion, pero no estamos obligados a utilizar solo esas clases sino que podemos crear nuestras propias excepciones.
+
+Si queremos crear una excepcion deberemos heredar de Exception o de alguna de sus subclases.
+
+namespace PruebaExcepcion{
+	public class PilaVaciaException : Exception{
+		public PilaVaciaException(String mensaje) : base("Problema: " + mensaje){}
+	}
+	
+	public class Pila{
+		class Nodo{
+			public int info;
+			public Nodo sig;
+		}
+		
+		private Nodo raiz;
+		
+		public Pila(){
+			raiz = null;
+		}
+		
+		public void Insertar(int x){
+			Nodo nuebo;
+			nuevo = new Nodo();
+			nuevo.info = x;
+			
+			if(raiz == null){
+				nuevo.sig = null;
+				raiz = nuevo;
+			} else {
+				nuevo.sig = raiz;
+				raiz = nuevo;
+			}
+		}
+		
+		public int Extraer(){
+			if(raiz != null){
+				int informacion = raiz.info;
+				raiz = raiz.sig;
+				return informacion;
+			} else {
+				throw new PilaVaciaException("No hay mas elementos en la pila");
+			}
+		}
+		
+		public bool Vacia(){
+			return raiz == null;
+		}
+		
+		public void Imprimir(){
+			Nodo reco = raiz;
+			Console.WriteLine("Listado de todos los elementos de la pila.");
+			
+			while(reco != null){
+				Console.Write(reco.info + "-");
+				reco = reco.sig;
+			}
+			
+			Console.WriteLine();
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Pila pila1 = new Pila();
+			
+			pila1.Insertar(10);
+			
+			try{
+				while(!pila1.Vacia())
+					Console.WriteLine("Extraemos de la pila: " + pila1.Extraer());
+				Console.WriteLine("Extraemos de la pila: " + pila1.Extraer());				
+			} catch (PilaVaciaException ex) {
+				Console.WriteLine(ex.Message);
+			}
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+105.- NAMESPACE
+Namespace propio
+
+En el proyecto se crea una clase.
+
+A esta clase se le quita el nombre del namespace por default y se le agrega el nombre deseado.
+
+En este namespace se agregan las clases que se quiere que pertenescan al nuevo namespace.
+
+namespace minamespace{
+	class Clase1{
+		public Clase1(){
+		
+		}
+		
+	}
+	
+	class Clase2{
+		public Clase2(){
+		
+		}
+	}
+	
+}
+
+Para que en el proyecto se puedan utilizar el nuevo namespace y sus clases se debe agregar en cada clase lo siguiente:
+
+using minamespace;
+
+Tambien se puede utilizar el Nombre totalmente calificado
+
+minamespace.Clase2 obj2 = new minamespace.Clase2();
+
+namespace otronamespace{
+	class Clase1{
+		public Clase1(){
+		
+		}
+		
+	}
+	
+	class Clase2{
+		public Clase2(){
+		
+		}
+	}
+	
+}
+
+Para evitar el conflicto de nombres repetidos de clases entre namespaces se puede utilizar el nombre totalmente calificado:
+
+minamespace.Clase1 obj1 = new minamespace.Clase1();
+otronamespace.Clase1 obj2 = new otronamespace.Clase1();
+
+Tambien se pueden utilizar los alias:
+
+using principal = minamespace.Clase1;
+using secundaria = otronamespace.Clase1;
+
+principla obj1 = new principal();
+secundaria obj2 = new secundaria();
+
+Anidamiento de namespace
+namespace primernivel{
+	namespace segundoniveluno{
+		class Clase1{
+			public Clase1(){
+		
+			}
+		
+		}
+	
+		class Clase2{
+			public Clase2(){
+		
+			}
+		}	
+	}
+	
+	namespace segundoniveldos{
+		class Clase1{
+			public Clase1(){
+		
+			}
+		
+		}
+	
+		class Clase2{
+			public Clase2(){
+		
+			}
+		}	
+	}
+}
+
+using primernivel.segundoniveluno;
+using otras = primernivel.segundoniveldos;
+
+otras.Clase1 obj1 = new otras.Clase1();

@@ -74,6 +74,7 @@
 103.- EXCEPCIONES - LANZAR UNA EXCEPCION MEDIANTE COMANDO THROW
 104.- EXCEPCIONES PROPIAS
 105.- NAMESPACE
+106.- CREAR BIBLIOTECA O LIBRERIA
 
 ==================================================================================================================
 
@@ -3781,3 +3782,61 @@ using primernivel.segundoniveluno;
 using otras = primernivel.segundoniveldos;
 
 otras.Clase1 obj1 = new otras.Clase1();
+
+106.- CREAR BIBLIOTECA O LIBRERIA
+Crear biblioteca.
+
+Crear nuevo proyecto
+Seleccionar Biblioteca de clases (.NET Framework)
+Nombre Aritmetica
+
+namespace Aritmetica{
+	public class MisMates{
+		pirvate double a;
+		pirvate double b;
+		pirvate double r;
+		
+		public MisMates(double pA, double pB){
+			a = pA;
+			b = pB;
+			r = 0;
+		}
+		
+		public double R { get { return r; } }
+		
+		public double suma(){
+			r = a + b;
+			return r;
+		}
+	}
+}
+
+Este tipo de proyectos no tienen la clase Program por que no se pueden ejecutar. Con Visual Studio se puede compilar para que este nos entregue un archivo dll.
+
+El archivo se encontrara en la carpeta Debug de la carpeta bin del proyecto.
+
+Aritmetica.dll
+
+Hacer referencia a la biblioteca.
+Crear un proyecto nuevo o abrir el proyecto donde se quiera utilizar el nuevo dll.
+
+Importar el dll
+En el proyecto buscar la carpeta Referencias.
+Seleccionarla.
+Clic derecho.
+Seleccionar la opcion Agregar referencia...
+En la ventana que aparesca buscar el boton Examinar...
+Buscar el dll.
+Seleccionarlo.
+Clic en el boton Agregar.
+En la clase que se vaya a utilizar agregar el codigo:
+using Aritmetica;
+
+Uso de la clase contenida en la biblioteca.
+MisMates mates = new MisMates(5, 3);
+
+double resultado = mates.suma();
+Console.WriteLine("El resultado de la suma es {0}", resultado);
+
+mates.suma();
+Console.WriteLine("El resultado de la suma es {0}", mates.R);

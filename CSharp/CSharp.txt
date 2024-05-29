@@ -47,8 +47,16 @@
 72.- ENUMERACIONES
 73.- SOBRECARGA DE OPERADORES
 74.- INDIZADORES
+78.- SQLCONNECTION: CONEXION CON EL SQL SERVER
+79.- SQLCOMMAND (INSERT): INSERTAR REGISTRO
+80.- SQLCOMMAND (SELECT): LISTAR REGISTROS
+81.- SQLCOMMAND (SELECT): CONSULTAR REGISTROS
+82.- SQLCOMMAND (DELETE): BORRAR REGISTRO
+83.- SQLCOMMAND (UPDATE): MODIFICAR REGISTRO
+84.- SQLCOMMAND: PASANDO PARAMETROS 
 85.- DEFINICION DE PROPIEDADES AUTOMATICAS
-
+86.- CREANDO UN OBJETO E INICIANDO SUS PROPIEDADES INMEDIATAMENTE
+87.- CLASES GENERICAS
 89.- COLECCIONES: QUEUE<T> Y STACK<T>
 90.- COLECCION: LIST<T>
 91.- COLECCION: LINKEDLIST<T>
@@ -68,6 +76,7 @@
 105.- NAMESPACE
 
 ==================================================================================================================
+
 3.- CODIFICACION DEL DIAGRAMA DE FLUJO
 Estructura basica
 
@@ -2523,12 +2532,354 @@ namespace indezador{
 	}
 }
 
+78.- SQLCONNECTION: CONEXION CON EL SQL SERVER
+Desde .Nwt disponemos de una condjuento de clases para conectarnos y pedor al SQL Server que ejecute comandos.
+
+El primer paso es conectarnos con nuestro servidor de base de datos utiliazando Microsoft SQL Server Management Studio.
+
+Para conectarnos con el servidor y seleccionar una base de datos debemos utilizar la clase SqlConnection:
+
+SqlConnection conexion = new SqlConnection("server=myserver; database=mydb; integrated security=true");
+
+El string que le pasamos al constructor del SqlConnection le indicamos como primer dato el nombre de nuestro servidor, en us maquina lo puede ubicar cuando arranca el SQL Server Management Studio.
+
+Algo importante si su nombre incluye la barra \ luego disponga dos seguidas ya que C# esta barra es un cracter de control y por lo tanto para disponer una debemos disponer \\.
+
+El segundo dato que se le pasa es el nombre de la base de datos con la que nos comunicaremos, en nuestro caso creamos previamente la base de datos y finalmente el ultimo dato obligatorio es indicar integrated security = true, esto hace que se utilice el usuario propio de Windows y no necesitemos por el momento crear otros ususarios propios de SQL Server.
+
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+
+conexion.Open();
+
+conexion.Close();
+
+79.- SQLCOMMAND (INSERT): INSERTAR REGISTRO
+Vimos en el concepto anterior como conectarnos al servidor de SQL Server y seleccionar una vase de datos. Veremos ahora como pedir que el SQL Server ejecute un comando INSERT.
+
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+
+string cadena = "INSERT INTO articulos(descripcion, precio) VALUES ('Producto 1', 24.50)";
+
+SqlCommand comando = new SqlCommand(cadena, conexcion);
+
+comando.ExecuteNonQuery();
+
+conexion.Close();
+
+80.- SQLCOMMAND (SELECT): LISTAR REGISTROS
+Vimos el concepto anterior como enviar datos al servidror para que se efectue un insert en una tabla.
+
+Veremos ahora como recuperar los datos alamacenados en una tabla para mostrarlos en pantalla.
+
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+
+string cadena = "SELECT codigo, descripcion, precio FROM articulos";
+
+SqlCommand comando = new SqlCommand(cadena, conexion);
+
+SqlDataReader registros = comando.ExecuteReader();
+
+while(registros.Read()){
+	Console.WriteLine(registros["codigo"].ToString());
+	Console.WriteLine(registros["descripcion"].ToString());
+	Console.WriteLine(registros["precio"].ToString());
+}
+
+conexion.Close();
+
+81.- SQLCOMMAND (SELECT): CONSULTAR REGISTROS
+En el concepto anterior recuperamos todos los registros de una tabla. Ahora veremos como podemos rescatar uno en particular.
+
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+string cadena = "SELECT codigo, descripcion, precio FROM articulos WHERE codigo = 123";
+SqlCommand comando = new SqlCommand(cadena, conexion);
+SqlDataReader registros = comando.ExecuteReader();
+
+if(registros.Read()){
+	Console.WriteLine(registros["codigo"].ToString());
+	Console.WriteLine(registros["descripcion"].ToString());
+	Console.WriteLine(registros["precio"].ToString());
+} else {
+	Console.WriteLine("No existe un articulo con el codigo ingresado.");
+}
+
+conexion.Close();
+
+82.- SQLCOMMAND (DELETE): BORRAR REGISTRO
+Otra de las actividades comunes con los datos es la elimnacion. Para eliminar registros de una tabla debemos emplear el comando SQL Delete.
+
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+string cadena = "DELETE FROM articulos WHERE codigo = 123";
+SqlCommand comando = new SqlCommand(cadena, conexion);
+
+int cant;
+cant = comando.ExecuteNonQuery();
+
+if(cant == 1){
+	Console.WriteLine("Se borro el articulo.");
+} else {
+	Console.WriteLine("No existe un articulo con el codigo ingresado.");
+}
+
+conexion.Close();
+
+83.- SQLCOMMAND (UPDATE): MODIFICAR REGISTRO
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+string cadena = "UPDATE articulos SET descripcion = 'Nueva descripcion' WHERE codigo = 123";
+SqlCommand comando = new SqlCommand(cadena, conexion);
+
+int cant;
+cant = comando.ExecuteNonQuery();
+
+if(cant == 1){
+	Console.WriteLine("Se modificarion los datos del articulo.");
+} else {
+	Console.WriteLine("No existe un articulo con el codigo ingresado.");
+}
+
+conexion.Close();
+
+84.- SQLCOMMAND: PASANDO PARAMETROS
+Hemos visto que podemos formar un comando SQL para enviarlo a SQL Server generando un string concatenando los datos que ingresa el operador por teclado.
+
+Esta metodologia tiene el inconveniente cuando hay que elaborar comandos SQL con muchos campos (imaginemos que tenemos que elaborar un insert con uan tabla que tiene mas de 10 campos).
+
+Para resolver esta dificultad se introduce el conapeto de parametros dentro del comando de SQL.
+
+Con select:
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+string cadena = "SELECT descripcion, precio FROM articulos WHERE codigo = @codigo";
+SqlCommand comando = new SqlCommand(cadena, conexion);
+
+comando.Parameters.Add("@codigo", SqlDbType.Int);
+
+comando.Parameters["@codigo"].Value = 123;
+
+SqlDataREader registro = comando.ExecuteREader();
+
+if(registro.Read()){
+	Console.WriteLine("Se encontro registro.");
+} else {
+	Console.WriteLine("No se encontro registro.");
+}
+
+conexion.Close();
+
+Con insert:
+using System.Data.SqlClient;
+
+SqlConnection conexion = new SqlConnection("Server=DIEGO-PC; database=base1; integrated security=true");
+conexion.Open();
+string cadena = "INSERT INTO articulos (descripcion, precio) VALUES (@descripcion, @precio)";
+SqlCommand comando = new SqlCommand(cadena, conexion);
+
+comando.Parameters.Add("@descripcion", SqlDbType.Varchar);
+comando.Parameters.Add("@precio", SqlDbType.Float);
+
+comando.Parameters["@descripcion"].Value = "Producto nuevo";
+comando.Parameters["@precio"].Value = 24.50;
+
+comando.ExecuteNonQuery();
+
+conexion.Close();
+
 85.- DEFINICION DE PROPIEDADES AUTOMATICAS
+Hemos visto en conceptos anteriores que normalmente definimos una propiedad para acceder a un atributo o campo de la clase. En muchas situaciones podemos agregar codigo en el momento de la asignacion o cuando recuperamos el valor de la propiedad.
 
+Pero hay situaciones donde definimos un atributo y luego una propiedadd que accede a dicho atributo y no definimos ningun algoritmo tanto en la seccion del get como del set. En estos casos nos cuestionamos el porque no feginir public el atriburo y no definir unapropiedad para accederlo. Debido a estos casos en C# se ha agregado la posibilidad de definir propiedades automaticas.
 
+Una propiedad automatica crea en forma transparente un atributo donde se almacena el valor y posteriormente se consulta.
 
+private int lado;
 
+public int Lado{
+	set{
+		lado = value;
+	}
+	get{
+		return lado;
+	}
+}
 
+Nueva forma de definir:
+
+public int Lado { get; set; }
+
+86.- CREANDO UN OBJETO E INICIANDO SUS PROPIEDADES INMEDIATAMENTE
+Hemos visto en conceptos anteriores que cuando se crea un objeto lo primero que sucede es la ejecucion del constructor.
+
+Veremos ahora que en el momento de crear un objeto podemos iniciar una o varias de sus propiedades.
+
+namespace Propiedades{
+	class Triangulo{
+		public int Lado1 { get; set; } = 5;
+		public int Lado2 { get; set; } = 5;
+		public int Lado3 { get; set; } = 5;
+		
+		public int RetornarPerimetro(){
+			return Lado1 + Lado2 + Lado3;
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Triangulo triangulo1 = new Triangulo { Lado1 = 10, Lado2 = 20, Lado3 = 30 };
+			
+			Console.WriteLine(triangulo1.RetornarPerimetro());
+			
+			Triangulo triangulo2 = new Triangulo { Lado3 = 30 };
+			
+			Console.WriteLine(triangulo2.RetornarPerimetro());
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+===================================================================================================
+
+namespace Propiedades{
+	class Triangulo{
+		public int Lado1 { get; set; } = 5;
+		public int Lado2 { get; set; } = 5;
+		public int Lado3 { get; set; } = 5;
+		
+		public Triangulo(string titulo){
+			Console.WriteLine(titulo);
+			Lado1 = 1;
+			Lado2 = 1;
+			Lado3 = 1;
+		}
+		
+		public int RetornarPerimetro(){
+			return Lado1 + Lado2 + Lado3;
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Triangulo triangulo1 = new TRiangulo("Perimetro triangulo 1") { Lado1 = 10, Lado2 = 20, Lado3 = 30 };
+			
+			Console.WriteLine(triangulo1.RetornarPerimetro());
+			
+			Triangulo triangulo2 = new TRiangulo("Perimetro triangulo 2") { Lado3 = 30 };
+			
+			Console.WriteLine(triangulo2.RetornarPerimetro());
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+87.- CLASES GENERICAS
+C# permite crear clases que administren distintos tipos de datos.
+
+Se utilizan mucho para la adminsitracion de colecciones de datos (pilas, colas, listas, arboles, etc.)
+
+Para entender las ventajas de definir clases genericas implementaremos los algoritmos para administrar una pila de enteros y una pila de string.
+
+namespace Generiacos1{
+	class Pila<T>{
+		private T[] vec = new T[5];
+		private int tope = 0;
+		
+		public void Insertar(T x){
+			vec[Tope] = x;
+			tope++;
+		}
+		
+		public T Extraer(){
+			tope--;
+			return vec[Tope];
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Pila<int> pila1 = new Pila<int>();
+			
+			pila1.Insertar(20);
+			pila1.Insertar(40);
+			pila1.Insertar(17);
+			
+			Console.WriteLine(pila1.Extraer());
+			
+			Pila<string> pila2 = new Pila<string>();
+			
+			pila2.Insertar("juan");
+			pila2.Insertar("ana");
+			pila2.Insertar("luis");
+			
+			Console.WriteLine(pila2.Extraer());
+			
+			Console.ReadKey();
+		}
+	}
+}
+
+======================================================================================
+
+namespace Generiacos1{
+	class Persona{
+		public stirng Nombre { get; set; }
+		public int Edad { get; set; }
+	}
+
+	class Pila<T>{
+		private T[] vec = new T[5];
+		private int tope = 0;
+		
+		public void Insertar(T x){
+			vec[Tope] = x;
+			tope++;
+		}
+		
+		public T Extraer(){
+			tope--;
+			return vec[Tope];
+		}
+	}
+	
+	class Program{
+		static void Main(string[] args){
+			Pila<Persona> pila1 = new Pila<Persona>();
+			
+			Persona persona1 = new Persona { nombre = "Juan", Edad = 22 };
+			Persona persona2 = new Persona { nombre = "Ana", Edad = 34 };
+			Persona persona3 = new Persona { nombre = "Carlos", Edad = 47 };
+			
+			pila1.Insertar(persona1);
+			pila1.Insertar(persona2);
+			pila1.Insertar(persona3);
+			
+			Persona p = pila1.Extraer();
+			
+			Console.WriteLine(p.Nombre + " " + p.Edad);
+			
+			Console.ReadKey();
+		}
+	}
+}
 
 89.- COLECCIONES: QUEUE<T> Y STACK<T>
 En el espacio de nombres: System.Collections.Generic se encuentran las clases Queue<T> y Stack<T>.

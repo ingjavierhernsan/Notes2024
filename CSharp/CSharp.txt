@@ -75,6 +75,11 @@
 104.- EXCEPCIONES PROPIAS
 105.- NAMESPACE
 106.- CREAR BIBLIOTECA O LIBRERIA
+107.- CICLO DE VIDA DEL OBJETO
+108.- GARBAGE COLLECTION Y TIPOS FINALIZABLES
+109.- OBJETOS DESECHABLES
+110.- OBJETO DESECHABLE Y FINALIZABLE
+111.- THREADS: INTRODUCCION
 
 ==================================================================================================================
 
@@ -3840,3 +3845,269 @@ Console.WriteLine("El resultado de la suma es {0}", resultado);
 
 mates.suma();
 Console.WriteLine("El resultado de la suma es {0}", mates.R);
+
+107.- CICLO DE VIDA DEL OBJETO
+C# = Lenguaje administrado
+
+Ciclo de vida del objeto
+- Creacion de la instancia
+- Heap administrado
+- Recoleccion de basura
+- Generaciones de objetos
+
+Conceptos basicos
+New
+- Se crea la instancia del objeto en el heap. 
+(Que es el CLR?)
+(Que es el heap en C#?)
+- Regresa una referencia de ese objeto, no el objeto en si.
+
+Variable
+- Se crea en el stack si es una variable local.
+- Guarda la referencia.
+
+Variable => Stack
+Instancia => Heap Administrado
+
+Ciclo de vida del objeto
+El CLR se encarga del objeto una vez que ha sido creado.
+
+El recolector de basura lo destruira cuando ya no sea necesario.
+- Remueve el objeto cuando ya no puede ser alvanzado por alguna parte del codigo (cuando el objeto ya no esta referenciado).
+- Ejemplo: Cuando se crea localmente en un metodo y el metodo finaliza ejecucion.
+- No hay garantia que sera destruido exactamente en ese momento.
+
+Creacion de la instancia (new)
+Se calcula la cantidad de memoria requerida para el objeto.
+Se verifica que el heap administrado tenga suficiente espacio.
+- Si lo hay, el constructor es invocado y quien lo hizo recibe una referencia al nuevo objeto en memoria.
+- La direccion es la del "apuntador al siguiente objeto".
+La direccion del apuntador al siguiente objeto es actualizada al siguente espacio disponible.
+
+Application Roots
+Locacion donde se guarda una referencia hacia un objeto en el heap administrado.
+- Referencias a objetos globales (C# no lo permite, si CIL).
+- Referencias a objetos estaticos.
+- Referencias a objetos locales.
+- Referencias a objetos pasados como parametros en un metodo.
+- Referencias a objetos esperando ser finalizados.
+- Cualquier regisgtro del CPU que referencia a un objeto.
+
+Recoleccion de basura
+Se investiga el heap administrado para ver que objetos estan rooted.
+- Para esto el CLR crea un objeto graph.
+- Ningun objeto puede aparecer dos o mas veces en la grafica.
+Los objetos que no se pueden alcanzar son marcados como basura.
+Se eliminan de memoria y el heap es compactado.
+El apuntador a siguiente objeto es actualizado.
+
+Generaciones de objetos
+Generacion 0: Objetos recien creados que nunca han sido marcados para recoleccion.
+Generacion 1: Objetos que han sobrevivido una recoleccion.
+Generacion 2: Objetos que han sobrevivido mas de una recoleccion.
+Las generaciones 0 y 1 se conocen como efimeras.
+
+Recoleccion de basura .NET 1.0 a 3.5
+Recoleccion de basura concurrente.
+Cuando se hace recoleccion de basura para generacioneas efimeras, el recolecgtor de basura suspende hilos activos.
+Esto con el fin de evitar que los procesos accesen al heap durante la recoleccion.
+
+Recoleccion de basura de .NET 4.0 en adelante
+Background garbage collection.
+Si el recolector trabaja en una generacion no efimera, puede usar un hilo dedicado para las generaciones efimeras.
+Reduce la cantidad de tiempo necesaria.
+
+108.- GARBAGE COLLECTION Y TIPOS FINALIZABLES
+- Clase GC - Recolector de basura
+- Trabajando con el heap administrado
+- Creacion de tipos finalizables
+
+Clase GC (Garbage Collector)
+Obtener la cantidad de bytes en el Heap administrado:
+
+long bytesHeap = GC.GetTotalMemory(false);
+Console.WriteLine("El heap usa {0} bytes.", bytesHeap);
+
+Obtener la cantidad de generaciones, basada en 0 por eso +1:
+int maximaGeneracion = GC.MaxGeneration + 1;
+Console.WriteLine("Se tienen {0} generaciones.", maximaGeneracion);
+
+Aplicacion del codigo con un ejemplo:
+CPrueba prueba1 = new CPrueba(5);
+
+bytesHeap = GC.GetTotalMemory(false);
+Console.WriteLine("El heap usa {0} bytes.", byteHeap);
+
+Obtener la generacion de la instancia
+int generacionInstancia = GC.GetGeneration(prueba1);
+
+Forzar la recoleccion de basura
+Solo hacerlo en situaciones especiales. Cuando la aplicacion entra a un bloque de codigo que no debe de ser interrumpido por la recoleccion.
+
+La aplicacion creo una gran cantidad de instancias y se ncesita liberar la mayor cantidad de memoria posible.
+
+GC.Collect(); 
+GC.WaitForPendingFinalizers(); //Espera que todo finalize correctamente
+
+Las dos sentencias deben ser ejecutadas.
+
+Para recolectar una generacion en particular:
+
+GC.Collect(0);
+GC.WaitForPendingFinalizers();
+
+Tipos finalizables
+Object tienen un metodo wirtual Finalize()
+
+Cuando se hace el override de Finalize tenemos un lugar donde llevar a cabo la limpieza para la clase.
+
+No se puede invocar directamente, por que es un metodo protefido.
+
+Lo invoca el recolector de basura antes de eliminar el objeto de la memoria.
+
+no se puede hacer override de tipos estructura.
+
+Pracitcamente nunca haremos esto salvo que tengamos recursos no administrados que necesiten ser eliminados manualmente: PInvoke, COM, memoria no administrada.
+
+No hacemos uso de override. Se utiliza el destructor para esto:
+
+~CPrueba(){
+	Console.WriteLine("Aqui liberamos recursos no administrados.");
+}
+
+109.- OBJETOS DESECHABLES
+- IDisposable
+- Dispose()
+- Using
+
+Si deseamos que los recursos no administrados sean liberados tan pronto como sea posible en lugar de que lo haga el recolector de basura podemos implementar la interfaz IDisposable.
+
+En este caso se toma que cuando el usuario deja de usar al objeto, el usuario invoca Dispose(), se libera lo no administrado, pero el objeto sigue existiendo.
+
+Implementamos a IDisposable:
+
+class CPrueba:IDisposable //<=== De esta forma se implementa
+{ 
+	private int a;
+	
+	public CPrueba(int pA){
+		a = pA;
+	}
+	
+	public override string ToString(){
+		return string.Format("El valor es {0}.", a);
+	}
+	
+	public void Dispose(){
+		Console.WriteLine("Estamos en Dispose, aqui liberamos lo no administrado {0}.", a);
+	}
+}
+
+class Program{
+	static void Main(string[] args){
+		CPrueba objeto - new CPrueba(5);
+		Console.WriteLine(objeto);
+		objeto.Dispose();
+	}
+}
+
+Una mejor manera de usarlo
+if(objeto is IDisposable)
+	objeto.Dispose();
+
+Una forma de garantizar que Dispose es invocado:
+try{
+	Console.WriteLine(objeto);
+} finally {
+	objeto.Dispose();
+}
+
+Con esta tecnica Dispose es invocado automaticamente. Se puede listar varios objetos en el using:
+
+using(CPrueba prueba2 = new CPrueba(7)){
+	Console.WriteLine(prueba2);
+}
+
+110.- OBJETO DESECHABLE Y FINALIZABLE
+- Crear un objeto que es desechable y finalizable
+- Suprimir la invocacion del destructor
+
+class CPrueba:IDisposable{
+	private int a;
+	
+	public CPrueba(int pA){
+		a = pA;
+	}
+	
+	public override string ToString(){
+		return string.Format("El valor es {0}", a);
+	}
+	
+	~CPrueba(){
+		Console.WriteLine("Estamos en destructor, aqui liberamos lo no administrado {0}", a);
+	}
+	
+	public void Dispose(){
+		Console.WriteLine("Estamos en Dispose, aqui liberamos lo no administrado {0}", a);
+		
+		//Si se uso dispose no debemos usar el destructor
+		GC.SupperssFinalize(this);
+	}
+}
+
+class Program{
+	static void Main(string[] args){
+		CPrueba objeto1 = new CPrueba(5);
+		CPrueba objeto2 = new CPrueba(7);
+		
+		Console.WriteLine(objeto1);
+		Console.WriteLine(objeto2);
+		
+		//Hacemos dispose de objeto1
+		objeto1.Dispose();
+		
+		//Objeto2 llega hasta el finalizador
+		Console.WriteLine("--- Fin del programa ---");
+	}
+}
+
+Codigo mejorado:
+class CPrueba:IDisposable{
+	//Para saber si se uso dispose
+	private bool usoDispose = false;
+	
+	private int a;
+	
+	public CPrueba(int pA){
+		a = pA;
+	}
+	
+	public override string ToString(){
+		return string.Format("El valor es {0}", a);
+	}
+	
+	public void Dispose(){
+		//Invocamos el metodo de limpieza
+		//Se coloca true por que se hace uso de dispose
+		Limpieza();
+		
+		//Si se uso dispose no debemos usar el destructor
+		GC.SupperssFinalize(this);
+	}
+	
+	~CPrueba(){
+		//Invocamos el metodo de limpieza
+		Limpieza();
+	}
+	
+	public void Limpieza(){
+		if(usoDispose == false){
+			//Codigo de limpieza colun
+			Console.WriteLine("Estamos en limpieza, aqui liberamos no administrados {0}", a);
+		}
+		
+		usoDispose = true;
+	}
+}
+
+111.- THREADS: INTRODUCCION

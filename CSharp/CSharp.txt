@@ -80,6 +80,7 @@
 109.- OBJETOS DESECHABLES
 110.- OBJETO DESECHABLE Y FINALIZABLE
 111.- THREADS: INTRODUCCION
+112.- THREADS: SINCRONIZACION Y BLOQUEO
 
 ==================================================================================================================
 
@@ -4111,3 +4112,50 @@ class CPrueba:IDisposable{
 }
 
 111.- THREADS: INTRODUCCION
+Threads. Programacion concurrente. Aplicaciones multitarea.
+
+Flujo (hilo) de ejecucion.
+- Monotarea.
+Solo tiene un hilo.
+- Multitarea.
+Tiene varios hilos ejecutandose al mismo tiempo.
+
+Hilo principal (main)
+===========================================> El procesador le dedica prioridad a este hilo
+			Otro hilo
+			===============================> Pasa a ejecutar este hilo
+
+Dormir un hilo de ejecucion
+
+using System.Threading;
+
+Thread.Sleep(500);
+
+Revidar subprocesos en Visual Studio
+- Agregar punto de interrupcion.
+- Ir al menu depurar.
+- Iniciar depuracion.
+- Cuando se detenga en el punto de interrupcion se debe abrir una ventana emergente con los subprocesos.
+- Si no sale ir al menu Depurar.
+- Opcion Ventanas.
+- Buscar y seleccionar la opcion Subprocesos.
+
+Correr dos procesos
+static void MetodoSaludo(){
+	Console.WriteLine("Proceso hilo 2.");
+}
+
+static void Main(string[] args){
+	//Agregar un hilo
+	Thread t1 = new Thread(MetodoSaludo);
+	t1.Start();
+	
+	//Agregar otro hilo
+	Thread t2 = new Thread(MetodoSaludo);
+	t2.Start();
+	
+	Console.WriteLine("Proceso hilo 2.");
+}
+
+112.- THREADS: SINCRONIZACION Y BLOQUEO
+

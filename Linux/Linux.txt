@@ -421,3 +421,31 @@ sudo systemctl set-default graphical.target
 
 INICIAR DE SUDO:
 sudo -i
+
+ESTABLISH A WIRELESS CONNECTION
+
+First, determine the name of the WiFi interface:
+$ nmcli d
+DEVICE             TYPE      STATE         CONNECTION
+...
+wlan0              wifi      disconnected     --
+
+Make sure the WiFi radio is on (which is its default state):
+$ nmcli r wifi on
+
+Then, list the available WiFi networks:
+$ nmcli d wifi list
+*  SSID           MODE   CHAN  RATE       SIGNAL  BARS  SECURITY
+   ...
+   my_wifi      Infra  5     54 Mbit/s  89      ▂▄▆█  WPA2
+
+As an example, to connect to the access point ‘my_wifi’, you would use the following command:
+$ nmcli d wifi connect my_wifi password <password>
+
+SHUTDOWN FROM TERMINAL
+shutdown -h now
+
+Now can be a time in minutes.
+
+RESTART FROM TERMINAL
+reboot

@@ -81,6 +81,15 @@
 110.- OBJETO DESECHABLE Y FINALIZABLE
 111.- THREADS: INTRODUCCION
 112.- THREADS: SINCRONIZACION Y BLOQUEO
+113.- THREADS: TAREAS COMPLETADAS
+114.- THREADS: THREADPOOL
+115.- TASK
+
+
+11x.- FUNCIONES COMUNES DE STRING
+11x.- INICIALIZAR STRING
+11x.- STRING SECUENCIAS DE ESCAPE
+11x.- ALGUNAS FUNCIONES UTILES
 
 ==================================================================================================================
 
@@ -4149,8 +4158,8 @@ static void Main(string[] args){
 	//Agregar un hilo
 	Thread t1 = new Thread(MetodoSaludo);
 	t1.Start();
-	
-	//Agregar otro hilo
+
+	//Agregar otro hilo	
 	Thread t2 = new Thread(MetodoSaludo);
 	t2.Start();
 	
@@ -4158,4 +4167,599 @@ static void Main(string[] args){
 }
 
 112.- THREADS: SINCRONIZACION Y BLOQUEO
+Sincronizar hilos
 
+static void MetodoSaludo(){
+	Console.WriteLine("Proceso hilo 2.");
+}
+
+static void Main(string[] args){
+	Thread t1 = new Thread(MetodoSaludo);
+	t1.Start();
+	t1.Join();
+
+	Thread t2 = new Thread(MetodoSaludo);
+	t2.Start();
+	t2.Join();
+	
+	Console.WriteLine("Proceso hilo 2.");
+}
+
+Primero termina su proceso t1 y despues el t2. Al final correr el proceso de la misma Main.
+
+Bloqueos
+
+class Program{
+	static void Main(string[] args){
+		CuentaBancaria CuentaFamilia = new CuentaBancaria(2000);
+		
+		Thread[] hilosPersonas = new Thread[15];
+		
+		for(int i = 0; i < 15; i++){
+			Thread t = new Thread(CuentaFamilia.VamosRetirarEfectivo);
+			t.Name = i.ToString();
+			hilosPersonas[i] = t;
+		}
+		
+		for(int i = 0; i < 15; i++){
+			hilosPersonas[i].Start();
+		}
+	
+	}
+}
+
+class CuentaBancaria{
+	private Object bloqueaSaldoPositivo = new object();
+	double Saldo { set; get; }
+	
+	public CuentaBancaria(double Saldo){
+		this.Saldo = Saldo;
+	}
+	
+	public double RetirarEfectivo(double cantidad){
+		if((Saldo-cantidad) < 0){
+			Console.WriteLine($"Lo siento queda {saldo} en la cuenta. Hilo: {Thread.CurrentThread.Name}");
+			
+			return Saldo;
+		}
+		
+		lock(bloqueaSaldoPositivo){
+			if(Saldo >= cantidad){
+				Console.WriteLine("Retirado {0} y queda {1} en la cuenta {2}", cantidad, (Saldo-cantidad), Thread.CurrentThread.Name);
+				Saldo -= cantidad;
+			}
+		
+			return Saldo;
+		}
+	}
+	
+	public void VamosRetirarEfectivo(){
+		Console.WriteLine("Esta sacanso dinero el hilo: {0}", Thread.CurrentThread.Name);
+		
+		for(int i = 0; i<=4; i++){
+			RetirarEfectivo(500);
+		}
+		
+	}
+}
+
+113.- THREADS: TAREAS COMPLETADAS
+Completado de Threads
+- TaskCompletionSource<generico>
+
+using System.Threading;
+using System.Threading.Tasks;
+
+class Program{
+	static void Main(string[] args){
+		var tariaTerminada = new TaskCompletionSource<bool>();
+		
+		var hilo1 = new Thread(() => {
+			for(int i = 0; i < 5; i++){
+				Console.WriteLine("Hilo 1");
+				Thread.Sleep(1000);
+			}
+			
+			tareaTerminad.TrySetResult(true);
+		}
+		
+		var hilo2 = new Thread(() => {
+			for(int i = 0; i < 5; i++){
+				Console.WriteLine("Hilo 2");
+				Thread.Sleep(1000);
+			}
+			
+			tareaTerminad.TrySetResult(true);
+		}
+		
+		var hilo3 = new Thread(() => {
+			for(int i = 0; i < 5; i++){
+				Console.WriteLine("Hilo 3");
+				Thread.Sleep(1000);
+			}
+		}
+		
+		hilo1.Start();
+		
+		//var resultado = tareaTerminada.Task.Result;
+		
+		hilo2.Start();
+		
+		var resultado = tareaTerminada.Task.Result;
+		
+		hilo3.Start();
+	}
+}
+
+114.- THREADS: THREADPOOL
+Pool de Threads (ThreadPool)
+
+class Program{
+	static void Main(string[] args){
+		for(int i = 0; i < 100; i++){
+			//Thread t = new Thread(EjecutarTarea);
+			//t.Start();
+			
+			ThreadPool.QueueUserWorkItem(EjecutarTarea, i);
+		}
+		
+		Console.ReadLine();
+	}
+	
+	//static void EjecutarTarea()
+	static void EjecutarTarea(Object o){
+		int nTarea = (int)o;
+		
+		//Console.WriteLine($"Thread no.: {Thread.CurrentThread.ManagedThreadId} ha comenzado su tarea.");
+		Console.WriteLine($"Thread no.: {Thread.CurrentThread.ManagedThreadId} ha comenzado la tarea no. " + nTarea);
+		
+		Thread.Sleep(1000);
+		
+		//Console.WriteLine($"Thread no.: {Thread.CurrentThread.ManagedThreadId} ha terminado su tarea.");
+		Console.WriteLine($"Thread no.: {Thread.CurrentThread.ManagedThreadId} ha terminado la tarea no. " + nTarea);
+	}
+}
+
+115.- TASK
+
+class Program{
+	static void Main(string[] args){
+		Task tarea = new Task(EjecutarTarea);
+		
+		tarea.Start();
+		
+		Task tarea2 = new Task(() => {
+			for(int i = 0; i < 100; i++){
+				Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+				Thread.Sleep(1000);
+			
+				Console.WriteLine("Esta vuelta de bucle corresponde al Thread: " + miThread + " ejecutandose desde le Main.");
+			}
+		});
+		
+		tarea2.Start();
+		
+		Console.ReadLine();
+	}
+	
+	static void EjecutarTarea(){
+		for(int i = 0; i < 100; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(1000);
+			
+			Console.WriteLine("Esta vuelta de bucle corresponde al Thread: " + miThread);
+		}
+	}
+}
+
+Tasks consecutivas
+
+class Program{
+	static void Main(string[] args){
+		Task tarea = Task.Run(() => 
+			EjecutarTarea()
+		);
+		
+		Task tarea2 = tarea.ContinueWith(EjecutarOtraTarea);
+		
+		Console.ReadLine();
+	}
+	
+	static void EjecutarTarea(){
+		for(int i = 0; i < 5; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(1000);
+			
+			Console.WriteLine("Esta vuelta de bucle corresponde al Thread: " + miThread);
+		}
+	}
+	
+	static void EjecutarOtraTarea(Task obj){
+		for(int i = 0; i < 5; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(1000);
+			
+			Console.WriteLine("Esto es otra tarea. Esta vuelta de bucle corresponde al Thread: " + miThread);
+		}
+	}
+}
+
+WaitAll(), WaitAny(), Wait()
+
+class Program{
+	static void Main(string[] args){
+		
+		RealizarTodasTareas();
+		
+		Console.ReadLine();
+	}
+	
+	static void RealizarTodasTareas(){
+		var tarea1 = Task.Run(() => {
+			EjecutarTarea();
+		});
+		
+		tarea1.Wait();
+		
+		var tarea2 = Task.Run(() => {
+			EjecutarTarea2();
+		});
+		
+		//Task.WaitAll(tarea1, tarea2);
+		//Task.WaitAny(tarea1, tarea2);
+		
+		tarea2.Wait();
+		
+		var tarea3 = Task.Run(() => {
+				EjecutarTarea3();
+		});
+		
+	}
+	
+	static void EjecutarTarea(){
+		for(int i = 0; i < 5; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(1000);
+			
+			Console.WriteLine("Esta vuelta de bucle corresponde a la tarea 1");
+		}
+	}
+	
+	static void EjecutarTarea2(){
+		for(int i = 0; i < 5; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(500);
+			
+			Console.WriteLine("Esta vuelta de bucle corresponde a la tarea 2");
+		}
+	}
+	
+	static void EjecutarTarea3(){
+		for(int i = 0; i < 5; i++){
+			Var miThread = Thread.CurrentThread.ManagedThreadId;
+			
+			Thread.Sleep(500);
+			
+			Console.WriteLine("Esta vuelta de bucle corresponde a la tarea 3");
+		}
+	}
+	
+}
+
+
+
+11x.- FUNCIONES COMUNES DE STRING
+- Concat()
+Comabines muiltple strings into one.
+
+Checks if a string ends with a specified suffix.
+
+string str1 = "Hello, ";
+string str2 = "World!";
+string result = string.Concat(str1, str2);
+
+Console.WriteLine(result);
+
+- Length
+Measures the length of a string (number of characters).
+
+string str = "Hello";
+
+int strLength = str.Length;
+
+- ToUpper()
+Convers a string to uppercase.
+
+string str = "Hello";
+string strtu = str.ToUpper();
+
+- ToLower()
+Converts a string to lowercase.
+
+string str = "HELLO";
+string strtu = str.ToLower();
+
+- Substring()
+Extracts a portin of a string.
+
+string originalString = "Hello, world!";
+string extractedSubstring = originalString.Substring(7);
+
+Console.WriteLine(extractedSubstring);
+
+- Replace()
+Replaces specific characters or words in a string.
+
+string sentence = "The quick brown fox jumps over the lazy dog.";
+string newSentence = sentence.Replace("fox", "cat");
+
+Console.WriteLine(newSentence);
+
+- IndexOf()
+Finds the position of a substring within a string.
+
+string sentence = "The quick brown fox jumps over the lazy dog.";
+int index = sentence.IndexOf("fox");
+
+Console.WriteLine(index);
+
+- Format()
+Creates formatted strings using placeholders.
+
+- Trim()
+Removes extra spaces at the beginning and end of a string.
+
+string stringWithWhiteSpace = "  Hello, world!  ";
+string trimmedString = stringWithWhiteSpace.Trim();
+
+Console.WriteLine(trimmedString);
+
+- Equals()
+Compares two strings for equality.
+
+string str1 = "Hello";
+string str2 = "hello";
+
+bool areEqual = str1.Equals(str2, StringComparison.OrdinalIgnoreCase);
+
+Console.WriteLine(areEqual);
+
+- Clone()
+Create a copy of the current string instance.
+
+string originalString = "Hello, world!";
+string clonedString = (string)originalString.Clone();
+
+Console.WriteLine(originalString);
+Console.WriteLine(clonedString);
+
+- Contains()
+Checks if a substring exists within a string.
+
+string sentence = "The quick brown fox jumps over the lazy dog";
+string searchTerm = "fox";
+
+bool containsFox = sentence.Contains(searchTerm);
+
+Console.WriteLine(containsFox);
+
+- Copy()
+The function coies a specified number of characters from the original string to a new character array.
+
+string originalString = "Copy me!";
+char[] charArray = new char[7];
+
+originalString.CopyTo(0, charArray, 0, 7);
+
+string copiedString = new string(charArray);
+Console.WriteLine(copiedString);
+
+- StartsWith()
+Checks if a string starts with a specified prefix.
+
+string str = "Super";
+bool blTemp = str.StartsWith("S");
+
+- EndsWith()
+Chencks if a string ends with a specified suffix.
+
+string str = "Super";
+bool blTemp = str.EndsWith("r");
+
+-Insert()
+Inserts a substring at a specified index.
+
+string sentence = "Hello, world";
+string insertedString = sentence.Insert(5, " beautiful");
+
+Console.WriteLine(insertedString);
+
+- Split()
+Devides a string into an array of substrings based on a delimiter.
+
+string str = "a,b,c,d";
+string[] splitstr = str.Split(',');
+
+- Remove()
+Deletes all the character from begining to specified index.
+
+string sentence = "Hello, world";
+string newstr = sentence.Remove(5);
+
+- ToCharArray()
+Converts an string into char array.
+
+string str = "hello";
+char[] carray = str.ToCharArray();
+
+- LastIndexOf()
+Returns the last index position of specified value.
+string str = "Hello";
+int intTemp = str.LastIndexOf("e");
+
+- CompareTo()
+Compare two string value and returns 0 for true and 1 for false.
+
+string str1 = "Hello";
+string str2 = "hello";
+
+int areEqual = str1.CompareTo(str2);
+
+- GetHashCode()
+Return HashCode of String.
+
+string str = "Hello";
+
+Console.WriteLine(str.GetHashConde());
+
+- GetType()
+Returns type of string.
+
+string str = "Hello";
+
+Console.WriteLine(str.GetType());
+
+- GetTypeCode()
+Returns type of string.
+
+string str = "Hello";
+
+Console.WriteLine(str.GetTypeCode());
+
+- IsNormalized()
+Check whether string is in Unicode normalization.
+
+string str = "Hello";
+
+Console.WriteLine(str.IsNormalized());
+
+- Empty
+Initialize as an empty string.
+string str = String.Empty;
+
+if(str == String.Empty)
+
+
+11x.- INICIALIZAR STRING
+
+string str;
+
+string? str = null;
+Initialize to null.
+
+string oldPath = "C:\\Program Files\\Microsoft";
+Initialize with a regular string literal.
+
+string newPath = @"C:\Program Files\Microsoft";
+Initialize with a verbatim string literal
+
+System.String greeting = "hello world";
+
+char[] letters = { 'a', 'b', 'c' };
+string alphabet = new string(letters);
+
+string s1 = "He";
+string s2 = "llo";
+
+s1 += s2;
+
+11x.- STRING SECUENCIAS DE ESCAPE
+
+\' - Single quote
+\" - Double quote
+\\ - Backslash
+\0 - Null
+\a - Alert
+\b - Backspace
+\f - Form feed
+\n - New line
+\r - Carriage return
+\t - Horizontal tab
+\v - Vertical tab
+\u - Unicode escape sequence (UTF-16)
+\U - Unicode escape sequence (UTF-32)
+\x - Unicode escape sequence similar to \u except with variable length.
+
+11x.- ALGUNAS FUNCIONES UTILES
+- Randow
+Random generador = new Random();
+
+int aleatorio = generador.Next(1, 101);
+
+Abs(x)
+Valor absoluto.
+
+Acos(x)
+Arco coseno.
+
+Asin(x)
+Arco seno.
+
+Atan(x)
+Arco tangente.
+
+Atan2(y, x)
+Arco tangente de y/x (por si x o y son 0)
+
+Ceiling(x)
+El valor entero superior a x y mas cercano a el.
+
+Cos(x)
+Coseno.
+
+Cosh(x)
+Coseno hiperbolico.
+
+Exp(x)
+Exponencial de x (e elebado a x)
+
+Floor(x)
+El mayor valor entero que es menor que x.
+
+Log(x)
+Logaritmo natural (o neperiano, en base "e").
+
+Log10(x)
+Logaritmo en base 10.
+
+Pow(x, y)
+x elevado a y.
+
+Round(x, cifras)
+Redondea un numero.
+
+Sin(x)
+Seno.
+
+Sinh(x)
+Seno hiperbolico.
+
+Sqrt(x)
+Raiz cuadrada.
+
+Tan(x)
+Tangente.
+
+Tanh(x)
+Tangente hiperbolica.
+
+E
+El nuemor "e", con un valor de 2.71828...
+
+PI
+El nuemro "Pi" con valor 3.14159...
+
+Uso:
+
+double x = Math.Sqrt(4);
+double y = Math.Pow(2, 3);
+int n = Math.Abs(x);
+
+double dbVar = 45;
+dbVar = dbVar * Math.PI;

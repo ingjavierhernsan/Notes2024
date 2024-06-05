@@ -4452,7 +4452,103 @@ class Program{
 	
 }
 
+Clase Parallel
 
+class Program{
+	private static int acumulador = 0;
+
+	static void Main(string[] args){
+		/*for(int i = 0; i < 100; i++){
+			RealizarTarea(i);
+			
+			Console.WriteLine($"Acumulador vale {acumulador}. Tarea realizada por le hilo {Thread.CurrentThread.ManagedThreadId}");
+		}*/
+		
+		Parralel.For(0, 100, RealizarTarea);
+		
+		Parralel.For(0, 100, dato=>{
+			Console.WriteLine($"Acumulador vale {acumulador}. Tarea realizada por le hilo {Thread.CurrentThread.ManagedThreadId}");
+	
+			if((acumulador%2) == 0){
+				acumulador += dato;
+				Thread.Sleep(100);
+			} else {
+				acumulador -= dato;
+				Thread.Sleep(100);
+			}
+		});
+		
+	}
+	
+	static void RealizarTareas(int dato){
+		Console.WriteLine($"Acumulador vale {acumulador}. Tarea realizada por le hilo {Thread.CurrentThread.ManagedThreadId}");
+	
+		if((acumulador%2) == 0){
+			acumulador += dato;
+			
+			Thread.Sleep(100);
+		} else {
+			acumulador -= dato;
+			
+			Thread.Sleep(100);
+		}
+	}
+}
+
+Cancelacion de Task
+
+Token de cancelacion
+	- CancellationTokenSource
+	- CancellationToken
+
+class Program{
+	static int acumulador = 0;
+	
+	static void Main(string[] args){
+		CancellationTokenSource miToken = new CancellationTokenSource();
+		
+		CancellationToken cancelToken = miToken.Token;
+		
+		Task tarea = Task.Run(() => RealizarTarea(cancelaToken));
+		
+		for(int i = 0; i < 100; i++){
+			acumulador += 30;
+			Thread.Sleep(1000);
+			
+			if(acumulador > 100){
+				miToken.Cancel();
+				
+				break;
+			}
+		}
+		
+		Thread.Sleep(1000);
+		
+		Console.WriteLine("Valor del acumulador: " + acumulador);
+		
+		Console.ReadLine();
+	}
+	
+	static void RealizarTarea(CancellationToken token){
+		
+	
+		for(int i = 0; i < 100; i++){
+			acumulador++;
+			
+			var miThread = Thread.CuarrentThread.ManagedThreadId;
+			
+			Thread.Sleep(1000);
+			
+			Console.WriteLine("Ejecuatando tarea el thread: " + miThread);
+			Console.WriteLine(acumulador);
+			
+			if(token.IsCancellationRequested){			
+				return;
+			}
+		}
+	}
+	
+}
 
 11x.- FUNCIONES COMUNES DE STRING
 - Concat()

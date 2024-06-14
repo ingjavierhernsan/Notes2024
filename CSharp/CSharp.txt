@@ -84,12 +84,11 @@
 113.- THREADS: TAREAS COMPLETADAS
 114.- THREADS: THREADPOOL
 115.- TASK
-
-
-11x.- FUNCIONES COMUNES DE STRING
-11x.- INICIALIZAR STRING
-11x.- STRING SECUENCIAS DE ESCAPE
-11x.- ALGUNAS FUNCIONES UTILES
+116.- FUNCIONES COMUNES DE STRING
+117.- INICIALIZAR STRING
+118.- STRING SECUENCIAS DE ESCAPE
+119.- ALGUNAS FUNCIONES UTILES
+120.- LINQ
 
 ==================================================================================================================
 
@@ -3297,6 +3296,60 @@ namespace Lambda4{
 	}
 }
 
+Funciones anonimas 
+
+Func<int, int> b = (a) => a * 2;
+
+Func - Inicia la funcion anonima.
+<int> - Cuando solo se usa un tipo, es para indicar la entrada.
+<int, int> - Cuando se usan dos tipos, es para indicar que tendra entrada y salida.
+b - Es el nombre del delegado.
+(a) - Indica la entrada del parametro.
+=> - Indica que proceso se hara.
+a * 2 - Es el proceso que se realiza con el parametro.
+
+Ejecutar:
+b(4);
+
+int resultado = b(4);
+
+Func<int, int, int> suma = (a, b) => {
+	if (a > b) return a;
+	else return b;
+};
+
+int reault = may(4, 10);
+
+var numbers = new Lis<int> { 3, 5, 7, 4, 8, 9, 2 };
+
+Func<int, bool> GetPairs = (number) => number %2 == 0;
+
+var pairs = numbers.Where(GetPairs);
+
+var pairs = numbers.Where((number) => number % 2 == 0);
+
+Action = No regresa algo, es como una funcion void.
+
+Action<int> print = (number) => Console.WriteLine(number);
+print(5);
+
+Action<List<int>> show (numbers) => {
+	foreach(var number in numbers)
+		print(number);
+};
+show(numbers);
+
+Funcions de orden superior (una funcion que recibe una funcion)
+Func<int, Func<int, int>, int> fnHigherOrder = (number, fn) => {
+	if(number > 100)
+		return fn(number);
+	else
+		return number;
+};
+
+ver res = fnHigherOrder(600, (n) => n * 2);
+var res = fnHigherOrder(600, n => n * 2);
+
 96.- METODOS DE EXTENSION
 Otra de las caracteristicas del lenguaje C# es el concepto de metodos de extension.
 
@@ -4550,7 +4603,7 @@ class Program{
 	
 }
 
-11x.- FUNCIONES COMUNES DE STRING
+116.- FUNCIONES COMUNES DE STRING
 - Concat()
 Comabines muiltple strings into one.
 
@@ -4742,7 +4795,7 @@ string str = String.Empty;
 if(str == String.Empty)
 
 
-11x.- INICIALIZAR STRING
+117.- INICIALIZAR STRING
 
 string str;
 
@@ -4765,7 +4818,7 @@ string s2 = "llo";
 
 s1 += s2;
 
-11x.- STRING SECUENCIAS DE ESCAPE
+118.- STRING SECUENCIAS DE ESCAPE
 
 \' - Single quote
 \" - Double quote
@@ -4782,7 +4835,7 @@ s1 += s2;
 \U - Unicode escape sequence (UTF-32)
 \x - Unicode escape sequence similar to \u except with variable length.
 
-11x.- ALGUNAS FUNCIONES UTILES
+119.- ALGUNAS FUNCIONES UTILES
 - Randow
 Random generador = new Random();
 
@@ -4859,3 +4912,96 @@ int n = Math.Abs(x);
 
 double dbVar = 45;
 dbVar = dbVar * Math.PI;
+
+120.- LINQ
+public class Beer{
+	public string? Name { get; set; }
+	public string? Brand { get; set; }
+	public decimal Alcohol { get; set; }
+}
+
+public class Brand{
+	public string? Nmae { get; set; }
+	public string? Country { get; set; }
+}
+
+var beers = new List<Beer>(){
+	new Beer(){ Name = "Pikantus, Brand = "Erdinger, Alcohol = 7.5m }
+	new Beer(){ Name = "Corona, Brand = "Modelo" Alcohol = 4.5m }
+	new Beer(){ Name = "Red, Brand = "Delirium, Alcohol = 8m }
+	new Beer(){ Name = "Stout, Brand = "Minerva, Alcohol = 6m }
+	new Beer(){ Name = "IPA, Brand = "Minerva, Alcohol = 7m }
+};
+
+var brands = new List<Brand>(){
+	new Brand(){ Name = "Erdinger", Country = "Alemania" },
+	new Brand(){ Name = "Modelo", Country = "Mexico" },
+	new Brand(){ Name = "Minerva", Country = "Mexico" },
+	new Brand(){ Name = "Delirium", Country = "Belgica" }
+};
+
+//QUERY EXPRESSIONS
+var names = from b in beers
+			select b.Name;
+
+foreach(var name in names){
+	Console.WriteLine(name);
+}
+
+var names = from b in beers
+			select { b.Name, b.Brand };
+
+foreach(var b in names){
+	Console.WriteLine(b.Brand);
+}
+
+var names = from b in beers
+			where b.Brand == "Minerva"
+			select { b.Name, b.Brand };
+			
+var names = from b in beers
+			where b.Brand == "Minerva" || b.Alcohol >= 7
+			select { b.Name, b.Brand };
+
+foreach(var b in names){
+	Console.WriteLine(b.Brand);
+}
+
+ORDER
+var names = from b in beers
+			where b.Brand == "Minerva" || b.Alcohol >= 7
+			orderby b.Name
+			select { b.Name, b.Brand };
+			
+var names = from b in beers
+			where b.Brand == "Minerva" || b.Alcohol >= 7
+			orderby b.Name descending
+			select { b.Name, b.Brand };
+
+GROUP
+var names = from b in beers
+			group b by b.Brand into groupBeers //b.Brand tomara el nombre de Key
+			select new 
+			{ 
+				Brand = groupBeers.Key,
+				Count = groupBeers.Count()
+			};
+
+JOINS
+var names = from b in beers
+			join bra in brands on b.Brand equals bra.Name
+			select new {
+				Name = b.Name,
+				Brand = b.Brand,
+				Country = bra.Country
+			};
+
+//METHODS EXPRESSIONS (En el compilado los query expressions se convierten en methods expresions)
+var names = beers.Where(b => b.Brand == "Minerva" || b.Alcohol >= 7).Select(b => new {
+	b.Name,
+	b.Brand
+});
+
+foreach(var b in names){
+	Console.WriteLine(b.Brand);
+}

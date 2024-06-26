@@ -5005,3 +5005,48 @@ var names = beers.Where(b => b.Brand == "Minerva" || b.Alcohol >= 7).Select(b =>
 foreach(var b in names){
 	Console.WriteLine(b.Brand);
 }
+
+PROGRAMCION ASINCRONA async, await, Task
+
+class Program{
+	static void Main(string[] args){
+		/*Barman oBarman = new Barman();
+		oBarman.CalientaSnack();
+		Thread.Sleep(10000);
+		oBarman.HacerCoctel();*/
+	
+	
+		//Como el metodo Main no se puede hace asincrono se debe emular la sincronicidad
+		Task.Run(async () => {
+			Barman oBarman = new Barman();
+			
+			Task<bool> TBool = oBarman.CalientaSnack();
+			
+			oBarman.HacerCoctel();	
+			
+			bool boolResult = await TBool; //Revisa si ya termino la tarea.
+		}).GetAwaiter().GetResult();
+	}
+	
+	public class Barman{
+		//public void CalientaSnack(){
+		//public async Task CalientaSnack(){ //para hacer el metodo asincrono
+		public async Task<bool> CalientaSnack(){ //si se ocupa que el metodo regresae algo
+			Console.WriteLine("Mete el sanck al horno.");
+			
+			Thread.Sleep(15000);
+			
+			Console.WriteLine("Saca el snack del horno.");
+			
+			return true;
+		}
+		
+		public void HacerCocktel(){
+			Console.WriteLine("Comienza hacer el coctel.");
+			
+			Thread.Sleep(10000);
+			
+			Console.WriteLine("Termina de hace el coctel.");
+		}
+	}
+}

@@ -1,0 +1,28 @@
+EC2
+- Instances
+- Launch Instances
+- Section: Application and OS Images (Amazon Machine Image)
+- Select Amazon Linux.
+- Subsection: Amazon Machine Image (AMI)
+- Select Amazon Linux 2023 AMI / Free tier eligible
+- Section: Instance type
+- Select t2.micro / Free tier eligible
+- Section: Key pair (login)
+- In combo box Key pair name: Proceed without a key pair (Not recommended) / Default value
+- Section: Network settings
+- Clic on button Edit
+- In combo box VPC: select the VPC created (MyVPC)
+- In combo box Subnet: select the some of the subnet created
+- In combo box Auto-assign public IP: Enable
+- In text box Security group name: WebAccessMyVPC
+- In text box Description: WebAccessMyVPC
+- Clic on button Launche Instance
+- In the Instances, select the created instance.
+- When the Instance status is Running clic in the button Connect
+- Tap: EC2 Instance Connect
+- Section: Connection Type
+- Select Connect using EC2 instance Connect
+- Section: Username
+- Select ec2-user
+- Clic on the button Connect
+- In the explorer will open a command line.

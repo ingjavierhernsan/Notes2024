@@ -22,7 +22,8 @@ Create VPC
 - Create VPC
 
 - Enter in MyVPC
-- Actions: Edit DNS hostnames
+- Actions: Edit VPC settings
+- Section: DNS settings
 - DNS hostnames: Enable
 - Save changes
 
@@ -32,23 +33,26 @@ Create Subnets
 - VPC ID: MyVPC
 - Subnet name: Public-1A
 - Availability Zone: US East (N. Virginia)/us-eat-1a
-- IPv4 CIDR block: 10.0.1/24
+- IPv4 subnet CIDR block: 10.0.1/24
 - Tags: Key = Name, Value - optional = Public-1A
 - Create subnet
 - Select subnet
-- Action: Modify auto-assign IP settings
-- Aunto-assign IPv4: Enable auto-assign pulic IPv4 address
+- Action: Edit subnet settings
+- Section: Auto-assign IP settings
+- Enable auto-assign pulic IPv4 address
 - Save
 * Only in the public subnets
 
 Create route table
+* For this steps you have to create a private subnet.
 - Route tables
 - Create Route table
 - Name - optional: Private-RT
 - VPC: MyVPC
 - Create route table
 - Select the route table
-- Tab Subnet associations
+- Tab: Subnet associations
+- Section: Explicit subnet associations
 - Edit subnet associations
 - Select the private subnets
 - Save associations
@@ -68,9 +72,11 @@ Create an internet Gateways
 - Attach internet gateway
 - Go to Route Tables
 - Select tab Routes
+- Select Private-RT
 - Edit routes
 - Add route
-- Destination: 0.0.0.0/0, Target: igw-...
+- Destination: 0.0.0.0/0 
+- Select Target: Internet GateWay.
+- Will appear a combo box, select MyIGW
 - Save changes
-
 

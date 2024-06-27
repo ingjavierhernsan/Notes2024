@@ -1,0 +1,59 @@
+CREATE AND ATTACH AN EBS VOLUME
+- EC2
+- In the left menu, in the section Elastic Block Store
+- Select Volumes
+- Clic in Create volume
+- In the section Volume settings.
+- In the combo box Volume type: General Purpose SSD (gp3)
+- In the combo box Availability Zone: us-east-1a
+- Create Volume
+- Go to Instances.
+- Select a public instance.
+- Connect
+- sudo lsblk -e7 (list devices in the instance)
+- Go to Volumes
+- Select the volume
+- Go Actions
+- Select: Attach volume
+- In Instance: select le public intances
+- In the combo box Device name: select some name.
+- Clic on button: Attach volume
+- Return to the running instances and run sudo lsblk -e7
+
+
+CREATE A FILESYSTEM AND MOUNT THE VOLUME
+- Create a filesystem on the EBS volume: 
+sudo mkfs -t ext4 /dev/xvdf
+- Create a mount point for EBS volume:
+sudo mkdir /data
+- Mount the EBS volume to teh mount point:
+sudo mount /dev/xvdf /data
+- Make the volume mount persistant:
+Run: sufo nano /etc/fstab
+Then add (in the last line): /dev/xvdf /data ext4 defaults,nofail 0 2
+Safe the file ctrl + x, y and enter
+cat /etc/fstab
+
+TAKE A SNAPSHOT
+- Intances
+- Elastic Block Store
+- Select: Volumes
+- Select the volume
+- If the volume does not have any name, name it.
+- Actions
+- Select: Create snapshot
+- In the section: Details
+- In the text box Description write a description
+- Clic on the button Create snapshot
+- In the section Snapshots in the Menu Elastic Bloc Store we can manage them.
+
+CREATE A VOLUME FROM A SNAPSHOT
+- Instances
+- Elastic Block Store
+- Select: Snapshot
+- Select a snapshot
+- Actions
+- Select the option Create volume from snapshot
+- We can see that here is the feature of the volume, we can modify the information.
+- Clic on the button Create volume
+

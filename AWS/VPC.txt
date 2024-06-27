@@ -9,6 +9,15 @@ private-1b	10.0.4.0/24		us-east-1b		Private-RT	No
 public-1a	10.0.1.0/24		us-east-1a		MAIN		Yes
 public-1b	10.0.2.0/24		us-east-1b		MAIN		Yes
 
+Main Route Table
+Destination		Target
+10.0.0.0/16		Local
+0.0.0.0/0		igw-id
+
+Private-RT Route Table
+Destination		Target
+10.0.0.0/16		Local
+
 MAIN - Has a route to an Internet Gateway
 
 Create VPC
@@ -50,6 +59,7 @@ Create route table
 - Name - optional: Private-RT
 - VPC: MyVPC
 - Create route table
+- In this point AWS created a public route table automatically, this does not have a name and it is recomended to name it, example: Public-RT. To find it, in the column Main it is indicate with Yes and the column VPC has in its final part the name of the new route table ....|MyVPC
 - Select the route table
 - Tab: Subnet associations
 - Section: Explicit subnet associations
@@ -72,7 +82,7 @@ Create an internet Gateways
 - Attach internet gateway
 - Go to Route Tables
 - Select tab Routes
-- Select Private-RT
+- Select Public-RT
 - Edit routes
 - Add route
 - Destination: 0.0.0.0/0 

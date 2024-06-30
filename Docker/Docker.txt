@@ -1,4 +1,16 @@
-Install Docker Engine
+1.- INSTALL DOCKER ENGINE
+2.- UNINSTALL DOCKER ENGINE
+3.- DOWNLOAD A DOCKER IMAGE
+4.- RUN A DOCKER IMAGE
+5.- LIST THE IMAGE DOWNLOADED
+6.- LIST THE RUNNING IMAGE
+7.- START A CONTAINER THAT WAS STOP
+8.- CHECK THE LOGS OF A CONTAINER
+9.- EXECUTE A COMMAND IN A RUNNING CONTAINER
+10.- STOP A CONTAINER
+11.- CREATE A DOCKER FILE
+
+1.- INSTALL DOCKER ENGINE
 Run the following command to uninstall all conflicting packages:
 
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -29,6 +41,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 sudo docker run hello-world
 
+2.- UNINSTALL DOCKER ENGINE
 Uninstall Docker Engine
 1.- Uninstall the Docker Engine, CLI, containerd, and Docker Compose packages:
 
@@ -39,15 +52,94 @@ sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 sudo rm -rf /var/lib/docker
 sudo rm -rf /var/lib/containerd
 
-docker pull alpine
-docker pull alpine:3.7
+3.- DOWNLOAD A DOCKER IMAGE
+docker pull imageName
 
-docker run alpine
-docker run alpine:3.7
+docker pull postgres
 
-docker run alpine ls -l
+An especific version:
+docket pull postgres:9.6
 
-docker run -it alpine:3.7 sh
-/ #
+4.- RUN A DOCKER IMAGE
+When you use the parameter run and you don't have the image, docket download and run the image.
 
+docker run imageName
+
+docker run postgres
+
+An especific version:
+docket run postgres:9.6
+
+Run in background
+docker run -d postgres
+
+d.- Detach
+
+5.- LIST THE IMAGE DOWNLOADED
+docker images
+
+6.- LIST THE RUNNING CONTAINERS
 docker ps
+
+docker ps -a
+
+7.- START A CONTAINER THAT WAS STOP
+docker start dockerId
+
+8.- CHECK THE LOGS OF A CONTAINER
+docker logs containerId
+
+docker logs containerName
+
+Watch the creation of the log:
+docker logs -f containerName
+
+9.- EXECUTE A COMMAND IN A RUNNING CONTAINER
+docker exec -it containerId sh
+
+It will appear a #
+
+i.- Create a interactive session.
+t.- Emulate a terminal.
+sh.- Shell.
+
+10.- STOP A CONTAINER
+docker stop containerId
+
+docker stop containerId containerId
+
+11.- CREATE A DOCKER FILE
+Name the file: Dockerfile
+
+The first line:
+FROM node:12.22.1-alpine3.11
+It is which image we are going to get.
+
+WORKDIR /app
+It indicates to docker that has to create the directory and it is where the image will work.
+
+COPY . .
+This indicate to docker to copy the container of the image to the directory app.
+
+RUN yarn install --production
+Indicate to compile the content of node.
+
+Final line:
+CMD ["node", "/app/src/index.js"]
+Indicate that when run this container the program (node) and file (index.js) will run.
+
+FROM node:12.22.1-alpine3.11
+
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+
+CMD ["node", "/app/src/index.js"]
+
+There is ENTRYPOINT, this allows you to enter an argument.
+
+12.- BUILD A CONTINER WITH THE DOCKER FILE
+docker build .
+
+With a tag:
+docker build -t countainerTag .

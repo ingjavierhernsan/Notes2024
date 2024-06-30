@@ -1,0 +1,305 @@
+1.- PARA INICIAR UN REPOSITORIO NUEVO
+git init
+
+Se crea una carpeta oculta llamada .git. Aqui se guarda todo los que se va haciendo. NO BORRAR!!!
+
+2.- INICIAR SESION EN GIT
+Para el repositorio actual:
+git config user.email "you@example.com"
+git config user.name "Your Name"
+
+Para todos los repositorios a crear:
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+3.- CONOCER EL ESTATUS DEL REPOSITORIO
+git status
+
+Cuando es la primera vez que se crea un repositorio esto dira:
+On branch master
+Initial commit
+nothin to commit (create/copy files and use "git add" to track)
+
+Crear un archivo (index.html) y correr de nuevo git status.
+Git indicara que en la carpeta hay un archivo nuevo que no esta incluido en el repositorio.
+
+4.- AGREAGAR UN ARCHIVO EN LA LISTA DEL REPOSITORIO
+git add index.html
+
+Al correr de nuevo git status, git nos indicara que se ha agregado un archivo en la lista del repositorio.
+
+Se pueden agregar todos los archivos de la carpeta con:
+git add .
+
+5.- AGREGAR LOS CAMVIOS AL REPOSITORIO
+git commit
+Esto nos mandara a un editor de texto para agregar los comentarios sobre los cambios.
+OJO:
+Este editor es tipo VIM. Para agregar el comentario primero presionar i y escribir el comentario.
+Para terminar de editar el texto se preciona la tecla Esc.
+Para salir del editor y guardar el comentario escribimos :wq (que significa write adn quit) y Enter.
+
+Git nos indicara que cambios se han guardado.
+
+Revisar el estatus. Este nos diraque a no hay cambios que guardar.
+
+Hay que tomar en cuneta la informacion resultante del commit. Los datos importantes son los que estan encerrados entre llaves: La rama (master) y el id.
+
+[master (roo-commit) b076159]
+
+Para evitar el editor VIM y realizar el commit directo y con los comentarios incluidos, escribir:
+
+git commit -m "Comentarios del commit"
+
+6.- REVISAR LOS COMMIT QUE SE HAN REALIZADO
+git log
+
+Muestra el id del commit, el autor, la fecha, la hora y los comentarios.
+
+gir log --oneline
+
+Muestra solo el id y los comentarios de los commit.
+
+Si git no nos muestra cual es HEAD  sy rama podemos utilizar este codigo:
+git log --oneline --decorate
+
+Mostrar los commit segun la fecha
+
+git log --oneline --all --since=2022-01-01
+
+7.- REVISAR MODIFICACIONES EN EL ARCHIVO QUE SE LE HAN HECHO CAMBIOS PERO NO COMMIT
+git diff
+
+Diferencias entre los dos commit:
+git diff commit1 commit2
+
+git diff 87825ab b076159
+
+git diff HEAD~1
+Compara el commit head con el siguiente commit, asi sucesivamente con HEAD~2, HEAD~3.
+
+Nos muestra los archivos que tienen cambios y nos indica en verde y el simbolo de + al inicio del renglon que es lo que se leha agregado.
+
+Con color rojo y el simbolo de - lo que se le ha quitado.
+
+8.- AGREGAR CAMBIOS EN UN COMMIT ANTERIOR
+git commit --amend
+
+Si realizamos un commit y mas adelante realizamos otro cambio que queremos que este en ese commit, escribimos la sentencia y los mandara al editor de textos con los comentarios de ese commit para agregar texto nuevo.
+
+9.- VOLVER A UNA VERSION ANTERIOR
+git checkout -- index.html
+
+Este se utiliza cuando no se ha hecho un git add
+
+git add index.html o git add .
+
+10.- COLCER A UNA VERSION ANTERIOR CUANDO YA SE HISO ADD
+git reset HEAD index.html
+
+Esto elimina el add realizado previamente. Ahora ya se puede utilizar el checkout --
+
+git checkout -- index.html
+
+HEAD es el repositorio actual donde se esta trabajando.
+
+11.-DESHACER UN COMMIT (ELIMINAR EL COMMIT)
+Con git log revisar a que commit se quiere regresar.
+
+Ya teniendo seleccionado el commi al que se desea volver escribir:
+
+git reset idDelCommit
+git reset 87825ab
+
+Git indicara que se ha regresado al commit deseado. Ahora se debe recuperar el codigo de ese commit:
+
+git checkout -- index.html
+
+Este proceso se puede realizar en un solo paso con:
+
+git reset --hard 87825ab
+
+Para solo regresar en estado stage se usa:
+
+git revert --soft 87825ab
+
+12.- REVERTIR UN COMMIT
+git revert 87825
+
+git revert HEAD
+
+En esta accion se entra al editor de texto para agregar un comentario y se crea un commit.
+
+Para no crear un commit se debe utilizar:
+
+git revert --no-commit HEAD
+
+Al final de realizar el revert se debe escribir:
+
+git revert --continue
+
+Entrar al editor de texto para agregar un comentario y crea un commit por todos los revert realizados.
+
+13.- MOSTRAR LAS RAMAS DEL REPOSITORIO
+git branch
+
+Muestra las ramas creadas en el repositorio. Con * se senala la rama en la cual se esta trabajando.
+
+14.- CREAR UNA RAMA
+git branch rama1
+
+15.- CAMBIAR A OTRA RAMA
+git checkout rama1
+
+Para creat y cambiarse a esa rama:
+git checkout -b rama2
+
+16.- CAMBIAR EL NOMBRE DE UNA RAMA
+git branch -m rama2 ramaDos
+
+17.- ELIMINAR UNA RAMA
+git branch -d ramaDos
+
+Eliminacion forzada:
+git branch -D ramaDos
+
+18.- UNIR RAMAS AL MASTER
+git merge rama1
+
+Pasos
+git checkout master
+git merge rama1
+
+Cuando existen muchos conflictos en el codigo y nose quiere resolver los conflictos indicados, para salir de merge se debe escribir:
+git merge --abort
+
+19.- ALIAS
+git config --global alias.lod 'log --oneline --decorate'
+git lod
+
+Tambien se pueden mezclar con codigos de git:
+git lod --graph
+
+git config --global alias.lodag 'log --oneline --decocrate --graph'
+
+Para ver los alias registrados:
+git config --global --get-regexp alias
+
+Para eliminar un alias:
+git config --global --unset alias.lodag
+
+20.- ETIQUETAS EN LSO COMMIT DEL REPOSITORIO
+git tag v0.2.0
+
+Etiqueta el commit que esta en HEAD
+commitId (HEAD -> master, tag: v0.2.0) Merge branch 'algunCommit'
+
+Etiquetar algun commit que no esta en HEAD
+git tag v0.1.0 commitId
+
+Tambien se pueden utilizar como identificadores:
+git checkout v0.1.0
+
+Para ver las distintas etiquetas creadas:
+git tag
+
+Eliminar una etiqueta:
+git tag -d v0.1.1
+
+21.- MOSTRAR INFORMACION SOBRE ALGO
+git show commitId
+git show anyRama
+git show anyTag
+
+22.- STASH
+Stash sirve para guardar lo que se ha realizado en el stage (add) y poder cambiar a otra rama. Para hacer esto solo se debe teclear:
+
+git stash
+
+Git indicara que el contenido del stage estara guardado en le stash. Se puede guardar varias modificaciones en el stash.
+
+Para agregar un comentario al stash agregamos save:
+
+git stash save "Comentario para el stash guardado".
+
+Para ver el contenido del stash tecleamos:
+
+git stash list
+
+Para ver mas informacion de un stash se debe teclear:
+
+git stash show stash@\{0\}
+
+Para eliminar el contenido del stash tecleamos:
+
+git stash drop
+
+Para aplicar los cambios guardados en stash al codigo que tenemos actualmente se debe teclear:
+
+git stash apply
+
+Para aplicar el ultimo  stash de la lista:
+
+git stash pop
+
+23.- REPOSITORIO REMOTO
+Para conectarse al repositorio remoto:
+git remote add nombreDelRepositorioRemoto direccionDelRepositorio
+
+git remote add nomRep https://github.com/danirod/paginaCliente.git
+
+Ver los repositorios remotos:
+git remote
+
+Para ver mas informacion sobre esos repositorio:
+git remote -v
+
+24.- AGREGAR RAMAS AL REPOSITORIO REMOTO
+git push nombreDelRepositorio rama
+
+git push origin master
+
+Para agregar todas las ramas:
+git push nombreRepositorio --all
+
+En el primer push el sistema pedira usuario y contrasena del repositorio.
+
+25.- DESCARGAR UN REPOSITORIO DE FORMA REMOTA
+Clonar un repositorio:
+git clone direccionRepositorio
+
+Este comando se utiliza en la consola, ubicandose en la carpeta donde se desea descargar el repositorio completo. Se decargaran todos los cambios realizados en el proyecto.
+
+git clone https://github.com/danirod/paginaCliente.git
+
+Cuando ya se tiene el repositorio descargado en la computadora se utiliza el comando pull para estar bajando los ultimos cambios del repositorio:
+
+git pull nombreRepositorio rama
+
+git pull origin master
+
+26.- COMANDO FETCH
+Fetch pregunta al repositorio remoto si hay algun modificacion realizada y los descarga.
+
+git fetch nombreRepositorio
+
+git fetch origin
+
+Se necesita hacer merge de forma manual. Con pull se descarga y se hace merge automaticamente.
+
+27.- COMANDO REBASE
+Este comando modifica el historial del repositorio. Se debe tener cuidado al utilizarlo, llega a borrar commits.
+
+Realiza la misma funcion de merge, pero elimina el arbol aplanando la rama principal. Asi es como borra algunos commits.
+
+git rebase master
+
+git pull --rebase origin master
+
+Lo anterior git lo hace de forma automatica. Tambien hay una forma de hacerlo manualmente:
+
+git rebase -i HEAD~4
+
+Git entra en el editor vim y muestra las opciones para realizar las modificaciones. Se guarda la informacion modificada y se debe salir del vim. Git empezara a hacer las modificaciones.
+
+

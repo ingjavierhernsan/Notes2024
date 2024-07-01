@@ -1,0 +1,96 @@
+CREATE AN AMAZON EFS FILESYSTEM
+
+Search CloudShell
+
+1.- Create a security group
+aws ec2 crate-security-group --group-name StorageLabs --description "Temporary SG for the storage service labs"
+
+The terminal will send a output. It will be the id of the security group:
+{
+	"GroupId": "sg-0f..."
+}
+
+Copy the Id.
+
+2.- Add a rule for SSH inbound to the security gruop
+aws ec2 authorize-security-group-ingress --group-name StorageLabs --protocl tcp --port 22 --cidr 0.0.0.0/0
+
+3.- Launch instance in US-EAST-1A
+aws ec2 run-instances --image-id <LATEST-AMI-ID> (<== Here paste the instansce id ami-0440d3b...) --instance-type t2.micro --placement AvailabilityZone=us-east-1a --security-group-ids <SECURITY-GROUP-ID> <== Here paste the security group id.
+
+4.- Launch instance in US-EAST-1B
+aws ec2 run-instances --image-id <LATEST-AMI-ID> --instance-type t2.micro --placement AvailabilityZone=us-east-1b --security-group-ids <SECURITY-GROUP-ID>
+
+CREATE AN EFS FILE SYSTEM
+1.- Add a rule to the security group to allow the NFS protocol from group members.
+
+aws ec2 authorize-security-group-ingress --group-id sg-0f... --protocol tcp --port 2049 --source-group sg-0f...
+
+To check the created rule:
+EC2 section.
+In the left menu search: Network & Security
+Clic in the option: Security Groups
+In the right table:
+Search the security group in the column Security group ID.
+Clic on it to watch its details
+
+2.- Create an EFS file system through the console, and add the StorageLabs security group to the mount targets for each AZ.
+Search EFS
+Find the section Create file system
+Clic on the button Create file system
+In the text box Name type a name.
+Clic on the button Customize.
+Clic on the button Next.
+In the Network access page, section Network, in the combo box Virtual Private Cloud (VPC): Select the desire VPC.
+Remove the Availability zone that you don't want.
+In the combo box Security groups of each availability zone select the created security group.
+Clic on the button Next.
+In the next page clic the Next button.
+In the next page clic the Create button.
+
+MOUNT USING THE NFS CLIENT
+Go to the desire instance an star Connect.
+1.- Create an EFS mount point
+mkdir ~/efs-mount-point
+
+2.- Install NFS client
+sudo yum -y install nfs-utils
+
+3.- Moutn using EFS client
+sudo mount -t nfs4 -o nfsvers=4.1,resize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-023...efs.us-east-1.amazonaws.com:/ ~/efs-mount-point
+
+This is the DNS nem of the File system:
+fs-023...efs.us-east-1.amazonaws.com
+
+To find it:
+Go to Amazon EFS.
+Select the desire file system in the table.
+Clic on the name.
+In the section General search the DNS name section and copy the information.
+
+4.- Create a file on the file system.
+
+5.- Add a file system policy to enforce encryption in-transit
+Go to Amazon EFS.
+Select the desire file system in the table.
+Clic on the name.
+In the tap File system policy.
+In the section Policy, clic on the button Edit.
+In the section Policy options, select the check box: Enforce in-transit encryption for all clients.
+Clic on the button Save.
+
+6.- Unmount (make sure to change directory out of efs-mount-point first)
+sudo umount ~/efs-mount-point
+
+These apply in each instance to share files.
+
+4.- Mount again using the EFS client (What happens?). You can't. Because the tool does not support the in-transit encryption.
+
+So, you need to do:
+
+MOUNT USING THE EFS UTILS (PERFORM STEPS ON BOTH INSTANCES
+1.- Install EFS utils.
+sudo yum install -y amanzon-efs-utils
+
+2.- Mount using the EFS mount helper.
+sudo mount -t efs -o tls fs-023...efs.us-east-1.amazonaws.com:/ ~/efs-mount-point

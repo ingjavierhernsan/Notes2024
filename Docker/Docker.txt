@@ -9,6 +9,12 @@
 9.- EXECUTE A COMMAND IN A RUNNING CONTAINER
 10.- STOP A CONTAINER
 11.- CREATE A DOCKER FILE
+12.- BUILD A CONTINER WITH THE DOCKER FILE
+13.- USAR PUERTOS EN DOCKER
+14.- VOLUMENES EN DOCKER
+15.- METER LOS CAMBIOS HECHOS EN LA IMAGEN
+16.- SUBIR LA IMAGEN AL REPOSITORIO DE DOCKER
+17.- CREAR UNA RED DE CONTENEDORES
 
 1.- INSTALL DOCKER ENGINE
 Run the following command to uninstall all conflicting packages:
@@ -143,3 +149,56 @@ docker build .
 
 With a tag:
 docker build -t countainerTag .
+
+13.- USAR PUERTOS EN DOCKER
+docker run -p 3000:3000 containerName
+
+-p 3000:3000.- Sirve para exponer el puerto 3000
+
+Tambien se pueden combinar parametros: -dp
+Expone el puerto y corre en background.
+
+14.- VOLUMENES EN DOCKER
+docker run -d -v /Users/kbs/ejemplo-docker/app/etc:/etc/todos -p 3000:3000 containerName
+
+Se guarda la informacion creada en el contenedor. Si se para el contenedor la informacion ya quedo guardada en la ruta indicada, cuando se corra de nuevo el contendor se podra revisar de nuevo la informacion. Se debe correr con los parametros indicados en la sentencia anterior.
+
+/Users/kbs/ejemplo-docker/app/etc:/etc/todos 
+/Users/kbs/ejemplo-docker/app/etc es la ruta donde se guarda la informacion en la computadora
+:/etc/todos es la ruta que se manejara en el contenedor
+
+La informacion puede ser modificada en la ruta indicada desde la computadora aun que este corriendo el contenedor, estos cambios se podran visualizar en el contenedor corriendo.
+
+15.- METER LOS CAMBIOS HECHOS EN LA IMAGEN
+docker build -t containerName:v2 .
+
+:v2 es un tag para indicar que no es la imagen original y es una version con alguna modificacion.
+
+16.- SUBIR LA IMAGEN AL REPOSITORIO DE DOCKER
+Para subir al repositorio docker recomienda poner el nombre del usuario al inicio del nombre del contenedor.
+
+Volver a tagear una imagen:
+docker tag imagenId user/containernomber:v1
+
+Crear una cuenta en docker hub.
+Logearte:
+docker login
+docker push user/containerName:v1
+
+17.- CREAR UNA RED DE CONTENEDORES
+Crear una nueva red:
+docker network create todo-app
+
+Correr un contenedor dentro de la red creada:
+docker run -d --network todo-app --network-alias mysql -v todo-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=todos mysql:5.7
+
+docker exec -it containerId mysql -p
+
+mysql -p va correr dentro del containerId
+
+Conectar otro contenedor a la red creada:
+docker run -it --network todo-app containerName
+
+Este tipo de sentencias con parametros se utiliza cuando se ocupa pasar ciertos parametros al contenedor
+docker run -dp 3000:3000 --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos containerName:v2
+

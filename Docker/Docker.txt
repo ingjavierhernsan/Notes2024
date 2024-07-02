@@ -15,6 +15,7 @@
 15.- METER LOS CAMBIOS HECHOS EN LA IMAGEN
 16.- SUBIR LA IMAGEN AL REPOSITORIO DE DOCKER
 17.- CREAR UNA RED DE CONTENEDORES
+18.- DOCKER COMPOSE
 
 1.- INSTALL DOCKER ENGINE
 Run the following command to uninstall all conflicting packages:
@@ -202,3 +203,35 @@ docker run -it --network todo-app containerName
 Este tipo de sentencias con parametros se utiliza cuando se ocupa pasar ciertos parametros al contenedor
 docker run -dp 3000:3000 --network todo-app -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=secret -e MYSQL_DB=todos containerName:v2
 
+18.- DOCKER COMPOSE
+Crear archivo:
+docker-compose.yaml
+
+vim docker-compose.yaml
+
+version: "3.7"
+
+services:
+#comentario
+	app:
+		image: user/containerName:v1
+		ports:
+			- 3000:3000
+		enviroment:
+			MYSQL_HOST: mysql
+			MYSQL_USER: root
+			MYSQL_PASSWORD: secret
+			MYSQL_DB: todos
+		
+	mysql:
+		image: mysql:5.7
+		volumes:
+			- ./todo-mysql-data:/var/lib/mysql
+		enviroment:
+			MYSQL_ROOT_PASSWORD: secret
+			MYSQL_DATABASE: todos
+
+version: es la version de sintaxis que el documento usa.
+
+Correr el archivo
+docker-compose up -d

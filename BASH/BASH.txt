@@ -1,0 +1,68 @@
+1.- CREAR ARCHIVO BASH
+Un archivo con extension .sh
+
+touch miscript.sh
+vim miscript.sh
+
+2.- INICIO DEL DOCUMENTO
+#!/bin/bash
+
+3.- IMPRIMIR EN PANTALLA
+#!/bin/bash
+
+echo "Hola mundo"
+
+4.- EJECUTAR ARCHIVO BASH
+bash miscript.sh
+
+5.- PASAR ARGUMENTOS
+#!/bin/bash
+
+echo "Hola mundo $1"
+
+bash miscript.sh textoDeParametro
+
+Se puede correr sin el argumento.
+
+curl --write-out "%{http_code}\n" --silent --output /dev/null "$1"
+
+bash miscript.sh https://github.com
+
+6.- UTILIZAR VARIABLES
+#!/bin/bash
+
+respoonse = hola
+
+echo $response
+
+La variable tendria el valor del texto no del resultado del comando:
+response = curl --write-out "%{http_code}\n" --silent --output /dev/null "$1"
+
+Toma el valor de la salida del comando:
+response = $(curl --write-out "%{http_code}\n" --silent --output /dev/null "$1")
+
+#!/bin/bash
+
+response = $(curl --write-out "%{http_code}\n" --silent --output /dev/null "$1")
+
+echo $1: $response
+
+7.- IF
+if [ $1 == https://qwertevfd.com ]; then
+	echo "Siempre 200."
+else
+	response = $(curl --write-out "%{http_code}\n" --silent --output /dev/null "$1")
+	echo $1: $response
+fi
+
+8.- WHILE
+while read line; do
+	response = $(curl --write-out "%{http_code}\n" --silent --output /dev/null "$line")
+	echo $line: $response
+done < lista.txt
+
+8.- DAR PERMISO DE EJECUCION AL ARCHIVO BASH
+chmod +x ./miscript.sh
+
+./miscript.sh
+

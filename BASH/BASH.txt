@@ -66,3 +66,129 @@ chmod +x ./miscript.sh
 
 ./miscript.sh
 
+9.- VARIOS ARGUMENTOS
+echo "Argumentos: $1 $2
+
+./miscript.sh argumentouno argumentodos
+
+Tambien:
+
+echo "Agumentos $@"
+
+miscript.sh argumentouno argumentodos
+
+10.- FOR
+for USUARIO in ${@}; do
+	echo $USUARIO
+done
+
+./miscript.sh juan pablo martin
+
+11.- FUNCIONES
+function saludar () {
+	echo Hola $1
+}
+
+saludar $saludar
+
+12.- VARIABLES
+x=3
+echo "El valor de X es $X"
+
+13.- DO WHILE
+x=3
+
+while [[ $X -ge 1]]; do
+	echo "El valor de X es $X"
+	X=$((X-1))
+done
+
+14.- CASE
+case "${1}" in
+	start)
+		echo "Ejecutastte start"
+		;;
+	finish)
+		echo "Ejecutaste finish"
+		;;
+	restart)
+		echo "Ejecutaste restart"
+		;;
+	*)
+		echo "Especificaste un argumento invalido"
+esac
+
+case "${1}" in
+	start|finish)
+		echo "Ejecutastte start o finish"
+		;;
+	rest*)
+		echo "Ejecutaste restart"
+		;;
+	*)
+		echo "Especificaste un argumento invalido"
+esac
+
+15.- WHILE ESPECIAL Y CASE
+while getopts "ab" FLAG
+do
+	case "${FLAG}" in
+		a)
+			echo "Pasaste la opcion '-a' al script"
+			;;
+		b)
+			echo "Pasaste la opcion '-b' al script"
+			;;
+		*)
+			echo "Uso invalido, por favor pasar opciones '-a' o '-b'"
+			;;
+	esac
+done
+
+Tambien:
+
+while getopts "a:b" FLAG
+do
+	case "${FLAG}" in
+		a)
+			echo "Pasaste la opcion '-a' al script"
+			echo "El argumentode '-a' es ${OPTARG}"
+			;;
+		b)
+			echo "Pasaste la opcion '-b' al script"
+			echo "El argumentode '-b' es ${OPTARG}"
+			;;
+		*)
+			echo "Uso invalido, por favor pasar opciones '-a' o '-b'"
+			;;
+	esac
+done
+
+./myscript.sh -a hola
+
+16.- CHILD SHELL Y SUB SHELL
+Al escribir a bash en la terminal se entra a una child shell:
+
+bash
+
+Para salir de la child shell:
+
+ctrl + d
+
+Para ver las shell que estan corriendo se utiliza el comando ps.
+
+Para comprobar si estamos en una child shell se imprime la variable $BASH_SUBSHELL, si es 0 no se esta en una subshell:
+
+echo $BASH_SUBSHELL
+
+Metodo de uso
+
+bash
+echo ($BASH_SUBSHELL)
+
+Las operaciones aritmeticas se hacen en la subshell
+
+while [[ $X -ge 1]]; do
+	echo "El valor de X es $X"
+	X=$((X-1))
+done

@@ -1,0 +1,117 @@
+INSTANCES METADATA IS DATRA ABOUT YOUR EC2 INSTANCE
+
+INSTANCE METADATA IS AVAILABLE AT http://169.254.169.254/latest/meta-data
+
+EXAMPLE:
+curl http://169.254.169.254/latest/meta-data
+
+curl http://169.254.169.254/latest/meta-data/local-ipv4
+
+curl http://169.254.169.254/latest/meta-data/public-ipv4
+
+/placement
+/availability-zone
+
+1.- Go to EC2
+2.- In the section Launch instance clic on Launch instance
+3.- Name the instances.
+3.- Select an AMI 
+4.- Select an Instance type.
+5.- In the option Key pair name - required, select teh opcion Proceed without a key pair (Not recommended)
+6.- In the section Nerwork setting, select the option Select existing security group and select in the opcion Common security groups: WebAccess
+7.- In the section Advanced details, go to the option Metadata acessible and select Enabled, in the Metada version select V1 and V2 (token optional).
+8.- Clic on Launch Instance button.
+
+Create a second instance without the step 7.
+
+In the table of instances select the first created instance.
+1.- Clic on the Connect button.
+2.- Select the option Connect using EC2 Instance Connect.
+3.- Click on the button Connect.
+4.- In the console:
+Get the instance ID:
+curl http://169.254.169.254/latest/meta-data/instance-id
+
+Get the AMI ID:
+curl http://169.254.169.254/latest/meta-data/ami-id
+
+Get the instance type:
+curl http://169.254.169.254/latest/meta-data/instance-type
+
+Get the local IPv4 address:
+curl http://169.254.169.254/latest/meta-data/local-ipv4
+
+Get the public IPv4 address:
+curl http://169.254.169.254/latest/meta-data/public-ipv4
+
+In the table of instances select the second created instance.
+1.- Clic on the Connect button.
+2.- Select the option Connect using EC2 Instance Connect.
+3.- Click on the button Connect.
+4.- In the console:
+Try to get the instance ID:
+curl http://169.254.169.254/latest/meta-data/instance-id
+
+1.- Create a session and get a token:
+
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+
+To watch the token content:
+
+echo $TOKEN
+
+Get the instance ID:
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id
+
+Get the AMI ID:
+curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/ami-id
+
+USE METADATA WITH USER DATA TO CONFIGURE THE INSTACE
+This script installs a wb server and uses instance metada to retrieve infromation about the instance and then output the information on a webpage.
+
+In a bash file:
+!/bin/bash
+
+yum update -y
+yum install -y httpd
+
+systemctl start httpd
+systemctl enable httpd
+
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/instance-id)
+AMI_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/ami-id)
+INSTANCE_TYPE=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" curl http://169.254.169.254/latest/meta-data/instance-type)
+
+cat <<EOF > /var/www/html/index.html
+<html>
+<head>
+	<title>EC2 Instance metadata</title>
+</head>
+<body>
+	<h1>EC2 Instance Metadata</h1>
+	<p>Instance ID: $INSTANCE_ID</p>
+	<p>AMI ID: $AMI_ID</p>
+	<p>Instance Type: $INSTANCE_TYPE</p>
+</body>
+</html>
+EOF
+
+USE DATA
+Create another instance
+
+1.- Go to EC2
+2.- In the section Launch instance clic on Launch instance
+3.- Name the instances.
+3.- Select an AMI 
+4.- Select an Instance type.
+5.- In the option Key pair name - required, select teh opcion Proceed without a key pair (Not recommended)
+6.- In the section Nerwork setting, select the option Select existing security group and select in the opcion Common security groups: WebAccess
+7.- In the section Advanced details, go to the option User data - optional.
+8.- Clic on the button Choose file to select a file or write the script in the text area. Paste the before script.
+9.- Clic on Launch Instance button.
+
+It only happen in the first time the instance runs. So, it can be change:
+1.- Go to the action button.
+2.- Select Instance settings.
+3.- Select Edit user data.

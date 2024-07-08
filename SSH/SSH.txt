@@ -1,0 +1,89 @@
+SSH = Secure SHell
+
+1.- INSTALAR SSH
+apt-get install openssh-server
+
+2.- ACTIVAR SSH
+systemctl enable ssh
+
+3.- CONECTARTE AL SERVIDOR SSH
+ssh root@94.237.92.33
+Pregunta que si quieren guardar la informacion del servidor a conectar, poner si.
+Pregunta contrasena.
+
+4.- SALIR DE LA SESION
+logout
+
+5.- CREAR CERTIFICADO PARA LA CONNECCON
+ssh-keygen
+
+Crea un certifacdo local para certificarte con los servidores.
+
+Se debe copiar el certificado publico al servidor (no copiar el certificado privado):
+
+cat .ssh/id_rsa.pub
+
+El texto que aparesca se debe copiar y pegar en:
+
+Se enta al servidor y se abre el archivo donde se pegara el certificado:
+
+vim .ssh/authorized_keys
+
+Al salir de la sesion y volverte a conectar no pedira la contrasena.
+
+En ese archivo se puede agregar muchos certificados.
+
+6.- COPIAR EL CERTIFICADO AL SERVIDOR
+ssh-copy-id root@209.50.63.115
+
+Para esto pedira la contrasena.
+
+7.- USAR EL SERVIDOR COMO UNA CLIENTE
+Se correra como ejemplo irssi.
+
+ssh -t root@209.50.63.115 irssi
+
+-t emula una terminal para el comando.
+
+irssi esta corriendo en el servidor.
+
+Salir de irssi: /quit
+
+9.- USAR COMO PROXY PARA EL NAVIGADOR
+ssh -D 9999 root@209.50.63.115
+
+Se debe configurar el proxy en la computadora local.
+
+10.- VER EL AMBIENTO GRAFICO
+ssh -X root@209.50.63.115
+
+11.- ARCHIVO DE CONFIGURACION DE SSH
+vim .ssh/config
+
+Host server1
+Hostname 209.151.148.214
+		User root
+
+ssh server1
+
+12.- COPIAR UN ARCHIVO AL SERVIDOR
+scp Desktop/1.mov server1:/root/
+
+Si se para el proceso de copiado y se vuelve a iniciar, inicia desde el principio.
+
+rsync --partial --progress --rsh=ssh Desktop/1.mov server1:/root/
+
+Si se para el proceso de copiado y se vuelve a iniciar, inicia desde el porcentaje que quedo.
+
+Se debe tener instalodo rsync.
+
+13.- CONECTAR DESDE UN SERVIDOR A OTRO CON EL CERTIFICADO LOCAL
+ssh -J server1 server2
+
+Para varios servidores:
+
+ssh -J server1, server2 server3
+
+14.- ABRIR DOCUMENTOS EN VIM CON SSH
+vim scp://rpi/docker-compose.yaml
+

@@ -1,0 +1,26 @@
+EC2 AUTO SCALING GROUP
+
+1.- In the EC2 Menu (left), select section Instances.
+2.- Select Launch Templates option.
+3.- Clic on the button Create launch template.
+4.- In the section Launch template name and description, in the text box Lauc template name type the name MyWebServer.
+5.- Select Amazon Linux.
+6.- Select the instance type.
+7.- In the Key pair (login) section in the combo box Key pair name select Don't inclue in launch template.
+8.- In the Network settings section, in the combo box Security groups select the WebAcess.
+9.- In the section Advance details in the text area User data paste the configuration of the instance.
+10.- Clic on the Create launch template button.
+11.- Go to the EC2 Menu (left)
+12.- In the section Auto Scaling: clic in the Auto scaling groups option.
+13.- In the title section clic on the button Create Auto Scaling group.
+14.- In the section Name, type a name. (ASG1)
+15.- In the section Launch template select in the combo box MyWebServer.
+16.- Clic in the button Next.
+17.- In the section Network, in the Availability Zones and subnets, select the public zones and clic on Next.
+18.- In the next page clic on Next.
+19.- In the section Group size, in the combo box Desired capacity increase to 2.
+20.- In the Scaling section, in the combo box Min desired capacity increase to 2 and in Max desired capacity increase to 2.
+21.- Clic on Next.
+22.- Next.
+23.- Next.
+24.- Create Auto Scacling group

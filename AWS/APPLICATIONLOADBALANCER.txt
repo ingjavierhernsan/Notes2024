@@ -1,0 +1,60 @@
+CREATE AN APPLICATION LOAD BALANCER
+
+Create the Target Group
+
+1.- In the EC2 section go to the left menu and search the section Load Balancing.
+2.- Select Target Groups option.
+3.- Clic on the button Create target group.
+4.- In the section Choose a target type, select the option Instances.
+5.- In the text box Target group name type a name, TG1.
+6.- In the combo box Protocol : Port select HTTP. Port 80.
+7.- In the IP adress type section, selec the option IPv4.
+8.- Clic on the button Next.
+9.- Clic on the button Next.
+
+Create the Load Balancer
+
+1.- In the EC2 section go to the left menu and search the section Load Balancing.
+2.- Select Load Balancers.
+3.- Clic on the button Crete load balancer.
+4.- In the section Application Load Balancer clic on the button  Create.
+5.- In the text box Load balancer name, type a name. ALB1.
+6.- In the section Networking mapping, in section Mapping select the availability zone (us-east-1a, us-east-1b).
+7.- In the section Security groups, in the combo box Secutiry groups select the option WebAcees.
+8.- In the section Listeners and routing, in the option Listener HTTP:80, in the combo box Default action select TG1.
+9.- Clic on the button Create load balancer.
+10.- In the EC2 section go to the left menu and search the section Auto Scaling.
+11.- Select Auto Scaling Groups.
+12.- Select the ASG1 in the table.
+13.- In the section Load balancing, clic on Edit button.
+14.- Clic on the check box Applicacion, Network or Gateway Load Balancer target groups.
+15.- In the combo box select TG1|HTTP.
+16.- Clic on the Update button.
+
+Create the Scaling policy
+
+1.- In the EC2 section go to the left menu and search the section Auto Scaling.
+2.- Select Auto Scaling Groups.
+3.- Select the ASG1 in the table.
+4.- In the section Group details, clic on the Edit button.
+5.- In the Max desired capacity increase to 4.
+6.- Clic on Update button.
+7.- In the section section Network, clic on the Edit button.
+8.- Add the 1c and 1d availability zones.
+9.- In the EC2 section go to the left menu and search the section Load Balancing.
+10.- Select Load Balancers.
+11.- Clic on ALB1 in the table.
+12.- Clic on the Networking mapping tap.
+13.- Clic on the Edit subnets button.
+14.- Select the 1c and 1d availability zones.
+15.- In the EC2 section go to the left menu and search the section Auto Scaling.
+16.- Select Auto Scaling Groups.
+17.- Select the ASG1 in the table.
+18.- Clic on the Automatic scaling tap.
+19.- In the section Dynamic scaling policies, clic on the Create dynamic scaling policy button.
+20.- In the Policy type combo box, select Target tracking scaling.
+21.- In the Metric type combo box, select Application Load Balancer request count per target.
+22.- In the Target group combo box, select TG1.
+23.- Clic on the Create button.
+
+To watch the action of this configuration go to CloudWatch, in the Alarms section, select the option All alarms.

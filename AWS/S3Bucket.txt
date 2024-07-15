@@ -1,0 +1,32 @@
+Create a S3 Bucket
+
+1.- Go to Amazon S3
+2.- Clic on Create bucket button.
+3.- In the section General configuration, in AWS Region combo box select the availibity zone.
+4.- In the Bucket name text box type a name. Remember, it is a unique name in the cloud.
+5.- Clic on Create bucket button.
+6.- In the page of Buckets, in the table select the created bucket.
+7.- In the Objects tap clic on Upload button.
+8.- In the section Files and folders clic on Add files button.
+9.- Select some file and clic on Upload button.
+10.- Clic on the Upload button.
+11.- When the uploading action finish, clic on Close button.
+12.- Clic on the Create folder button.
+13.- In the section Folder, in the Folder name text box type a name.
+14.- Clic on Create folder button.
+15.- Select the created folder.
+16.- Clic on the Upload button.
+17.- When the uploading action finish, clic on Close button.
+18.- In the page of Buckets, select the Permissions tap.
+19.- Select the Permissions tap.
+20.- In the section Block public access (bucket settings), clic on Edit button.
+21.- Uncheck the Block all public access check box.
+22.- Clic on Save changes button.
+23.- Confirm the action and clic on Confirm button.
+24.- In the section Bucket policy clic on Edit button.
+25.- Clic on + Add new statement button.
+26.- In Principal statement delete the content and type *.
+27.- In Action statement delete the content s3:GetObject.
+28.- Add the statement Resource with the content arn of the bucket (arn:aws:s3:::mybucket-3dq2r2af/*)
+29.- Clic on Save changes button.
+30.- Copy the Object URL of some file and paste in the web browser to watch it.

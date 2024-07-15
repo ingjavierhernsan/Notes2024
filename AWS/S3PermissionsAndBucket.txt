@@ -1,0 +1,36 @@
+S3 Permissions and Bucket
+
+1.- Go to IAM dashboard.
+2.- In the left menu in the section Access management, select the option Users.
+3.- Create a new user.
+4.- Clic on the Add users button.
+5.- In the User name text box type a name.
+6.- Check the check box Provide user access to the AWS Managemente Console - optional.
+7.- In the section Areyou provaticen console access to a person? select the option I want to create an IAM user.
+8.- In the section Console password select teh option Custom password and type the password in the text box.
+9.- Uncheck the check box Users must create a new password at next sign-in (recommended).
+10.- Clic on the Next button.
+11.- Clic on the Next button.
+12.- Clic on the Create user button.
+13.- Clic on the Return to users list button.
+14.- In the course material search the document identity-policy.json in the Amazon S3 section.
+15.- Copy the arn of some bucket.
+16.- Past in the section Resource of the json. (Action: s3:PutObject, s3:GetObject)
+17.- In the las part of the arn add /*
+18.- Copy the whole json code.
+19.- Go to the new user.
+20.- In the tap Permissions, in the Add permissions combo box select the option Create inline policy.
+21.- Select the JSON tap.
+22.- Past the json code in the text area.
+23.- Clic on the Review policy button.
+24.- In the Name text box type a name.
+25.- Clic on the Create policy button.
+26.- Login with the new user.
+27.- Go to Amazon S3 and check the buckets.
+28.- Upload some file in the bucket who has permissions.
+29.- Check the different Bucket policies in the course material to apply to the user.
+30.- To check the user permission policies, go to the user.
+31.- In the Permissions tap, clic in the + square aside of the user name in the table.
+32.- To edit it, clic on the Edit button.
+33.- Select the JSON tap.
+

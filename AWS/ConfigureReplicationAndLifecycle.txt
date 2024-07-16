@@ -1,0 +1,54 @@
+Configure replication and lifecycle
+
+1.- Go to Amazon S3.
+2.- Go to Buckets.
+3.- Clic on the Create bucket button.
+4.- Type a name in the Bucket name text box.
+5.- In the section Bucket Versioning, select the option Enable.
+6.- Clic on the Create bucket button.
+7.- Create another bucket with the same features.
+8.- Create a role.
+9.- Go to the Identity and Access Managemente (IAM) page.
+10.- In the left menu, in the section Access management select the option Roles.
+11.- Clic on the Create role button.
+12.- Select the option Custom trust policy.
+13.- Copy the json code from Users/neal/Documents/Code/Amazon S3/s3-trust-policy.json
+14.- Delete the content of the Text area Custom trust policy.
+15.- Paste the new code.
+16.- Clic on the Next button.
+17.- Clic on the Next button.
+18.- Type a name in the text box Role name.
+19.- Clic in the Create role button.
+20.- Select the role in the table.
+21.- In the Permissions tap, clic on the Add permissions button.
+23.- Select the option Create inline policy.
+24.- Go to the JSON tap.
+25.- Copy the json code from Users/neal/Documents/Code/Amazon S3/s3-replication-permissions.json
+26.- Replace the word SOURCE-BUCKET by the bucket name.
+27.- Replace the word DESTINATION-BUCKET by the bucket name.
+28.- Add /* at the end.
+29.- Copy the code.
+30.- Paste the code.
+31.- Clic on the Review policy button.
+32.- Type a name in the text box Name.
+33.- Clic on the button Create policy.
+34.- Go to the source bucket.
+35.- Go to the Managment tap.
+36.- In the Replication rules section, clic on the Create replication rule button.
+37.- In the Replication rule configuration section, type a name in the Replicacion rule name text box.
+38.- In the Destination section, select the option Choose a bucket in his account and clic on the Browse S3 button.
+39.- Find and select the destination bucket.
+40.- Clic on the Choose path button.
+41.- In the section IAM role, select the option Choose from existing IAM roles and in the combo box IAM role select the created role.
+42.- Clic on the Save button.
+43.- Clic on the Submit button.
+44.- Test copying a file to the bucket.
+
+Create a lifecycle rule
+
+1.- In the source bucket, go to the Management tap.
+2.- In the section Lifecycle rules, select the Create lifecycle rule button.
+3.- Type a name in the Lifecycle rule name text box.
+4.- In the Prefix text box type files.
+5.- In the Lifecycle rule actions section, select what need your data.
+6.- Clic on the Create rule button.

@@ -1,0 +1,22 @@
+Enforce encryption with AWS KMS
+
+1.- Create a bucket.
+2.- Enter to the bucket.
+3.- Clic on the Properties tap.
+4.- Copy the arn
+5.- In the json code from Users/neal/Documents/Code/Amazon S3/s3-enforce-kms-encryption.json replace <YOUR-BUCKET-NAME> bye the copied arn.
+6.- Copy the whole code.
+7.- Go to the Permission tap in the bucket.
+8.- In the Bucket policy section, clic on Edit button.
+9.- Paste the code in the Bucket policy text area.
+10.- Clic on the Save changes button.
+11.- Test uploading a file.
+12.- Clic on the Add file button.
+13.- Go to the section Proterties and enter.
+14.- In the Server-side encryption.
+15.- Select the option Specify an encryption key.
+16.- In the sub section Encryption settings, select the option Override buckter settings for default encryption.
+17.- In the sub section Encryption key type, select the option AWS Key Managemente Service key (SSE-KMS).
+18.- In the sub section AWS KMS key, select the option Choose from your AWS KMS keys.
+19.- In the Available AWS KMS keys combo box select the option aws/s3.
+20.- Clic on the Upload button.

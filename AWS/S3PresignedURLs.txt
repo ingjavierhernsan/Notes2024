@@ -1,0 +1,21 @@
+S3 Presigned URLs
+
+1.- Go to Amazon S3.
+2.- Clic on Create bucket button.
+3.- In the section Genaral configuration, in the Bucket name text box type a name.
+4.- Clic on the Create button.
+5.- Select the new bucket.
+6.- Upload a file.
+7.- Click on the button Upload.
+8.- Go to the file.
+9.- Copy the URL.
+10.- If you want to enter to the file by the URL you can't enter.
+11.- Copy the bucket name.
+12.- Go to the CloudShell.
+13.- Type:
+aws s3 presign s3://bucketName/fileName
+
+aws s3 presign s3://dct-data-bucket/presigned_index.html
+
+14.- Copy the answer.
+15.- Paste the answer in the internet browser.

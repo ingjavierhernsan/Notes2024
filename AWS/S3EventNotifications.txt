@@ -1,0 +1,40 @@
+S3 Event notifications
+
+1.- Go to Amazon S3.
+2.- Clic on Create bucket button.
+3.- In the section Genaral configuration, in the Bucket name text box type a name.
+4.- Clic on the Create button.
+5.- Go to Simple Notification Service.
+6.- In the section Create topic, in the Topic name text box type a name.
+7.- Clic on the Next step button.
+8.- In the Details section, select the option Standard.
+9.- Clic on the Create topic button.
+10.- In the topic, in the Subscriptions tap, clic on the Create subscription button.
+11.- In the section Details, select the option Email in the Protocol combo box.
+12.- In the Endpoint text box type a email.
+13.- Clic on the Create subscription button.
+14.- Return to Amazon S3.
+15.- In the table of bucket, select the created bucket.
+16.- Select the Properties tap.
+17.- In the section Event notification, clic on the Create event notification button.
+18.- In the section General configuration, in the Event name text box type a name.
+19.- In teh section Event types, in the sub section Object creation, check the option All object create events.
+20.- In the section Destination, select the option SNS topic.
+21.- In the Specify SNS topic combo box select the created topic.
+22.- Clic on the Save changes button.
+23.- If there is some proble, apply permission to the topic:
+24.- Go to the json document: Users/neal/Documents/Course Code/aws-saa-code/amazon-s3/event-notification-sns.json
+25.- In the part "Resource": "SNS-topic-ARN" paste the arn of the created topic.
+26.- In part "aws:SourceArn": "arn:aws:s3:*:*:bucket-name" paste the arn created bucket.
+27.- In the part "aws:SourceAccount": "bucket-owner-account-id" paste the id o the created topic.
+28.- Select and copy the whole code.
+29.- Go to Amazon SNS.
+30.- Select the create topic.
+31.- Select the Access policy tap.
+32.- Clic on the Edit button.
+33.- Open the section Access policy - optional.
+34.- Select the whole code and delete.
+35.- Paste the code.
+36.- Clic on the Save changes button.
+37.- Return to the SNS and save the event notification.
+38.- Test uploading a file to the bucket.

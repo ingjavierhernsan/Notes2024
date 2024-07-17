@@ -58,4 +58,3 @@ Create the Scaling policy
 23.- Clic on the Create button.
 
 To watch the action of this configuration go to CloudWatch, in the Alarms section, select the option All alarms.
-s

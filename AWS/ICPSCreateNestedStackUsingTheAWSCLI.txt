@@ -1,0 +1,31 @@
+Section 6: Infrastructureas Code and PaaS
+ICPS
+
+Create nested stack using the AWS CLI
+
+Get the file in the resource of the course:
+Users/neal/Documents/Code/AWS CloudFormation/Create Nested Stack using the AWS CLI.md
+
+With the code we have to create tree yaml files:
+vpc.yaml
+subnet1.yaml
+subnet2.yaml
+
+1.- Go to the cloud shell.
+2.- Create a bucket:
+aws s3 mb s3://my-cloudformation-s3-bucket-3121s2
+
+3.- Copy the files to the bucket.
+aws s3 cp vpc.yaml s3://my-cloudformation-s3-bucket-3121s2
+
+4.- Run the line:
+aws s3api list-objects --bucket my-cloudformation-s3-bucket3121s2 --query "Contes[].{Key: Key}" --output text | aws '{ print "https://my-cloudfromation-s3-bucket-3121s2.s3.amazonaws.com/" $1 }'
+
+5.- Create the file main.yaml with the code in the file.
+6.- Run the line:
+aws cloudformation creat-stac --stack-name NestedStackExample --template-body file://main.yaml --capabilities CAPABILITY_NAMED_IAM
+
+7.- Go to the CloudFormation/Stack to check the changes.
+
+To delete the stack in the CLI use this:
+aws cloudformation delete-stack --stack-name NestedStackExample

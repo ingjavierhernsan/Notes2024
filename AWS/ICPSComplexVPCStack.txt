@@ -1,0 +1,21 @@
+Section 6: Infrastructureas Code and PaaS
+ICPS
+Complex VPC Stack
+
+Search the file:
+Users/neal/Documents/Code/AWS CloudFormation/create-vpc-with-cloudformation.yaml
+
+1.- Go to CloudFormation.
+2.- Go to Stacks.
+3.- Clic on the button Create stack.
+4.- Clic on the option With new resources (standard).
+5.- In the section Specify template, select the option Upload a template file.
+6.- Clic on the button Choose file.
+7.- Select the file and enter.
+8.- Clic in the button Next.
+9.- In the text box Stack name type a name.
+10.- In the section Parameters, in the text box EnvironmentName type a name.
+11.- Clic on the button Next.
+12.- Clic on the button Next.
+14.- Clic on the button Create stack.
+15.- 

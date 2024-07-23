@@ -1,0 +1,26 @@
+Section 6: Infrastructureas Code and PaaS
+
+Create an Elastic Beanstalk
+
+1.- Go to Elastic BeanStalk.
+2.- Clic on the Create application.
+3.- In the section Application information, in the text box Application name type a name.
+4.- In the section Platform select the plataform of the application in the combo box Platform. (Node.js)
+5.- In the combo box Platform version select the version.
+6.- Clic on the button Next.
+7.- In the Service access section selec the option Create and use new service role.
+8.- In the combo box EC2 key pair select the key pair.
+9.- In the combo box EC2 instance profile select the option S3ReadOnly.
+10.- Clic on the button Next.
+11.- In the section Virtual Private Cloud (VPC), in the combo box VPC select the defualt VPC.
+12.- In the section Instances Settings, check the option Public IP address (Activated).
+13.- In the section Instance subnets select the subnet with the avaliability zone us-east-1b and us-east-1a.
+14.- Clic in the button Next.
+15.- In the section EC2 security groups select the WebAccess.
+16.- In the section Instance types eliminate the selected instance and select t2.micro.
+17.- Clic on the button Next.
+18.- In the section Health reporting, in the options System select the option Basic.
+19.- In the section Managed platform updates, in the option Managed updates un check the option Activaed.
+20.- Clic on the button Next.
+21.- Clic on the button Submit.
+22.- In Elastic Beanstalk/Enviroments/My-eb-websit-env clic on the direction Domain to test.

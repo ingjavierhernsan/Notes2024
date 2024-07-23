@@ -1,0 +1,50 @@
+Section 6: Infrastructureas Code and PaaS
+ICPS
+
+Creating and updating stacks
+
+1.- Go to CloudFormation.
+2.- In the left menu select the option Stacks.
+3.- Clic on the button Create stack.
+4.- In the section Prerequisite - Prepare template select the option Create template in Designer.
+5.- Clic on the button Create template in designer.
+6.- Here are drag and drop designer.
+7.- Back to the Create stack.
+8.- In the section Prerequisite - Prepare template select the option Template is ready.
+9.- In the section Specify template select the option Upload a template file.
+10.- In the files of the course search:
+Users/neal/Documents/GitHub-Code/cod/aws-cloudformation/
+1-ec2-template.yml
+2-ec2-template.yml
+3-ec2-template.yml
+
+11.- Go to the EC2 service and select a operation system,ans copy the uefi-preferred.
+12.- Paste in the part ImageId: of the code of the three files.
+13.- In the page of the Create stack clic on the button Choose file.
+14.- Select the first file ans enter.
+15.- Clic on the button Next.
+16.- In the section of Provide a stack name in the text box Stack name type a name.
+17.- Clic on the button Next.
+18.- Clic on the button Next.
+19.- Clic on the button Submit.
+20.- The first stance is created.
+
+1.- In the created instance in CloadFormation/Stacks/nameInstances.
+2.- Select the tap Events.
+3.- Select the button Stack actions.
+4.- Clic on the option Create change set for current stack.
+5.- In the section Prerequisite - Prepare template select the option Replace current template.
+6.- In the section Specify template select the option Upload a template file.
+7.- Clic on the button Choose file.
+8.- Select the second file and enter.
+9.- Clic on the button Next.
+10.- Clic on the button Next.
+11.- Clic on the button Next.
+12.- Clic on the button Submit.
+13.- In the section Overview clic on the button refresh.
+14.- When the button Execute change set get enable clic on it.
+15.- In the dialog window clic on the button Execute change set.
+16.- In the section of the instances in the EC2 page can you see the changes on the first instance.
+
+Apply the same process with the third file.
+

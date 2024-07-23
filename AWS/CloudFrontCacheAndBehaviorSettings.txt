@@ -1,0 +1,90 @@
+CloudFront cache and behavior settings
+
+Before the practice:
+
+1.- Set up Amazon S3 buckets:
+- Creae two S3 buckets for the files (e.g. 'pdf-bucket' and 'jpg-bucket').
+In cloud shell:
+aws s3 mb s3://pdf-bucket-3qrdfq33s
+aws s3 mb s3://jpg-bucket-34q2d3sd
+
+- Upload sumple PDF files to the 'pdf-bucket' and JPG image to the 'jpg-bucket'.
+- Create a bucket for the static website.
+
+In cloud shell:
+aws s3 mb s3://my-static-website-324d3q32s
+
+- In the AWS Console, go to Amazon S3.
+- Enter to the bucket my-static-website-324d3q32s.
+- Select the tab Permissions.
+- In the section Block public access (bucket setting) clic on the button Edit.
+- Disable the option Block all public access.
+- Clic on the button Save changes.
+- In the emerge windows confirm it.
+- Go to the section Bucket policy and clic on the button Edit.
+- Clic on the button Add new statement.
+- In the "Principal" add "*".
+- In the "Action" add "s3:GetObject"
+- In the "Resource" add "arn:aws:s3:::my-static-website-324d3q32s/*".
+- Clic on the button Save changes.
+- Upload the page.
+- In the tab Properties go to the section Static website hosting and clic on the button Edit.
+- Clic in Enable in the option Static website hosting.
+- In the text box Index document type the name of the page (index.com).
+- Clic on the button Saves changes.
+- To test the page, go to the seccion Static website and clic on the web direction.
+
+2.- For the static website:
+- Enable public access.
+- Configure as a statci website.
+- Add the index.html (when ready).
+
+3.- Configure Amazon CloudFront:
+- Create a new CloudFront distribution.
+- Add the static website as an origin (use website endpoint).
+- Disable caching.
+- Add 2 more originds for the buckets containing the files and create/configure OAC.
+- Configure cache behavior setting for each origin based on file type (PDF or JPG) and default going to the static website.
+
+- Go to the CloudFront service.
+- Clic on the button Create a CloudFront distribution.
+- In the combo box control select the my-static-website...
+- Will appear a square, clic on button Use website endpoint.
+- In the section Cache key and origin requests, in the option Cache policy, select Caching Disabled.
+- In the section Web Application Firewall (WAF) select the option Do not enable security protections.
+- Clic on the button Create distribution.
+- In the page of the created distribution, select the tap Origins.
+- In the section Origins clic on the button Create origin.
+- In the section Settings, in the combo box Origin domain select the jpg bucket.
+- In the option Origin access select the option Origin access control settings (recommended).
+- Clic on the button Create control setting.
+- Clic on the button Create.
+- Clic on the button Copy policy.
+- Clic on the button Create origin.
+- Go to Amazon S3.
+- Select the jpg bucket.
+- Select the Permissions tap.
+- In the section Bucket policy clic on the button Edit.
+- In the text area paste what copied.
+- Clic on the button Save changes.
+- Return to the Distribution.
+- Clic on the button Create origin.
+- In the section Settings, in the option Origin domain select the pdf bucket.
+- In the options Origin access select the option Origin access control settings (recommended).
+- In the combo box Origin access control select the jpg bucket.
+- Clic on the button Create origin.
+- Go to Amazon S3.
+- Select the pdf bucket.
+- Select the Permissions tap.
+- In the section Bucket policy clic on the button Edit.
+- In the text area paste what copied.
+- Copy the arn of the bucket and paste to the code.
+- Clic on the button Save changes.
+- In the distribution clic on the tap Behaviors.
+- Clic on the button Create behavior.
+- In the section Settings, in the combo box Path pattern select /*.jpg.
+- In the combo box Origin and origin groups select the jpg bucket.
+- In the section Cache key and origin requests, in the combo box Cache policy select the option Caching Disabled.
+- Clic on the button Create behavier.
+- Create another behaiver to the pdf bucket.
+- In the table of Distributions copy the Domain name and paste in the explorer to check it.

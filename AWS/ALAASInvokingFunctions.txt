@@ -1,0 +1,26 @@
+Section 7: AWS Lambda and AWS SAM
+
+Invoking functions
+
+1.- Go to AWS Lambda.
+2.- In the Dashboard page, clic on the button Create function.
+3.- Clic on the option Author from scratch.
+4.- In the section Basic information, in the Function name type a name.
+5.- In the Runtime combo box select a language and its version (Node.js 16.x).
+6.- In the section Change default execution role, select the option Create a new role with basis Lambda permissions.
+7.- Clic on the button Create function.
+8.- Select the Test tap.
+9.- In the text box Event name type a name.
+10.- Clic on the button Save.
+11.- Clic on the button Test.
+12.- Invoke functions:
+
+BASE64-ENCODED-STRING = convert the text in base 64 with any extarnal tool in google.
+
+Invoke function synchronously
+aws lambda invoke --function-name mytestfunction --payload BASE64-ENCODED-STRING response.json --profile cloudlabs
+
+aws lambda invoke --function-name mytestfunction out --profile cloudlabs
+
+Invoke function asynchronously
+aws lambda invoke --function-name mytestfunction --invocation-type Even --payload BASE64-ENCODED-STRING response.json --profile cloudlabs

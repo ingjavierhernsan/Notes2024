@@ -1,0 +1,42 @@
+Section 7: AWS Lambda and AWS SAM
+
+Using versions and aliases
+
+1.- Go to AWS Lambda.
+2.- Clic on the button Create function.
+3.- In the section Basic information, in the text box Funcion name type a name.
+4.- In the combo box Runtime select Node.js 16.x
+5.- Clic on the button Create function.
+6.- Change the message of the code.
+7.- Clic on the button Deploy (it just saves the code).
+8.- Clic on the button Actions, select the option Publish new version.
+9.- In the dialog windows, in the text box Version description - optional type a version.
+10.- Clic on the button Publish.
+11.- In the last part of the ARN appear the version.
+12.- In the place indicator, shows the version. We can return to the main version or preview version.
+13.- Run the codes:
+Invoke Lambda versions
+aws lambda invoke --function-name myversiontest:/$LATEST response.json
+
+aws lambda invoke --function-name myversiontest:1 response.json
+
+14.- Go to the code.
+15.- Modify the message.
+16.- Clic on the button Deploy.
+17.- Clic on the button Deploy (it just saves the code).
+18.- Clic on the button Actions, select the option Publish new version.
+19.- In the dialog windows, in the text box Version description - optional type a version.
+20.- Clic on the button Publish.
+21.- Back to the main version.
+22.- Clic on the button Actions, select the option Create alias.
+23.- In the text box Name type a name.
+24.- In the combo box Version select some version.
+25.- Clic on the section Weighted alias.
+26.- In the combo box Additional version - optional, select another verion.
+27.- In the text box Weight(%) type 50.
+28.- Clic on the button Save.
+29.- Check the ARN, it has changed.
+30.- Run the command:
+
+Invoke Lambda alias
+aws lambda invoke --function-name myversiontest:myapp response.json

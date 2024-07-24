@@ -1,0 +1,53 @@
+Section 7: AWS Lambda and AWS SAM
+
+Create event source mapping
+
+Create Lambda function from zip file
+zip function.zip index.js
+aws lambda create-function --function-name EventSourceSQS --zip-file fileb://function.zip --handler index.handler --runtime nodejs1.x --role ROLE-ARN
+
+Create event-source mapping
+aws lambda create-event-source-mapping --function-name EventSourceSQS --batch-size 10 --event-source-arn SQS-QUEUE-ARN
+
+aws lambda list-event-source-mappings --function-name EventSourceSQS --event-source-arn SQS-QUEUE-ARN
+
+1.- Go to IAM.
+2.- Select Roles in the left menu.
+3.- Clic on the button Create role.
+4.- In the section Use case, select the option Lambda.
+5.- Clic on the button Next.
+6.- Search the permission for SQS.
+7.- Select the permission AWSLambdaSQSQueueExecutionRole.
+8.- Clic on the button Next.
+9.- In the text box Role name type a name.
+10.- Clic on the button Create role.
+11.- Go to SQS Sevice (Simple Queue Service).
+12.- Clic on the button Create queue.
+13.- In the section Details, in the text box Name type a name.
+14.- Clic on the button Create queue.
+15.- Go to the created role.
+16.- Copy its ARN.
+17.- Paste it in the section of ROLE-ARN of the code.
+18.- Go to the shell (No cloud shell).
+19.- Run zip function.zip index.js
+20.- Run:
+aws lambda create-function --function-name EventSourceSQS --zip-file fileb://function.zip --handler index.handler --runtime nodejs16.x --role ROLE-ARN --profile cloudlabs
+
+21.- To see the function got to AWS Lambda.
+22.- Go to the created queue, copy its ARN.
+23.- Paste it the part of the code SQS-QUEUE-ARN.
+24.- Run:
+aws lambda create-event-source-mapping --function-name EventSourceSQS --batch-size 10 --event-source-arn SQS-QUEUE-ARN
+
+25.- Run:
+aws lambda list-event-source-mappings --function-name EventSourceSQS --event-source-arn SQS-QUEUE-ARN
+
+26.- Go to the created queue.
+27.- Clic on the button Send and receive messages.
+28.- In the section Send message, in the text area type a message.
+29.- Clic on the button Send message.
+30.- Go to AWS Lambda.
+31.- Enter to the created function.
+32.- Select the Monitor tap.
+33.- Clic on the button View logs in CloudWatch.
+34.- In the section Log streams open the log.

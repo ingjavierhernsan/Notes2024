@@ -1,0 +1,87 @@
+Section 7: AWS Lambda and AWS SAM
+
+Using Environment Variables
+
+import json
+import os
+
+def lambda_handler(event, context):
+                DB_HOST = os.environ["DB_HOST"]
+                DB_USER = os.environ["DB_USER"]
+                DB_PASS = os.environ["DB_PASS"]
+                print("Connected to %s as %s with %s" % (DB_HOST, DB_USER, DB_PASS))
+                return { 'statusCde' : 200, 'body' : json.dumps('Hello from Lambda!')}
+
+1.- Go to AWS Lambda.
+2.- Clic on the button Create function.
+3.- In the Basic information section, in the text box Function name type a name.
+4.- In the combo box Runtime select Python 3.8.
+5.- Clic on the button Create function.
+6.- In the section Code source, in the text area paste the code.
+7.- Clic on the button Deploy.
+8.- Select the Configuration tap.
+9.- In the left menu, select the option Environment variables.
+10.- Clic on the button Edit.
+11.- Clic on the button Add enviroment variable.
+12.- In the text box Key type DB_HOST and in the text box Value type some information.
+13.- In the text box Key type DB_USER and in the text box Value type some information.
+14.- In the text box Key type DB_PASS and in the text box Value type some information.
+15.- Clic on the button Save.
+16.- Select the Test tap.
+17.- In the section Test event, in the text box Event name type a name.
+18.- Clic on the button Save.
+19.- Clic on the button Test.
+20.- In teh section Execution result you can see the result of the code.
+
+Encryption
+
+1.- Go to AWS KMS.
+2.- Clic on the button Create key.
+3.- Clic on the button Next.
+4.- In the section Alias, in the text box Alias type an alias.
+5.- Clic on the button Next.
+6.- Select a Key administrator in the Key administrators table.
+7.- Clic on the button Next.
+8.- In the Define key usage permissions table select an account.
+9.- Search the role aliasTyped+someId and select.
+10.- Clic on the button Next.
+11.- Clic on the button Finish.
+12.- Go to the lambda function.
+13.- Select the Configuration tap.
+14.- In left menu select Environment variables.
+15.- Clic on the button Edit.
+16.- Enter the section Encryption configuration.
+17.- Select the option Encryption in transit.
+18.- Select the option Use a customer master key.
+19.- In the combo box Customer master key select the KMS Key created.
+20.- In the Enviroment variables clic on DB_PASS Encrypt button.
+21.- In the dialog window, in the AWS KMS key to encrypt in transit combo box select the KMS key created.
+22.- Open the section Decrypt secrets snippet and select the code in the text area.
+23.- Clic on the button Encrypt.
+24.- Clic on the button Save.
+25.- The new code will be:
+
+import json
+import os
+import boto3
+from base64 import b64decode
+
+def lambda_handler(event, context):
+                DB_HOST = os.environ["DB_HOST"]
+                DB_USER = os.environ["DB_USER"]
+                DB_PASS = os.environ["DB_PASS"]
+                ENCRYPTED = os.environ['DB_PASS']
+                DECRYPTED = boto3.client('kms').decrypt(
+                CiphertextBlob=b64decode(ENCRYPTED),
+                EncryptionContext={'LambdaFunctionName': os.environ['AWS_LAMBDA_FUNCTION_NAME]})['Plaintext].decode('utf-8')
+                print("Connected to %s as %s with %s" % (DB_HOST, DB_USER, DB_PASS))        
+                return { 'statusCde' : 200, 'body' : json.dumps('Hello from Lambda!')}
+
+26.- Go to the code of the function and paste the new code.
+27.- Clic on the button Deploy.
+28.- Clic on the button Test.
+29.- To watch the encrypted text add print(DECRYPTED) to the code:
+
+print("Connected to %s as %s with %s" % (DB_HOST, DB_USER, DB_PASS))
+print(DECRYPTED)
+return { 'statusCde' : 200, 'body' : json.dumps('Hello from Lambda!')}

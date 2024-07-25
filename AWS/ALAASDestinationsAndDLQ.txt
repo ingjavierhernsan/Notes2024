@@ -1,0 +1,49 @@
+Section 7: AWS Lambda and AWS SAM
+
+Destinations and DLQ
+
+1.- Search the file:
+users/neal/Documents/Code/AWS Lambda/destinations-and-dlq.md
+
+2.- Copy the section Function code.
+3.- Go to AWS Lambda.
+4.- Clic on the Create function button.
+5.- In the section Basic information in the text box Function name type a name.
+6.- In the combo combox Runtime select the option Node.js 16x.
+7.- Clic on the button Create function.
+8.- In the section Code source, in the text area paste the code.
+9.- Clic on the button Deploy.
+10.- Go to Amazon SQS.
+11.- Clic on the button Create queue.
+12.- In the section Details, in the text box Name type a name.
+13.- Clic on the button Create queue.
+14.- Return to the created function.
+15.- Clic on the button Add destination.
+16.- In the combo box Destination type select the option SQS queue.
+17.- In the combo box Destination select the created queue.
+18.- Clic on the button Save.
+19.- Clic in Add destination.
+20.- Select options Condition select On success.
+21.- In the combo box Destination type select the option SQS queue.
+22.- In the combo box Destination select the created queue.
+23.- Clic on the button Save.
+24.- Copy the code of the section Generate success message.
+25.- Go to the CLI of the PC.
+26.- Paste the code and enter.
+27.- To see the information in the queue, go to Amazon SQS.
+28.- Enter to the created queue.
+29.- Clic on the button Send and receive messages.
+30.- In the section Recieve messages clic on the button Poll for messages.
+31.- In the table Messages select the desired.
+32.- Clic on the button View details.
+33.- Run the code of the section Failure message.
+34.- Go to the function and delete the added destinations.
+
+Dead-letter queue
+1.- In the function, in the left menu select the option Asynchronous invocation.
+2.- Clic on the button Edit.
+3.- In the section Dead-letter queue, in the combo box Dead-letter queue services select Amazin SQS. 
+4.- In the combo box Queue select the created queue.
+5.- Clic on the button Save.
+6.- Run the code of the section Failure message several times.
+7.- Check the Recieve messages of the created queue.

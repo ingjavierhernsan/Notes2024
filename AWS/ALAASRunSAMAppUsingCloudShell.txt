@@ -1,0 +1,21 @@
+Section 7: AWS Lambda and AWS SAM
+
+Run SAM App Using CloudShell
+
+1.- Go to AWS Serverless Applicaction Model.
+2.- In the left menu select the option Installing the AWS SAM CLI.
+3.- Select the instruction of the installation in your operating system.
+4.- Or use the AWS CloudShell.
+5.- Go to AWS EC2.
+6.- Enter to the CloudShell icon.
+7.- Search the file:
+Users/neal/Documents/Code/AWS Lambda/sam-cli-commands.md
+
+8.- Copy the first command, paste on the cloudshell and enter.
+9.- Copy the second command, paste on the cloudshell and enter.
+10.- Run sam build command.
+11.- Run sam deploy --guided
+12.- Answer the question.
+13.- To check the status of the deploy go to Cloud formation/Stacks/sam-app
+14.- To test the API, in the table Outputs, select the Value of the Key HelloWorldApi.
+15.- Paste in the browser and see the answer.

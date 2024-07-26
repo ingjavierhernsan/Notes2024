@@ -1,0 +1,8 @@
+Section 7: AWS Lambda and AWS SAM
+
+The Serveless Application Repository
+
+1.- Go to Serveless Application Repository.
+2.- In the left menu clic on the option Available applications.
+3.- In the section of Public applications you can see the appliation that you can deploy.
+4.- If you clic on the title of the application the page send you to the AWS Lambda of the application.

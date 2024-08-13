@@ -449,3 +449,16 @@ Now can be a time in minutes.
 
 RESTART FROM TERMINAL
 reboot
+
+TIMEOUT
+The timeout command runs a command with a time limit. If the command exceeds the specified time, it automatically stops it:
+
+timeout 30s command
+
+INSTALAR UN PAQUETE EN LINUX UBUNTU
+Extencion del paquete .deb
+
+sudo dpkg -i packageName.deb
+
+Solicita contrasena.
+Muestra proceso de la instalacion.

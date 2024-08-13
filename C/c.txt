@@ -3756,3 +3756,85 @@ int main(){
 }
 
 ===============================================================================
+
+C project structure
+
+bin -The executable
+build -Intermidate build files e.g. *o
+docs -Documentation
+include -Header files
+lib -Third-party libraries
+src -C source files
+-main.c
+-*.c
+tests -Contins tests (CUnit)
+.gitignore
+LINCESE
+README.md
+
+Binary (0b) and Hexadecimal (0x) Literals
+Binary is a base-2 numbering system (digits are either 0 or 1), while hexadecimal is a base-16 numbering system (digits 0-F). Look online for descriptions of how these systems work.
+
+In C, you can express integers using their binaty or hecadecimal representations by prefixing them with 0b or 0x.
+
+//These represent different numbers
+uint8_t binary = 0b01101011;
+uint8_t hex = 0xF7;
+
+.c and .h files
+In oursoftware repositories, you will often see pairs of files with the same name but different extensions (.c and .h). The .c file is often called the C file or implementation, while the .h file is often called the header file or interface.
+
+.c files contain the implementation of the code, while .h files exist to provide interfaces that allow a file to access functions, global variables, and macros from othrer files.
+
+When you #include "file.h" or #include <folder/file.h> in a file, it includes the header file in the current file so that you can call functions from file.h.
+
+For functions, the .c file contains the entire function. You copy the corresponding function prototype to the .h file, which is just the first line containing the function name, return type, and parameters.
+
+Example
+For example, say we have a function call foo() in a file called test.c.
+
+double foo(double a, double c){
+	return a + b;
+}
+
+In the corresponding header file, test.h, we put just the function prototype so other files can call this function.
+
+double foo(double a, double b);
+
+Say we want to call this function from main.c.
+
+#include "test.h"
+
+int main(void){
+	foo(1.1, 2.3);
+	...
+}
+
+Calling C function from Python
+
+Create a C file with some functions:
+my_functions.c
+
+#include <stdio.h>
+
+int square(int i) {
+	return i * i;
+}
+
+Creating the shared library file
+
+cc -fPIC -shared -o my_functions.so my_functions.c
+also
+gcc -o my_function.so -shared -fPIC -02 my_function.c
+Calling C function from Python program.
+
+from ctypes import *
+
+so_file = "/my_functions.so"
+
+my_functions = CDLL(so_file)
+
+print(type(my_functions))
+print(my_functions.square(10))
+
+print("Done")

@@ -1,0 +1,197 @@
+Top Linux interview questions with answers
+https://www.geeksforgeeks.org/linux-interview-questions/
+
+Linux has hundreds of important concepts for you to understand before the interview. That's why Linux Interview questions are useful in preparing for the job. These questions contain basic and advanced approaches of the field that you must learn before any interview. The correct knowledge about Linux can help you make a different spot from other candidates.
+
+Hence, learning interview questions can benefit you in competitiveness, interview success, confidence-building, and many more. If you are also preparing for a job in the Linux field, the following questions will surely benefit you. Here we have included the Top Linux interview questions you can learn as a beginner, intermediate, or expert.
+
+Beginner-Level Linux interview questions
+The following 15 Linux interview questions are suitable for freshers because these questions will have basic information about Linux.
+
+1.- What is Linux?
+
+2.- Explain the basic features of the Linux OS.
+
+3.- Name some Linux Distros.
+
+4.- What are the major differences between Linux and Windows?
+
+5.- Define the basic components of Linux.
+
+6.- Elaborate all the file permission in Linux.
+
+7.- What is the Linux Kernel? Is it legal to edit it?
+
+8.- Explain LILO.
+
+9.- What is Shell in Linux?
+
+10.- What is a root account?
+
+11.- Describe CLI and GUI in Linux.
+
+12.- What is Swap Space?
+
+13.- What is the difference between hard links and soft links?
+
+14.- How do users create a symbolic link in Linux?
+
+15.- What do you understand about the standard streams?
+
+16.- How do you mount and unmount filesystem in Linux?
+
+17.- How do you troubleshoot network connectivity issues in Linux?
+
+18.- How do you list all the processes running in Linux?
+
+19.- What is the chmod command in Linux, and how do you use it?
+
+20.- How do you check disk space usage?
+
+21.- How do you find the process ID (PID) of a running process?
+
+22.- What is the rsync command, and how do you use this command for synchronization?
+
+23.- How do you create a user account?
+
+24.- How do you format a disk in Linux?
+
+25.- How do you change the password for a user account?
+
+26.- What is the difference between a process and a thread?
+
+27.- What is the ulimit command, and how do you use it?
+
+28.- What is the find command, and how do you use it?
+
+29.- What is RAID in Linux?
+
+30.- What are the challenges of using Linux?
+
+31.- What is the /proc file system?
+
+32.- How do you secure a Linux server?
+
+33.- What is strace command?
+
+34.- How do you optimize Linux system performance?
+
+35.- How to administer Linux servers?
+
+36.- What is a Linux virtual memory system?
+
+37.- What do you understand about process scheduling in Linux?
+
+38.- What are the most important Linux commands?
+
+39.- What is the iptables command, and how to use it for network filtering?
+
+40.- How do you troubleshoot a Linuxx OS that fails to boot?
+
+41.- What is the init process in Linux?
+
+42.- What is SMTP?
+
+43.- What is LVM in Linux?
+
+44.- What is the difference between UDP and TCP?
+
+45.- What is /etc/resolv.conf file?
+
+46.- What is the difference between absolute and relative paths in Linux?
+
+47.- What is the grep command used for in Linux?
+
+48.- How do you check the status of a service or daemon in Linux?
+
+49.- What is the difference between /etc/passwd and /etc/shadow files?
+
+50.- How do you compress and decompress files in Linux?
+
+51.- What is the difference between a process and a daemon in Linux?
+
+52.- How do you schedule recurring tasks in Linux?
+
+53.- What is the sed command used for in Linux?
+
+54.- What are runlevels in Linux?
+
+55.- What is sudo in Linux?
+
+56.- What is umask?
+
+57.- How to find and kill a process in Linux?
+
+58.- What is network bonding in Linux?
+
+59.- What is SELinux?
+
+60.- What is the purpose of the SSH protocol in Linux, and how do you securely connect to a remote server using SSH?
+
+61.- How do you check the contents of a file without opening it in Linux?
+
+62.- What is the purpose of the crontab file in Linux, and how do you schedule recorring tasks using cron jobs?
+
+63.- How do you find and replace text in a file using the sed command in Linux?
+
+64.- What is the purpose of the sudoers file in Linux, and how do you configure sudo access for users?
+
+65.- How do you change the ownership of a file or directory in Linux using the chown command?
+
+66.- What is the purpose of the ping command in Linux, and how do you test network connectivity to a remote host?
+
+67.- How do you recursively copy files and directories in Linux using the cp command?
+
+68.- What is the purpose of the netstat command in Linux, and how do you view network connections and listening ports?
+
+69.- How do you set up a static IP address in Linux using the command-line interface?
+
+70.- How to copy a file to multiple directories in Linux?
+
+Linux Admin interview questions
+
+71.- How are files organized in Linux?
+
+72.- How can you find the IP address of a Linux system?
+
+73.- What is the distincion between a hard link and a symbolic link in Linux?
+
+74.- How do you check the amount of disk space being used in Linux?
+
+75.- How do you start and stip a service in Linux?
+
+76.- What are common causes of file permission issues in Linux?
+
+77.- How fo you troubleshoot a Linux system that cannot connect to a remote server?
+
+Linux troubleshooting interview questions
+
+78.- What steps would you take to fix a network connectivity issue in Linux?
+
+79.- How do you check the system logs in Linux?
+
+80.- What are the possible reasons for a Linux system running out of memory?
+
+81.- How would you troubleshoot a slow-performing Linux server?
+
+82.- What are common couses of a Linux system running out of disk space?
+
+83.- How can you identify and terminate a process that is usisng a lot of CPU in Linux?
+
+84.- How would you troubleshoot a Linux system that cannot boot up?
+
+Linux networking interview questions
+
+85.- What does the ifconfig command do in Linux?
+
+86.- How do you set up a fixed IP address in Linux?
+
+87.- How do you configure a DNS server in Linux?
+
+88.- What is a firewall in Linux, and how do you set it up?
+
+89.- How do you check the network connectivity between two Linux systems?
+
+90.- What is the purpose of the 'route' command in Linux?
+
+91.- How do you configure a Linux system to act as a router?

@@ -1,0 +1,32 @@
+Amazon Dynamo DB
+Creating DynamoDB Tables
+
+- Go to DynamoDB.
+- Clic on the button Create table.
+- In the paga Create table, in the section Table details type the name of the table in the text box Table name (myforum).
+- Type postid in the text box Partition key.
+- In the section Setting, select the Customize setting option.
+- Clic on the button Create table.
+- Create some items. In the left side menu clic on the option Explore items.
+- In the right side buttons clic on the Create item button.
+- In the page Create item, in the section Attributes, go to the text box values and type some value.
+- For a new attribute, go to que upper place of the table and clic on the combo box Add new atrribute, select String option.
+- Name the new attribute with Subject and type a values.
+- Add a new attribute but with the type Number, name it with Replies and type a value.
+- Clic on the button Create item.
+- Create another item.
+- Create another table with the name mystore, clientid in the Partition key. But it will have a Sort key.
+- In the Sort key - optional text box type created.
+- Clic on the button Create table.
+- Create items in the mystore table. Like clientid use an email and in the created attribute use a time stamp.
+- Add a new attribute named category with the value phone.
+- Clicn on the button Create item.
+- Create another item in the mystore table with the same used email. Use another time stamp.
+- Add a new attribute name category with the value computer.
+- Clic on the button new item.
+- Go to the left side menu, clic on the Update settings option.
+- Select the myforum table.
+- Clic on the combo box Action.
+- Clic on the Delete table option.
+- Confirm the action.
+- Clic on the button Delete table.

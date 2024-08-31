@@ -81,26 +81,154 @@ CLI, i.e., command line interface. It takes input as a command and runs the task
 Linux uses swap space to expand RAM. Linux uses this extra space to hold concurrently running programs termporarily.
 
 13.- What is the difference between hard links and soft links?
+Here isthe table that shows the difference berween soft links and hard links:
+
+Hard links:
+- Includes original content.
+- Hard links are faster as compared to soft links.
+- It shares similar inode numbers.
+- There is no relative path for hard links.
+- It didn't link the directories.
+- Any change in this link reflects other files directly.
+- It uses less memory.
+
+Soft links:
+- It includes the original file location.
+- Soft links are slower.
+- It shares different inode numbers.
+- Relative paths are used for soft links.
+- Every changes in this link reflects its hard link and the actual file directtly.
+- It uses more memory.
 
 14.- How do users create a symbolic link in Linux?
+Symbolic links, symlink, or soft links are shortcuts to files and directories. Users can create the symbolic link in Linux through the 'ln' command. The general command to create a symbolic link is as follows:
+
+ln -s <existing_source file> <optional_symbolic link>
 
 15.- What do you understand about the standard streams?
+Output and input in Linux OS are divided into three standard streams:
+
+- stdin (standard input)
+- stdout (standart output)
+- stderr (standard error)
+
+Under Linux, these standard streams channet communication of output and input between programs and their environment.
+
+Intermediate-Level Linux interview questions
+The next 15 questions are the best suitable for those who have and intermediate level of experience in Linux:
 
 16.- How do you mount and unmount filesystem in Linux?
+In this case, you can use the mount and umount commands.
+
+For mounting:
+- First, identify the partition through the fdisk -l command. You can also use the lsblk command for it.
+- After identifying the parttion, create the directory which will work as the mount point. For example, running the mkdir /mnt/mountpnt will create the mountpnt directory as the mount point.
+- Finally, you can run sudo mount <partition> <mount_point_directory> to complete the mounting.
+
+For Unmounting:
+Once you check if the specific filesystem is in use, you can run the sudo umount <mount_point_directory> for unmounting. If you want to learn more about the mount command in Linux, brief guide (https://www.geeksforgeeks.org/mount-command-in-linux-with-examples/).
 
 17.- How do you troubleshoot network connectivity issues in Linux?
+There are multiple ways to troubleshoot the network connectivity and find the issue correctly:
+
+- Check the internet conectivity:
+First of all, please check if the internet connection option is on and also check the cables to find if there is any issue with it.
+
+- Verify the network configuration:
+Please check that your network is configured correctly and the network interface has your IP address. You can check it by running the ip addr or ifconfig commands.
+You can also run the ip route command to check if the default gateway is set properly.
+Finally, verify the DNS server configuration in the /etc/resolv.cont file.
+
+- Check the firewall:
+Sometimes, firewall rules block the internet connection for the system's security. Hence, you can run the ufw or iptables command to modify the firewall rules.
+
+- Network interface:
+You can restart your network through the ifup and ifdown commands. Once you restart the network interface, please reboot the system to make changes successful.
 
 18.- How do you list all the processes running in Linux?
+You can list the currently running process in Linux through various commands such as:
+
+- ps command:
+Then ps command displays brief information about the running processes. You can use the ps -f of ps -e command because the -f option shows the full-format result, and the -e option displays all processes. Moreover, you can use the ps auxf vommand to get a detailed list of processes.
+
+top and htop command:
+The top command displays the real-time details about the system process and the complete resource usage.
+
+The htop command is the improved version of the top command because it displays the color-coded list with additional features such as sorting, filtering, sorting, etc.
 
 19.- What is the chmod command in Linux, and how do you use it?
+You can use the chmod command to change the file permissions of the directories. It offers a simple way to control the read and write permissions. For instance, if you want to change the permission of the ABC.sh script and give it the write and executable permission, you can run the below command:
+
+chmod u+wx ABX.sh
+
+The chmod command is not limited to the write (w), read (r), and executable (x) permissions because there are symbolic modes and numeric modes, which you can learn from this guide.
 
 20.- How do you check disk space usage?
+There are some simple commands you can use to check disk space usage, such as:
+
+df command:
+The df or disk-free command shows the used and the available disk space. You can use the additional options to check disk the disk usage in the human-readable format.
+
+du command:
+
+The du or disk usage command estimates and shows the disk space usage, so running the du command with no option shows the disk usage of your current directory. However, you can run the following command to check the disk usage of a specific directory:
+
+du -sh ~/<directory>
+
+ncdu command:
+The NCurses Disk Usage, or ncdu command, displays more interactive disk usage. Similar to the du command, the ncdu command also requires the path of the specific directory to check its space.
 
 21.- How do you find the process ID (PID) of a running process?
+You can use the following command to find the process ID or PID of the currently running process:
+
+pgrep command:
+
+The pgrep command shoes the PID of a process through its name or other different attributes. For example, you can find the PID of process_1 using the below command:
+
+pgrep <process_1>
+
+ps command:
+ps command not only displays the currently running process but also shows the process's PID. However, if you want to check the PID of a specific process, you can combine the ps with the grep command:
+
+ps -e | grep -i <process_1>
 
 22.- What is the rsync command, and how do you use this command for synchronization?
+The rsync command is used to synchronize and transfer the files in linux. It synchronizes files between two local systems, directories, or a network. The basic rsync command contains the following:
+
+rsync <option> <source> <destination>
+
+For example, let's  synchronize between Documents and the Downloads directory. For this, you need to run the following command:
+
+rsync -av ~/Documents ~/Downloads
+
+If you want to go one step further, then you can use the below command:
+
+rsync -avz --delete ~/Documents ~/Downloads
+
+In the above command:
+
+- The -a option preserves all the permissions and other attributes.
+- The -v option displays the detailed output of the synchronization.
+- The -z allows compression that decreases the bandwidth use.
+- The -delete option removes the file in the Downloads that do not exist in the Documents directory.
 
 23.- How do you create a user account?
+You can use adduser and useradd commands to create a user for the system.
+
+useradd command:
+Let's create a username, Ron, and provide a password for accession the system:
+
+useradd Ron
+passwd Ron
+
+You can also explore the useradd command's additional options to modify the new user's permissions and privileges.
+
+adduser command:
+
+The adduser command is similar to the useradd command, so let's create a username Shawn:
+
+adduser Shawn
+passwd Shawn
 
 24.- How do you format a disk in Linux?
 

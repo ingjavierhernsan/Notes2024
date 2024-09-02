@@ -1,0 +1,48 @@
+AWS DynamoDB
+Create LSI and GSI
+
+- Go to DynamoDB console.
+- Select the table mystore
+- In the tap section, select the indexes tap.
+- In the combo box action select the option Delete.
+- Confirm the action delete.
+- Clic on the button Create table.
+- In the section Table details, in the text box Table name type mystore.
+- In the text box Partition key type clientid.
+- In the text box Sort key - (optional) type created.
+- In the section Setting, select the option Customize settings.
+- In the section Secondary indexes, clic on the button Create local sencodary index.
+- In the text box Sort key, type sku.
+- Clic on the button Create index.
+- Clic on the button Create table.
+- In console run:
+aws dynamodb batch-write-item --request-items file://mystore.json --profile cloudlabs
+- In the DynamoDB console, select the table mystore.
+- In the section Scan/Query items, clic on the buttton Scan.
+- In the combo box Table or index select sku-index.
+- Clic on the button Run.
+- In the left menu, clic on the option Explore items.
+- In the section Scan/Query items, clic on the button Query.
+- In the combo box Table or index select sku-index.
+- In the text box clientId (Partition key) type an email (Pj@example.com).
+- In the combo box sku (Sort key) select the Equal to option.
+- In the next text box type a sku (SKU-P122).
+- Clic on the button Run.
+
+- In the left side menu, select the option Update settings.
+- In the taps, select the Indexes tap.
+- In the Global secondary indexes section, clic on the Create index button.
+- In the section Index details, in the text box Partition key type sku.
+- In the text box Sort key - optional type qty.
+- In the combo box Data type select the option Number.
+- Clic on the button Create index.
+- In the left menu, clic on the option Explore items.
+- Clic on the Scan button.
+- In the combo box Table or index select the sku-qty-index option.
+- Clic on the button Run.
+- Clic on the button Query.
+- In the combo box Table or index select the sku-qty-index option.
+- In the text box sku (partition key) type a sku (SKU-P122).
+- In the qty (Sor key) combo box select Equal to.
+- In the next text box type 1.
+- Clic on the button Run.

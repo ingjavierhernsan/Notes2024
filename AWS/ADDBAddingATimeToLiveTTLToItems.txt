@@ -1,0 +1,29 @@
+AWS DynamoDB
+Adding a time to live (TTL) to items
+
+- Create the table mystore.
+- Fill a table.
+- In console run:
+aws dynamodb batch-write-item --request-items file://mystore.json --profile cloudlabs
+- In the left menu, select the option Exploe items.
+- Select the first item.
+- In the combo box Add new attribute, select the option Number.
+- Type the name expiry.
+- Convert a date to the Unix Timestamp.
+- Copy the number.
+- Paste it in the text box value.
+- Clic on the button Save changes.
+- Go to the second item and repeat the process on it.
+- In the pago of mystore table, in the upper part, clic on the button Update table settings.
+- Go to the Additional settings tap.
+- Go to the section Time to Live (TTL).
+- Clic on the button Run a preview.
+- In teh TTL attribure name, type expiry.
+- In the combo box Simulated date and time, select Next 60 minutes.
+- Clic on the button Run preview.
+- In the combo box Simulated date and time, select Next 24 hours.
+- Clic on the button Run preview.
+- Clic on the button Close.
+- Clic on the button Enable.
+- In the TTL settings, in the text box TTL attribute name type expiry.
+- Clic on the button Enable TTL.

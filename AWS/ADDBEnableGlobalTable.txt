@@ -1,0 +1,11 @@
+AWS DynamoDB
+Enable global table
+
+- In the table mystore.
+- Go to the tap Global tables.
+- Clic on the button Create replica.
+- In teh section Replications settings.
+- In the combo box Available replication Regions search US West (N. California)
+- Clic on the button Create replica.
+- Wait the replication process finish (minutes!!!).
+- Go to the region US West (N. California) in the DynamoDB console.

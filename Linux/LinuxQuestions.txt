@@ -430,26 +430,102 @@ The full form  of LVM is Logical Volume Manager, which provides an advanced disk
 You can use the LVM to create the logical volume for easy storage management through various features like resizing, volume mirroring, and snapshots. LVM is powerful utility for disk management whre you need dynamic storge allocations.
 
 44.- What is the difference between UDP and TCP?
+The followinf table shows the difference between UDP and TCP:
+
+Connection-orinted:
+- UDP does not establish a proper connection.
+- TCP is connection-orinted because it establishes a connection between the sender and receiver.
+
+Relibility:
+- UDP does not provide a reliability mechanism.
+- TCP guarantees reliable data delivery by retransmitting corrupt packers or lost packets.
+
+Usage:
+- UDP is used in low overhead, speed, and real-time communication applications.
+- TCP is used where ordered data is delivered, and reliable data must be delivered.
+
+Applications:
+- UDP: Video/voice conferencing, DNS, online gaming, streming media, etc.
+- TCP: File transfers, email, web browsing, database transactions, etc.
 
 45.- What is /etc/resolv.conf file?
+The /etc/resolv.conf is the config file used for the DNS server resolution process. This config file is used to specify the DNS server, set up the search directive for domains, and configure the resolver options.
 
 46.- What is the difference between absolute and relative paths in Linux?
+Absolute path = It specifies the exact location of a file or directory from the root directory ("/"). We will notice that they always start with a forward slash ("/").
+
+For example: /home/user/jayesh/geeksforgeeks.txt
+
+Relative paths = It specifies the location relative to the current working directory. In this we do not start with a forward slash ("/").
+
+For example: documents/file.txt
 
 47.- What is the grep command used for in Linux?
+The grep command is used to search for specific patterns within files or input streams. It allows us to find and print lines that we give to match the pattern.
+
+For example: If we want to search test in a text file name file.txt. We use the following command:
+
+grep "test" file.txt
+
+This command will search for the word 'test' in the file named "file.txt" and print the matching lines.
 
 48.- How do you check the status of a service or daemon in Linux?
+To check the status of a service or daemon, we can use the systemctl command followed by the service name.
+
+For example: If we want to display the status of the Apache Web server. We use the following command:
+
+systemctl status apache2
+
+It will show whether the service is running, stopped, or in an error state.
 
 49.- What is the difference between /etc/passwd and /etc/shadow files?
+The /etc/passwd file stores essential user information like usernames, user IDs, home directories, and default shells. Each line in the file represents a user account.
+
+The /etc/shadow file contains encrypted passwords and other security-relqaqted information. It is only accessible by the root user or privileged processes.
 
 50.- How do you compress and decompress files in Linux?
+To compress files in Linux, you can use the tar command along with gzip compression.
+
+For example: If we want to create a file name "jayesh" with gzip compression. We use the following command:
+
+tar -czvf jayesh.tar.gz files
+
+This command will create a compressed archive file containg the specified 'files'.
+
+To decompress the same, we use the following command:
+
+tar -xzvf jayesh.tar.gz
 
 51.- What is the difference between a process and a daemon in Linux?
+A process is an executing instance of a program. It can be a foreground process that interacts with the user or a background process started by a user or another process.
+
+A daemon is a background process taht runs independently of user sessions. It is typically started at system boot time and performs system tasks or provides services. Daemons often have no user interaction and continue running even when users log out.
 
 52.- How do you schedule recurring tasks in Linux?
+We can use 'crontab' command for performing recurring tasks in Linux. By adding entries to the crontab file, we can specify when and how frequently a command or script should be executed.
+
+For example: If we want to execute a script name geek.sh every day at 3:30 AM. We use the following command:
+
+crontab -e
+
+Thies command opens the crontab file in an editor.
+
+30 0 * * * /path/to/geeks.sh
 
 53.- What is the sed command used for in Linux?
+The sed command is used to perform text transformations on files. It can search for specific patterns and repalce them with desired text.
+
+For example:
+
+sed 's/foo/bar/g' file.txt
+
+This command replaces all occurrences of 'foo' with 'bar' in the file name file.txt.
 
 54.- What are runlevels in Linux?
+Runlevels in Linux define different system states, such as single-user mode or multi-user mode with or without a GUI. They determine which services start or stop during system startup and shutdown. The default runlevel is often set to a multi-user mode with a GUI (runlevel 5). Runlevel 3 is commonly used for a multi-user mode without a GUI.
+
+Bonus Linux intervie questions
+The next 5 Linux interview questions are the most common ones recruiters ask.
 
 55.- What is sudo in Linux?
 

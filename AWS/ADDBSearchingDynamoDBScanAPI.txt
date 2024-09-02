@@ -1,0 +1,30 @@
+Amazon Dynamo DB
+Searching DynamoDB - Scan API
+
+- Go to the document:
+C:\Users\My PC\OneDrive\Desktop\aws-dva-code-main\amazon-dynamodb\DynamoDB CLI Commands.sh
+- Copy the command of the line Import data
+aws dynamodb batch-write-item --request-items file://mystore.json
+- Paste in the shell and include --profile cloudlabs
+aws dynamodb batch-write-item --request-items file://mystore.json --profile cloudlabs
+- Run it. 
+- Check the uploaded data in the page of AWS in the DynamoDB section.
+- Copy the command of the line Perform scan of ProductOrders table:
+aws dynamodb scan --table-name mystore
+- Paste in the console.
+aws dynamodb scan --table-name mystore --profile cloudlabs
+- Run it.
+- Copy the command of the line Use Max-Items Parameter:
+aws dynamodb scan --table-name mystore --max-items 1
+- Paste in the console.
+Use Max-Items Parameter:
+aws dynamodb scan --table-name mystore --max-items 1 --profile cloudlabs
+- Run it.
+
+Use Projection-Expression Parameter:
+aws dynamodb scan --table-name mystore --projection-expression "created"
+aws dynamodb scan --table-name mystore --projection-expression "colour"
+
+Use Filter-Expression Parameter:
+aws dynamodb scan --table-name mystore --filter-expression "clientid = :username" --expression-attribute-values '{ ":username": { "S": "chris@example.com" }}'
+aws dynamodb scan --table-name mystore --filter-expression "size = :n" --expression-attribute-values '{ ":n": { "N": "12" }}'

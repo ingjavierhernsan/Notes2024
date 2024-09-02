@@ -1,0 +1,20 @@
+Amazon Dynamo DB
+Scan and query in the AWS Console
+
+- Go to AWS page.
+- Go to DynamoDB section.
+- Select the databae mystore.
+- In the section Scan/Query items clic on the button Scan.
+- In the text box Attribute name type clientid.
+- In the text box Value type the email chris@example.com
+- Clic on the button Run.
+
+- Clic on the button Query.
+- In the combo box select mystore.
+- In the text box clientid (partition key) type the email chris@example.com
+- In the combo box created (Sort key) select the option Greater than or equal to.
+- In the next text box type 2020-03-10T14:30Z
+- Open the section Filters.
+- In the text box Attribute name type category.
+- In the combo box Condition select the option Exists.
+- Clic on the button Run.

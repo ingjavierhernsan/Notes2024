@@ -528,26 +528,83 @@ Bonus Linux intervie questions
 The next 5 Linux interview questions are the most common ones recruiters ask.
 
 55.- What is sudo in Linux?
+The word sudo is the short form of "Super user do" that allows you to run the command with system privileges. With this command, you can get the system's administrative access to perform varios tasks. The sudo command requires a password before the execution to verify the user's authorization.
 
 56.- What is umask?
+It is used for user file creation mode. When a user creates any file, then it has default file permission. Umask specifies restrictions for these permissions on the file, i.t., controls the permissions.
 
 57.- How to find and kill a process in Linux?
+you can use different commans to kill a process, but first, you must find the PID of that specific process. So, please the below command:
+
+ps aux | grep <process>
+
+Once you get the PID of the process then run the kill command to end it:
+
+kill <PID>
+
+If you don't want to find the PID, then you can use the pkill command to kill a process by its name:
+
+pkill <process>
+
+The pkill command sends a signal (by default, SIGTERM) to the matched processes, causing them to terminate.
 
 58.- What is network bonding in Linux?
+Network  bonding is the process of creating a single network by combining two or more network interfaces. This combination of networks imporves redundancy and performance by increasing bandwidth and throughput. The major benefit of network bonding is that the overall network works fine even if a single network in the bonding does not work properly.
 
 59.- What is SELinux?
+SELinux or also known as Security-Enhanced Linux, is the security framework. It offers an additonal layer of security to improve access control and strengthen security. SELinux was developed to improve the security policies to prevent unauthorized access and exploitation. However, learning about SELinux is essential before working on it can create serious security issues.
 
 60.- What is the purpose of the SSH protocol in Linux, and how do you securely connect to a remote server using SSH?
+The Secure Shell (SSH) is a protocol in Linux which is used to establish a secire encrypted connection between a local and remote machine. It allows to securely access and manage remote servers. If we want to connect to a remote server using SSH. We can use the following command.
+
+ssh username@remote_ip
+
+Here repalce the username with the desired username of the remote server and replace the remote_ip with the IP address of the remote server.
 
 61.- How do you check the contents of a file without opening it in Linux?
+In Linux we can use the cat command to view the content of a file without opening it in an editor form.
 
-62.- What is the purpose of the crontab file in Linux, and how do you schedule recorring tasks using cron jobs?
+For example: If we want to check content of a file with file_name = geeks.txt
+
+cat geeks.txt
+
+62.- What is the purpose of the crontab file in Linux, and how do you schedule recurring tasks using cron jobs?
+The crontab file in Linux is used to schedule recurring tasks or cron jobs. It contains a list of commands or scripts that are executed at specified time intervals. To edit the crontab file, you can use the crontab -e command.
+
+For example: If we want to run a script name jayesh.sh every day at 5 AM, we can use the following procedure.
+
+First, we need to open the crontab in editorial format.
+
+crontab -e
+
+Secondly, add the entries in the crontab file.
+
+0 5 * * * /path/to/jayesh.sh
 
 63.- How do you find and replace text in a file using the sed command in Linux?
+The sed command (stream editor) can be used to find and replace test in a file. The basic syntax is sed 's/pattern/replacement/g' filename.
+
+For example: to replace all occurrences of 'true' with 'False' in a file.
+
+sed 's/true/False/g' file_name
 
 64.- What is the purpose of the sudoers file in Linux, and how do you configure sudo access for users?
+The sudoers file in Linux controls the sudo access permissions for users. It determines which users are allowed to run commands with superuser (root) privileges. To configure sudo access, you can edit the sudoers file using the visudo command.
+
+For example:
+
+sudo visudo
+
+Now add this line anywhere in the file. for instance, if we want to grant a user full sudo access.
+
+user_name ALL=(ALL) ALL
 
 65.- How do you change the ownership of a file or directory in Linux using the chown command?
+In Linux, you can change the ownership of a file or directory using the chown command. The basic syntax is chown new_owner: new_group filename.
+
+For example: If we want to change the ownership of a file to user Jayesh and group "users".
+
+chown jayesh:users file_name
 
 66.- What is the purpose of the ping command in Linux, and how do you test network connectivity to a remote host?
 

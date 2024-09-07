@@ -667,37 +667,53 @@ The df command displays information about the disk space usage on Linux, includi
 The 'systemctl start <service>' command is used to start a service, and 'systemctl stop <service>' is used to stop a service in Linux.
 
 76.- What are common causes of file permission issues in Linux?
+Common causes of file permission issues in Linux include incorrect ownership, improper permissions set for users of groups, and conflicts between different users' permissions.
 
-77.- How fo you troubleshoot a Linux system that cannot connect to a remote server?
+77.- How do you troubleshoot a Linux system that cannot connect to a remote server?
+Possible troubleshooting steps include checking network connectivity using tools like 'ping', verifying firewall rules, checking DNS settings, and examining relevant log files for error messages.
 
 Linux troubleshooting interview questions
 
 78.- What steps would you take to fix a network connectivity issue in Linux?
+Steps would include checking physical connections, verifying IP configuration, checking firewall settings, ensuring DNS resolution is working, and using network troubleshooting tools like 'ping', 'traceroute', or 'tcpdump'.
 
 79.- How do you check the system logs in Linux?
+System logs can be checked using the 'tail' or 'less' command to view the contents of log files located in the '/var/log' directory, such as 'syslog', 'messages', or 'auth.log'.
 
 80.- What are the possible reasons for a Linux system running out of memory?
+Possible reasons include memory leaks in applications, excessive memory usage by running processes, inadequate memeory allocation, or high memory demands from large datasets.
 
 81.- How would you troubleshoot a slow-performing Linux server?
+Troubleshooting steps might involve checking system resource usage with tools like 'top' or 'htop', monitoring disk I/O, analyzing network traffic, identifying memory or CPU bottlenecks, and reviewing application logs.
 
 82.- What are common couses of a Linux system running out of disk space?
+Common causes include large log files, excessive data storage, uncontrolled growth of temporary files, improper cleanup of old files, or runaway processes generating excessive output.
 
 83.- How can you identify and terminate a process that is usisng a lot of CPU in Linux?
+The 'top' or 'htop' command can display the processes using the most CPU. To terminate a process, the 'kill' command followed by the process ID (PID) can be used.
 
 84.- How would you troubleshoot a Linux system that cannot boot up?
+Troubleshooting steps might include checking hardware connections, verifying BIOS/UEFI settings, booting into a recovery mode or lives system, analyzing boot logs, and diagnosing disk or file system errors.
 
 Linux networking interview questions
 
 85.- What does the ifconfig command do in Linux?
+The 'ifconfig' command is used to configure or display network interfaces in Linux. It can be used to view or modify IP addresses, netmasks, and other network interface parameters.
 
 86.- How do you set up a fixed IP address in Linux?
+A fixed IP address can be set up in Linux by editing the network configuration file (e.g., /etc/network/interfaces ot /etc/sysconfig/network-scripts/ifcfg-<interface>) and assigning the desired IP address to the interface.
 
 87.- How do you configure a DNS server in Linux?
+DNS server configuration invovlves editing the /etc/named.conf (BIND) or /etc/named/named.conf.options (ISC BIND) file to specify the server's zone information, name resolution options, and defining forwarders or root hints.
 
 88.- What is a firewall in Linux, and how do you set it up?
+A firewall is a network security system that filters and controls network traffic. In Linux, iptables or newer nftables can be used to set up firewall rules by defining filtering criteria, network zones, and desired actions.
 
 89.- How do you check the network connectivity between two Linux systems?
+Network connectivity between two Linux systems can be checked using tools like 'ping' or 'traceroute', which send packets to the target system and report on the round-trip time and the path taken.
 
 90.- What is the purpose of the 'route' command in Linux?
+The 'route' command is used to view or modify the IP routing table on a Linux system. It displays information about the network routes and allows adding or deleting routes.
 
 91.- How do you configure a Linux system to act as a router?
+To configure a Linux system as a router, IP forwarding must be enabled by setting the appropriate value in the /proc/sys/net/ipv4/ip_forward file. Additionally, network interfaces adn routing tables need to be configured accordingly.

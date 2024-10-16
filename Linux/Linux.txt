@@ -462,3 +462,65 @@ sudo dpkg -i packageName.deb
 
 Solicita contrasena.
 Muestra proceso de la instalacion.
+
+How to transfer files (local and remote) in Linux
+scp (Secure copy protocol)
+
+The scp command is a command-line program usedto securely copy files and directories between two hosts using SSH (Secure Shell), which means the data is transferred in an encrypted manner during file transfer over the internet.
+
+Basic syntax:
+
+scp [options] source_file destination
+
+Copying files locally in Linux:
+
+scp ~/document.txt /tmp
+
+Copying files to a remote server:
+
+scp ~/document.txt username@192.168.1.100:/home/username
+
+Copying files from remote server:
+
+scp username@192.168.1.100:home/username/document.txt /tmp
+
+To copy an entire directory, use the -r option (which stands for recursive):
+
+scp -r ~/tecmint /tmp
+
+rsync in Linux
+
+The rsync command is another most widely used file transfer command-line tool that is used fro transferring files and directories between the source and the destination, which is commonly used for sychtonizing directories.
+
+The basic syntax for using rsync is:
+
+rsync [options] source destination
+
+Transfer fiels locally
+
+To transfer files or directories locally, you can use rsync with the -a option to enable archive mode, which preseves premissions, ownership, and timestamps. The -v option stands for verbose, which shows the progress of the file transfer.
+
+rsync -av ~/myfolder /backup
+
+Transfer files to a remote server
+
+rsync -av ~/myfolder username@192.168.1.100:/home/username
+
+The above command will transfel myfolder to the remote server, and if you run again, rsync will only copy the files that have changed.
+
+Transfer files from a remote server
+
+rsync -av username@192.168.1.100:/home/username/myfolder /backup
+
+Synchronizing directories with rsync
+One of the key strengths of rsync is its ability to synchronize directories, which means you can keep two directories in sync, whether they are on the same machine or on different machines.
+
+rsync -av /local/directory/ username@remote_host:/remote/directory/
+
+To synchronize a remote directory with a local directory, you would reverse the source and destination in the rsync command.
+
+rsync -av username@remote_host:/remote/directory/ /local/directory/
+
+If a transfer is interrupted due to a network failure or other reasons, you can resume it using the --partial option, which allows to resume transferring files from where it left off:
+
+rsync -av --partial /path/to/source username@remote_host:/path/to/destination
